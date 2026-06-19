@@ -16,6 +16,8 @@ is for things you can see or feel when running the app.
 
 ## [Unreleased]
 
+## [v4.0.168] - 2026-06-19
+
 ### Fixed
 - **Archiving a book now updates the shelf count in the sidebar.** The badge
   next to a shelf name counted archived books even though opening the shelf
