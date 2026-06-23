@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-06-23 12:07+0000\n"
+"POT-Creation-Date: 2026-06-23 17:35+0000\n"
 "PO-Revision-Date: 2022-08-11 16:46+0200\n"
 "Last-Translator: pollitor <pollitor@gmx.com>\n"
 "Language-Team: gl\n"
@@ -3722,7 +3722,7 @@ msgstr "Convertir libro"
 #: cps/templates/book_table.html:346 cps/templates/duplicates.html:766
 #: cps/templates/layout.html:204 cps/templates/layout.html:508
 #: cps/templates/layout.html:651 cps/templates/modal_dialogs.html:34
-#: cps/templates/shelf.html:110 cps/templates/update_now_modal.html:61
+#: cps/templates/shelf.html:110 cps/templates/update_now_modal.html:69
 #: cps/templates/user_edit.html:673
 msgid "Close"
 msgstr "Pechar"
@@ -5829,15 +5829,15 @@ msgid ""
 "up -d\". After that you stay up to date automatically — no button to press."
 msgstr ""
 
-#: cps/templates/cwa_settings.html:770 cps/templates/update_now_modal.html:28
-#: cps/templates/update_now_modal.html:37
-#: cps/templates/update_now_modal.html:55 cps/templates/user_edit.html:618
+#: cps/templates/cwa_settings.html:770 cps/templates/update_now_modal.html:36
+#: cps/templates/update_now_modal.html:45
+#: cps/templates/update_now_modal.html:63 cps/templates/user_edit.html:618
 msgid "Copied!"
 msgstr ""
 
-#: cps/templates/cwa_settings.html:770 cps/templates/update_now_modal.html:28
-#: cps/templates/update_now_modal.html:37
-#: cps/templates/update_now_modal.html:55 cps/templates/user_edit.html:618
+#: cps/templates/cwa_settings.html:770 cps/templates/update_now_modal.html:36
+#: cps/templates/update_now_modal.html:45
+#: cps/templates/update_now_modal.html:63 cps/templates/user_edit.html:618
 msgid "Copy"
 msgstr ""
 
@@ -8107,99 +8107,99 @@ msgstr "{} usuarios borrados con éxito"
 msgid "Error cancelling scheduled item"
 msgstr ""
 
-#: cps/templates/update_now_modal.html:11
+#: cps/templates/update_now_modal.html:19
 #, fuzzy
 msgid "Update Calibre-Web NextGen"
 msgstr "Catálogo de libros electrónicos de Calibre-Web"
 
-#: cps/templates/update_now_modal.html:14
+#: cps/templates/update_now_modal.html:22
 msgid ""
 "Updating pulls the new image and recreates the container. It is quick, and "
 "your library, settings and reading progress are safe — they live in your "
 "mounted volumes, not in the container."
 msgstr ""
 
-#: cps/templates/update_now_modal.html:16
+#: cps/templates/update_now_modal.html:24
 msgid "How do you run Calibre-Web NextGen?"
 msgstr ""
 
-#: cps/templates/update_now_modal.html:17
+#: cps/templates/update_now_modal.html:25
 msgid "Setup type"
 msgstr ""
 
-#: cps/templates/update_now_modal.html:18
+#: cps/templates/update_now_modal.html:26
 msgid "Docker Compose"
 msgstr ""
 
-#: cps/templates/update_now_modal.html:19
+#: cps/templates/update_now_modal.html:27
 msgid "docker run"
 msgstr ""
 
-#: cps/templates/update_now_modal.html:20
+#: cps/templates/update_now_modal.html:28
 msgid "Unraid"
 msgstr ""
 
-#: cps/templates/update_now_modal.html:21
+#: cps/templates/update_now_modal.html:29
 msgid "Portainer / Synology"
 msgstr ""
 
-#: cps/templates/update_now_modal.html:25
+#: cps/templates/update_now_modal.html:33
 msgid "Run this from the folder that holds your compose file:"
 msgstr ""
 
-#: cps/templates/update_now_modal.html:30
+#: cps/templates/update_now_modal.html:38
 msgid "Replace calibre-web-nextgen with your service name if it differs."
 msgstr ""
 
-#: cps/templates/update_now_modal.html:34
+#: cps/templates/update_now_modal.html:42
 msgid ""
 "Pull the new image, then recreate your container with the same options you "
 "started it with:"
 msgstr ""
 
-#: cps/templates/update_now_modal.html:39
+#: cps/templates/update_now_modal.html:47
 msgid ""
 "Then stop and remove the old container and start a new one with your usual "
 "docker run command. Your mounted volumes keep all data."
 msgstr ""
 
-#: cps/templates/update_now_modal.html:44
+#: cps/templates/update_now_modal.html:52
 msgid "Open the Docker tab in the Unraid web UI."
 msgstr ""
 
-#: cps/templates/update_now_modal.html:45
+#: cps/templates/update_now_modal.html:53
 msgid ""
 "Click the Calibre-Web NextGen container icon and choose Force update (check "
 "for updates first if you want to see what changed)."
 msgstr ""
 
-#: cps/templates/update_now_modal.html:47
+#: cps/templates/update_now_modal.html:55
 msgid ""
 "For hands-off updates, install the \"CA Auto Update Applications\" plugin "
 "from Community Applications."
 msgstr ""
 
-#: cps/templates/update_now_modal.html:51
+#: cps/templates/update_now_modal.html:59
 msgid "Portainer:"
 msgstr ""
 
-#: cps/templates/update_now_modal.html:51
+#: cps/templates/update_now_modal.html:59
 msgid ""
 "Images → pull the image below, then Containers → select Calibre-Web NextGen "
 "→ Recreate with \"Re-pull image\" enabled."
 msgstr ""
 
-#: cps/templates/update_now_modal.html:52
+#: cps/templates/update_now_modal.html:60
 msgid "Synology Container Manager:"
 msgstr ""
 
-#: cps/templates/update_now_modal.html:52
+#: cps/templates/update_now_modal.html:60
 msgid ""
 "Registry → download the image below (tag: latest), then stop the container → "
 "Action → Reset to recreate it."
 msgstr ""
 
-#: cps/templates/update_now_modal.html:60
+#: cps/templates/update_now_modal.html:68
 msgid "Set up automatic updates"
 msgstr ""
 
