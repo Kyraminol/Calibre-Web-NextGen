@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiGet, apiPost, ApiError } from './api';
-import type { Me, BooksPage } from './api';
+import type { Me, BooksPage, BookDetail } from './api';
 
 export function useMe() {
   return useQuery<Me | null>({
@@ -41,10 +41,31 @@ export function useLogout() {
   });
 }
 
-export function useBooks(page: number) {
+export function useBooks(page: number, search: string, sort: string) {
+  let url = `/api/v1/books?page=${page}&per_page=24`;
+  if (search) url += `&search=${encodeURIComponent(search)}`;
+  url += `&sort=${sort}`;
   return useQuery<BooksPage>({
-    queryKey: ['books', page],
-    queryFn: () => apiGet<BooksPage>(`/api/v1/books?page=${page}&per_page=24`),
+    queryKey: ['books', page, search, sort],
+    queryFn: () => apiGet<BooksPage>(url),
     placeholderData: (prev) => prev,
+  });
+}
+
+export function useBook(id: string | number) {
+  return useQuery<BookDetail>({
+    queryKey: ['book', String(id)],
+    queryFn: () => apiGet<BookDetail>(`/api/v1/books/${id}`),
+  });
+}
+
+export function useToggleRead(id: string | number) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (read: boolean) =>
+      apiPost<{ read: boolean }>(`/api/v1/books/${id}/read`, { read }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['book', String(id)] });
+    },
   });
 }

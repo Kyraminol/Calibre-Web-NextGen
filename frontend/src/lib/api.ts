@@ -18,6 +18,31 @@ export interface Book {
   formats: string[];
 }
 
+export interface BookFormat {
+  format: string;
+  size_bytes: number;
+  download_url: string;
+  read_url: string;
+}
+
+export interface BookDetail {
+  id: number;
+  title: string;
+  authors: string[];
+  series: string | null;
+  series_index: string;
+  cover_url: string | null;
+  pubdate: string | null;
+  description_html: string | null;
+  tags: string[];
+  languages: string[];
+  publishers: string[];
+  identifiers: { type: string; val: string }[];
+  formats: BookFormat[];
+  read: boolean;
+  archived: boolean;
+}
+
 export interface BooksPage {
   items: Book[];
   page: number;
