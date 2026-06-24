@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web (GPLV3)\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-06-24 00:17+0000\n"
+"POT-Creation-Date: 2026-06-24 21:05+0000\n"
 "PO-Revision-Date: 2026-04-26 13:31+0200\n"
 "Last-Translator: Michiel Cornelissen <michiel.cornelissen+gitbhun at proton."
 "me>\n"
@@ -2982,7 +2982,7 @@ msgstr ""
 msgid "Hardcover Sync"
 msgstr "Zet Hardcover-sync aan"
 
-#: cps/tasks/mail.py:280
+#: cps/tasks/mail.py:274
 msgid "E-mail"
 msgstr "E-mail"
 

@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-06-24 00:17+0000\n"
+"POT-Creation-Date: 2026-06-24 21:05+0000\n"
 "PO-Revision-Date: 2025-12-02 12:00+0000\n"
 "Last-Translator: Alex <298750+alexantao@users.noreply.github.com>\n"
 "Language-Team: pt_BR <LL@li.org>\n"
@@ -3020,7 +3020,7 @@ msgstr ""
 msgid "Hardcover Sync"
 msgstr "Ativar Hardcover sync"
 
-#: cps/tasks/mail.py:280
+#: cps/tasks/mail.py:274
 msgid "E-mail"
 msgstr "E-mail"
 

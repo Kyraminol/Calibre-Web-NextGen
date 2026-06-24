@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-06-24 00:17+0000\n"
+"POT-Creation-Date: 2026-06-24 21:05+0000\n"
 "PO-Revision-Date: 2020-09-27 22:18+0800\n"
 "Last-Translator: xlivevil <xlivevil@aliyun.com>\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
@@ -2930,7 +2930,7 @@ msgstr ""
 msgid "Hardcover Sync"
 msgstr "啟用Kobo同步"
 
-#: cps/tasks/mail.py:280
+#: cps/tasks/mail.py:274
 #, fuzzy
 msgid "E-mail"
 msgstr "郵箱地址"
