@@ -24,6 +24,14 @@ SORT_MAP = {
 }
 
 
+def _row_to_item(e):
+    """Unwrap a SQLAlchemy Row (Books, is_archived, read_status) or plain Books object."""
+    book = getattr(e, "Books", e)
+    read = getattr(e, "read_status", None) == ub.ReadBook.STATUS_FINISHED
+    archived = bool(getattr(e, "is_archived", False))
+    return serialize_book_list_item(book, read=read, archived=archived)
+
+
 @api_v1.route("/books")
 @login_required_if_no_ano
 def list_books():
@@ -43,13 +51,8 @@ def list_books():
         entries, total, _pagination = calibre_db.get_search_results(
             search, config, offset, [order], per_page, *join
         )
-        # get_search_results → order_authors(combined=True) returns the raw
-        # SQLAlchemy Row objects from generate_linked_query (Books, is_archived,
-        # read_status).  Each Row exposes the Books ORM object as .Books.
-        # Normalize here so serialize_book_list_item receives plain Books objects.
-        books = [getattr(e, "Books", e) for e in entries]
         return jsonify({
-            "items": [serialize_book_list_item(b) for b in books],
+            "items": [_row_to_item(e) for e in entries],
             "page": page,
             "per_page": per_page,
             "total": total,
@@ -57,10 +60,10 @@ def list_books():
 
     entries, _random, pagination = calibre_db.fill_indexpage(
         page, per_page, db.Books, True, order,
-        False, config.config_read_column,
+        True, config.config_read_column,
     )
     return jsonify({
-        "items": [serialize_book_list_item(b) for b in entries],
+        "items": [_row_to_item(e) for e in entries],
         "page": pagination.page,
         "per_page": pagination.per_page,
         "total": pagination.total_count,

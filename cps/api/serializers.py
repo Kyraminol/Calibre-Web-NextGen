@@ -24,7 +24,7 @@ def serialize_user(user):
     }
 
 
-def serialize_book_list_item(book):
+def serialize_book_list_item(book, read=False, archived=False):
     series = book.series[0].name if getattr(book, "series", None) else None
     return {
         "id": book.id,
@@ -34,6 +34,8 @@ def serialize_book_list_item(book):
         "series_index": book.series_index,
         "cover_url": f"/cover/{book.id}/sm" if getattr(book, "has_cover", 0) else None,
         "formats": [d.format for d in book.data] if getattr(book, "data", None) else [],
+        "read": bool(read),
+        "archived": bool(archived),
     }
 
 

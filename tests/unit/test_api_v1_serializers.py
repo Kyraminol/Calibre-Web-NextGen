@@ -17,6 +17,8 @@ def test_serialize_book_list_item_full():
         "series": "Dune Chronicles", "series_index": "1.0",
         "cover_url": "/cover/7/sm",
         "formats": ["EPUB", "PDF"],
+        "read": False,
+        "archived": False,
     }
 
 
@@ -30,6 +32,18 @@ def test_serialize_book_list_item_no_cover_no_series():
     assert out["series"] is None
     assert out["authors"] == []
     assert out["formats"] == []
+    assert out["read"] is False
+    assert out["archived"] is False
+
+
+@pytest.mark.unit
+def test_serialize_book_list_item_read_archived():
+    from cps.api.serializers import serialize_book_list_item
+    book = SimpleNamespace(id=5, title="Y", series_index="1.0", has_cover=0,
+                           authors=[], series=[], data=[])
+    out = serialize_book_list_item(book, read=True, archived=True)
+    assert out["read"] is True
+    assert out["archived"] is True
 
 
 @pytest.mark.unit
