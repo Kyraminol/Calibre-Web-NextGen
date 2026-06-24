@@ -16,7 +16,7 @@ def list_books():
     per_page = request.args.get("per_page", config.config_books_per_page, type=int)
     entries, _random, pagination = calibre_db.fill_indexpage(
         page, per_page, db.Books, True, [db.Books.timestamp.desc()],
-        True, config.config_read_column,
+        False,
     )
     return jsonify({
         "items": [serialize_book_list_item(b) for b in entries],
