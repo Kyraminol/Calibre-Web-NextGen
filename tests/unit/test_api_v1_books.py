@@ -201,3 +201,117 @@ def test_list_books_search_empty_string_uses_fill_indexpage():
 
     mock_fill.assert_called_once()
     mock_search.assert_not_called()
+
+
+@pytest.mark.unit
+def test_list_books_author_filter_passes_entity_db_filter():
+    """GET /api/v1/books?author=3 must call fill_indexpage with a non-True db_filter (entity filter applied)."""
+    from cps.api import books as books_mod
+    from cps.pagination import Pagination
+
+    pag = Pagination(1, 60, 2)
+
+    app = flask.Flask(__name__)
+    with app.test_request_context("/api/v1/books?author=3"):
+        with patch.object(books_mod.calibre_db, "fill_indexpage",
+                          return_value=([], None, pag)) as mock_fill, \
+             patch.object(books_mod.config, "config_books_per_page", 60, create=True), \
+             patch.object(books_mod.config, "config_read_column", 0, create=True):
+            view = inspect.unwrap(books_mod.list_books)
+            view()
+
+    call_args = mock_fill.call_args
+    assert call_args is not None, "fill_indexpage was never called"
+    positional = call_args.args
+    # 4th positional arg (index 3) is db_filter; must NOT be plain True
+    assert len(positional) >= 4, f"Expected ≥4 positional args, got {len(positional)}"
+    assert positional[3] is not True, (
+        "db_filter (arg[3]) must be an entity expression when ?author= is supplied, not True"
+    )
+
+
+@pytest.mark.unit
+def test_list_books_unread_filter_passes_db_filter():
+    """GET /api/v1/books?filter=unread must call fill_indexpage with a non-True db_filter."""
+    from cps.api import books as books_mod
+    from cps.pagination import Pagination
+
+    pag = Pagination(1, 60, 5)
+
+    app = flask.Flask(__name__)
+    with app.test_request_context("/api/v1/books?filter=unread"):
+        with patch.object(books_mod.calibre_db, "fill_indexpage",
+                          return_value=([], None, pag)) as mock_fill, \
+             patch.object(books_mod.config, "config_books_per_page", 60, create=True), \
+             patch.object(books_mod.config, "config_read_column", 0, create=True):
+            view = inspect.unwrap(books_mod.list_books)
+            view()
+
+    call_args = mock_fill.call_args
+    assert call_args is not None, "fill_indexpage was never called"
+    positional = call_args.args
+    assert len(positional) >= 4, f"Expected ≥4 positional args, got {len(positional)}"
+    assert positional[3] is not True, (
+        "db_filter (arg[3]) must be an unread expression when ?filter=unread is supplied, not True"
+    )
+
+
+@pytest.mark.unit
+def test_list_books_archived_filter_uses_fill_indexpage_with_archived_books():
+    """GET /api/v1/books?filter=archived routes to fill_indexpage_with_archived_books."""
+    from cps.api import books as books_mod
+    from cps.pagination import Pagination
+    from unittest.mock import MagicMock
+
+    pag = Pagination(1, 60, 3)
+
+    app = flask.Flask(__name__)
+    with app.test_request_context("/api/v1/books?filter=archived"):
+        mock_ub_query = MagicMock()
+        mock_ub_query.filter.return_value = mock_ub_query
+        mock_ub_query.all.return_value = []
+
+        with patch.object(books_mod.calibre_db, "fill_indexpage_with_archived_books",
+                          return_value=([], None, pag)) as mock_fill_arch, \
+             patch.object(books_mod.calibre_db, "fill_indexpage",
+                          return_value=([], None, pag)) as mock_fill, \
+             patch.object(books_mod.ub, "session") as mock_ub_session, \
+             patch.object(books_mod.config, "config_books_per_page", 60, create=True), \
+             patch.object(books_mod.config, "config_read_column", 0, create=True), \
+             patch.object(books_mod, "current_user", SimpleNamespace(id=1)):
+            mock_ub_session.query.return_value = mock_ub_query
+            view = inspect.unwrap(books_mod.list_books)
+            resp = view()
+
+    mock_fill_arch.assert_called_once()
+    mock_fill.assert_not_called()
+    data = json.loads(resp.get_data(as_text=True))
+    assert "items" in data
+    assert data["total"] == 3
+
+
+@pytest.mark.unit
+def test_list_books_no_filter_passes_true_db_filter():
+    """GET /api/v1/books (no entity or filter params) passes db_filter=True (unfiltered)."""
+    from cps.api import books as books_mod
+    from cps.pagination import Pagination
+
+    pag = Pagination(1, 60, 10)
+
+    app = flask.Flask(__name__)
+    with app.test_request_context("/api/v1/books"):
+        with patch.object(books_mod.calibre_db, "fill_indexpage",
+                          return_value=([], None, pag)) as mock_fill, \
+             patch.object(books_mod.config, "config_books_per_page", 60, create=True), \
+             patch.object(books_mod.config, "config_read_column", 0, create=True):
+            view = inspect.unwrap(books_mod.list_books)
+            view()
+
+    call_args = mock_fill.call_args
+    assert call_args is not None
+    positional = call_args.args
+    assert len(positional) >= 4
+    # db_filter must be True when no entity or filter param supplied
+    assert positional[3] is True, (
+        f"db_filter should be True (unfiltered) with no params, got {positional[3]!r}"
+    )
