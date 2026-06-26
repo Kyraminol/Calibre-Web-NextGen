@@ -52,6 +52,7 @@ export function BookDetail() {
 
   const readableFormats = book.formats.filter((f) => readableFormat(f) !== null);
   const primaryReadable = readableFormats[0] ?? null;
+  const hasEpub = book.formats.some((f) => f.format.toLowerCase() === 'epub');
 
   return (
     <main className={styles.container}>
@@ -100,14 +101,17 @@ export function BookDetail() {
 
           {/* Actions */}
           <div className={styles.actions}>
-            {primaryReadable && (
-              <a
-                href={primaryReadable.read_url}
-                className={styles.actionPrimary}
-              >
+            {hasEpub ? (
+              // EPUB opens in the in-browser SPA reader (resumes saved progress).
+              <Link href={`/read/${book.id}`} className={styles.actionPrimary}>
+                Read
+              </Link>
+            ) : primaryReadable ? (
+              // Other readable formats (PDF, …) use the classic full-page reader.
+              <a href={primaryReadable.read_url} className={styles.actionPrimary}>
                 Read
               </a>
-            )}
+            ) : null}
 
             <button
               className={book.read ? styles.readToggleActive : styles.readToggleGhost}

@@ -114,13 +114,20 @@ _start_time = time.time()
 
 @app.after_request
 def add_security_headers(resp):
+    # The SPA reader (spa.spa_shell serves /app/*) renders EPUBs with epub.js,
+    # which loads in-book images and CSS as blob: URLs inside an iframe — the
+    # same need the legacy web.read_book reader has. Since the SPA serves one
+    # shell for every /app route (client-side nav keeps the initial CSP), the
+    # blob: allowance must cover the whole spa endpoint, not a single path.
+    # blob: URLs are same-origin and JS-created, so this is not a new XSS vector.
+    reader_like = request.endpoint in ("web.read_book", "spa.spa_shell")
     default_src = ([host.strip() for host in config.config_trustedhosts.split(',') if host] +
                    ["'self'", "'unsafe-inline'", "'unsafe-eval'"])
     csp = "default-src " + ' '.join(default_src)
     if request.endpoint == "web.read_book" and config.config_use_google_drive:
         csp +=" blob: "
     csp += "; font-src 'self' data:"
-    if request.endpoint == "web.read_book":
+    if reader_like:
         csp += " blob: "
     csp += "; img-src 'self'"
     if request.path.startswith("/author/") and config.config_use_goodreads:
@@ -135,7 +142,7 @@ def add_security_headers(resp):
         # Douban, etc.). Allow those img-src origins for these two endpoints
         # only — all other pages keep the strict same-origin policy.
         csp += " *"
-    if request.endpoint == "web.read_book":
+    if reader_like:
         csp += " blob: ; style-src-elem 'self' blob: 'unsafe-inline'"
     csp += "; object-src 'none';"
     resp.headers['Content-Security-Policy'] = csp

@@ -172,6 +172,24 @@ export function useDeleteShelf() {
   });
 }
 
+// ── Reader (bookmark / progress) ─────────────────────────────────────────────
+
+export function useBookmark(bookId: string | number, format = 'epub') {
+  return useQuery<{ bookmark: string | null }>({
+    queryKey: ['bookmark', String(bookId), format],
+    queryFn: () => apiGet<{ bookmark: string | null }>(
+      `/api/v1/books/${bookId}/bookmark?format=${encodeURIComponent(format)}`),
+    staleTime: 0,
+  });
+}
+
+export function useSaveBookmark(bookId: string | number) {
+  return useMutation({
+    mutationFn: (vars: { format: string; bookmark: string }) =>
+      apiPost(`/api/v1/books/${bookId}/bookmark`, vars),
+  });
+}
+
 // ── Account ──────────────────────────────────────────────────────────────────
 
 export function useAccount() {

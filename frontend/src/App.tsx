@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Router, Route, Switch } from 'wouter';
 import { useMe, useLogout } from './lib/queries';
 import { Login } from './pages/Login';
@@ -10,6 +11,10 @@ import { AdvancedSearch } from './pages/AdvancedSearch';
 import { Account } from './pages/Account';
 import { AppShell } from './components/AppShell';
 import { SpinnerCentered } from './components/Spinner';
+
+// The reader pulls in epub.js (large) — load it only when a book is opened so it
+// stays out of the initial bundle.
+const Reader = lazy(() => import('./pages/Reader').then((m) => ({ default: m.Reader })));
 
 export function App() {
   const { data: me, isLoading } = useMe();
@@ -25,8 +30,20 @@ export function App() {
 
   return (
     <Router base="/app">
-      <AppShell userName={me.name} onLogout={() => logout.mutate()}>
-        <Switch>
+      <Switch>
+        {/* Full-screen reader — outside the app shell (no sidebar/topbar). */}
+        <Route path="/read/:id">
+          {(p) => (
+            <Suspense fallback={<SpinnerCentered size={40} />}>
+              <Reader id={p.id} />
+            </Suspense>
+          )}
+        </Route>
+
+        {/* Everything else lives inside the shell. */}
+        <Route>
+          <AppShell userName={me.name} onLogout={() => logout.mutate()}>
+            <Switch>
           <Route path="/book/:id" component={BookDetail} />
 
           {/* Browse: entity lists + per-entity filtered catalog */}
@@ -66,8 +83,10 @@ export function App() {
           <Route path="/account">{() => <Account />}</Route>
 
           <Route path="/">{() => <Catalog />}</Route>
-        </Switch>
-      </AppShell>
+            </Switch>
+          </AppShell>
+        </Route>
+      </Switch>
     </Router>
   );
 }
