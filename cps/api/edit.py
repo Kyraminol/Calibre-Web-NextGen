@@ -18,7 +18,7 @@ from .serializers import serialize_book_detail
 from .. import calibre_db, config, db, ub, isoLanguages
 from ..cw_login import current_user
 from ..usermanagement import login_required_if_no_ano
-from ..editbooks import edit_book_param
+from ..editbooks import edit_book_param, delete_book_from_table
 
 # Fields the SPA edit form can change, applied in this order. Title/authors come
 # first because they may restructure the book's directory; the rest follow.
@@ -123,3 +123,18 @@ def update_metadata(book_id):
     if errors:
         body["errors"] = errors
     return jsonify(body)
+
+
+@api_v1.route("/books/<int:book_id>/delete", methods=["POST"])
+@login_required_if_no_ano
+def delete_book(book_id):
+    if not current_user.is_authenticated or current_user.is_anonymous:
+        return _err("unauthorized", "You must be signed in", 401)
+    if not current_user.role_delete_books():
+        return _err("forbidden", "You are not allowed to delete books", 403)
+    if not calibre_db.get_book(book_id):
+        return _err("not_found", "Book not found", 404)
+    # delete_book_from_table re-checks the role and does the data-safe (DB-first,
+    # files-last) whole-book delete + shelf cleanup. book_format="" = whole book.
+    delete_book_from_table(book_id, "", True)
+    return "", 204

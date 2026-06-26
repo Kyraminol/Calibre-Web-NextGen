@@ -173,6 +173,37 @@ export function useDeleteShelf() {
   });
 }
 
+// ── Bulk operations ──────────────────────────────────────────────────────────
+
+/** Bulk actions over a set of book ids, each implemented as a fan-out over the
+ *  existing per-book endpoints (settle-all so one failure doesn't abort the
+ *  batch). Suitable for the moderate selections the catalog allows. */
+export function useBulkActions() {
+  const qc = useQueryClient();
+  const refresh = () => {
+    void qc.invalidateQueries({ queryKey: ['books'] });
+    void qc.invalidateQueries({ queryKey: ['shelves'] });
+  };
+  const settle = (ps: Promise<unknown>[]) => Promise.allSettled(ps);
+
+  const markRead = useMutation({
+    mutationFn: (v: { ids: number[]; read: boolean }) =>
+      settle(v.ids.map((id) => apiPost(`/api/v1/books/${id}/read`, { read: v.read }))),
+    onSuccess: refresh,
+  });
+  const addToShelf = useMutation({
+    mutationFn: (v: { ids: number[]; shelfId: number }) =>
+      // tolerate 409 (already on shelf) per book
+      settle(v.ids.map((id) => apiPost(`/api/v1/shelves/${v.shelfId}/books/${id}`).catch(() => null))),
+    onSuccess: refresh,
+  });
+  const remove = useMutation({
+    mutationFn: (ids: number[]) => settle(ids.map((id) => apiPost(`/api/v1/books/${id}/delete`))),
+    onSuccess: refresh,
+  });
+  return { markRead, addToShelf, remove };
+}
+
 // ── Upload ───────────────────────────────────────────────────────────────────
 
 export function useUploadBooks() {

@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'wouter';
-import { Search, ChevronLeft, SlidersHorizontal } from 'lucide-react';
+import { Search, ChevronLeft, SlidersHorizontal, ListChecks } from 'lucide-react';
 import { BookCard } from '../components/BookCard';
+import { BulkBar } from '../components/BulkBar';
 import { Button } from '../components/Button';
 import { Spinner, SpinnerCentered } from '../components/Spinner';
 import { EmptyState } from '../components/EmptyState';
@@ -56,6 +57,10 @@ export function Catalog({ entityKind, entityId }: CatalogProps) {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('new');
   const [readFilter, setReadFilter] = useState<ReadFilter>('all');
+
+  // Multi-select / bulk mode
+  const [selecting, setSelecting] = useState(false);
+  const [selected, setSelected] = useState<Set<number>>(new Set());
 
   const accKeyRef = useRef<string>('');
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -187,6 +192,20 @@ export function Catalog({ entityKind, entityId }: CatalogProps) {
             </option>
           ))}
         </select>
+
+        <button
+          type="button"
+          className={selecting ? styles.selectBtnActive : styles.selectBtn}
+          onClick={() => {
+            setSelecting((s) => !s);
+            setSelected(new Set());
+          }}
+          aria-pressed={selecting}
+          title="Select multiple"
+        >
+          <ListChecks size={15} />
+          <span className={styles.selectLabel}>{selecting ? 'Done' : 'Select'}</span>
+        </button>
       </div>
 
       {isFirstLoad ? (
@@ -211,6 +230,16 @@ export function Catalog({ entityKind, entityId }: CatalogProps) {
                 key={book.id}
                 book={book}
                 style={{ animationDelay: `${Math.min(i, 24) * 35}ms` }}
+                selectable={selecting}
+                selected={selected.has(book.id)}
+                onToggleSelect={(b) =>
+                  setSelected((prev) => {
+                    const next = new Set(prev);
+                    if (next.has(b.id)) next.delete(b.id);
+                    else next.add(b.id);
+                    return next;
+                  })
+                }
               />
             ))}
           </div>
@@ -230,6 +259,24 @@ export function Catalog({ entityKind, entityId }: CatalogProps) {
             </div>
           )}
         </>
+      )}
+
+      {selecting && selected.size > 0 && (
+        <BulkBar
+          ids={[...selected]}
+          onClear={() => {
+            setSelected(new Set());
+            setSelecting(false);
+          }}
+          onChanged={() => {
+            // A bulk action changed read state / membership / removed books.
+            // Reset the accumulated grid so the refetched first page replaces it
+            // (the load-more accumulator otherwise keeps stale/deleted cards).
+            setAllBooks([]);
+            setPage(1);
+            accKeyRef.current = '';
+          }}
+        />
       )}
     </main>
   );

@@ -20,9 +20,9 @@ def _ctx(path, method="POST", body=None):
     return app.test_request_context(path, **kwargs)
 
 
-def _editor(role_edit=True, anon=False):
+def _editor(role_edit=True, anon=False, role_delete=True):
     return SimpleNamespace(is_authenticated=True, is_anonymous=anon,
-                           role_edit=lambda: role_edit, id=1)
+                           role_edit=lambda: role_edit, role_delete_books=lambda: role_delete, id=1)
 
 
 # ── result parsing ───────────────────────────────────────────────────────────
@@ -98,6 +98,38 @@ def test_update_metadata_calls_core_per_field():
     for c in core.call_args_list:
         assert c.args[1]["pk"] == "5"
     assert resp.status_code == 200
+
+
+@pytest.mark.unit
+def test_delete_book_requires_delete_role():
+    from cps.api import edit as mod
+    with _ctx("/api/v1/books/5/delete"):
+        with patch.object(mod, "current_user", _editor(role_delete=False)):
+            resp = inspect.unwrap(mod.delete_book)(5)
+    assert resp[1] == 403
+
+
+@pytest.mark.unit
+def test_delete_book_not_found_404():
+    from cps.api import edit as mod
+    with _ctx("/api/v1/books/999/delete"):
+        with patch.object(mod, "current_user", _editor()), \
+             patch.object(mod, "calibre_db", SimpleNamespace(get_book=lambda _id: None)):
+            resp = inspect.unwrap(mod.delete_book)(999)
+    assert resp[1] == 404
+
+
+@pytest.mark.unit
+def test_delete_book_success_204_calls_core():
+    from cps.api import edit as mod
+    with _ctx("/api/v1/books/5/delete"):
+        with patch.object(mod, "current_user", _editor()), \
+             patch.object(mod, "calibre_db", SimpleNamespace(get_book=lambda _id: object())), \
+             patch.object(mod, "delete_book_from_table", return_value='{"location":"/"}') as core:
+            resp = inspect.unwrap(mod.delete_book)(5)
+    assert resp[1] == 204
+    # whole-book delete: book_format="" , json_response=True
+    assert core.call_args.args[0] == 5 and core.call_args.args[1] == ""
 
 
 @pytest.mark.unit

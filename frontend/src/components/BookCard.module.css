@@ -2,9 +2,15 @@
   text-decoration: none;
   color: inherit;
   display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
-.card {
+.card, .cardSelected {
   display: flex;
   flex-direction: column;
   gap: var(--sp-2);
@@ -28,10 +34,40 @@
 }
 
 .card:hover .coverWrap,
-.card:focus-within .coverWrap {
+.card:focus-within .coverWrap,
+.cardSelected:hover .coverWrap {
   transform: translateY(-4px);
   box-shadow: var(--elev-3);
   outline-color: var(--accent);
+}
+
+/* Selected state: persistent amber ring + dim so the selection reads at a glance. */
+.cardSelected .coverWrap {
+  outline-color: var(--accent);
+  outline-width: 3px;
+}
+
+.checkboxOn, .checkboxOff {
+  position: absolute;
+  top: var(--sp-2);
+  left: var(--sp-2);
+  width: 24px;
+  height: 24px;
+  border-radius: var(--r-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--elev-1);
+}
+
+.checkboxOn {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.checkboxOff {
+  background: rgba(20, 28, 36, 0.7);
+  border: 2px solid #fff;
 }
 
 .info {
