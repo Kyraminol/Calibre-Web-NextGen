@@ -3,6 +3,7 @@ import { apiGet, apiPost, ApiError } from './api';
 import type {
   Me, BooksPage, BookDetail, EntityList, Shelf, ShelfDetail,
   SearchOptions, AdvancedSearchParams, AdvSearchResult, Account, ProfileUpdate,
+  BookMetadata, MetadataUpdate,
 } from './api';
 
 /** Entity kinds the catalog can be filtered by. Singular here; the browse-list
@@ -169,6 +170,28 @@ export function useDeleteShelf() {
   return useMutation({
     mutationFn: (id: number) => apiPost(`/api/v1/shelves/${id}/delete`),
     onSuccess: () => void qc.invalidateQueries({ queryKey: ['shelves'] }),
+  });
+}
+
+// ── Edit metadata ────────────────────────────────────────────────────────────
+
+export function useBookMetadata(id: string | number) {
+  return useQuery<BookMetadata>({
+    queryKey: ['metadata', String(id)],
+    queryFn: () => apiGet<BookMetadata>(`/api/v1/books/${id}/metadata`),
+  });
+}
+
+export function useUpdateMetadata(id: string | number) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (vars: MetadataUpdate) => apiPost<BookMetadata>(`/api/v1/books/${id}/metadata`, vars),
+    onSuccess: (data) => {
+      qc.setQueryData(['metadata', String(id)], data);
+      // The detail/catalog views show the same fields — refresh them.
+      void qc.invalidateQueries({ queryKey: ['book', String(id)] });
+      void qc.invalidateQueries({ queryKey: ['books'] });
+    },
   });
 }
 

@@ -140,6 +140,22 @@ export interface ProfileUpdate {
   default_language?: string;
 }
 
+export interface BookMetadata {
+  id: number;
+  title: string;
+  authors: string;
+  series: string;
+  series_index: number | string;
+  tags: string;
+  publishers: string;
+  languages: string;
+  comments: string;
+  rating: number;
+  errors?: Record<string, string>;
+}
+
+export type MetadataUpdate = Partial<Omit<BookMetadata, 'id' | 'errors'>>;
+
 export class ApiError extends Error {
   status: number;
   constructor(status: number, message: string) {

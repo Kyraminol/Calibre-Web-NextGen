@@ -1,0 +1,125 @@
+# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: GPL-3.0-or-later
+"""Edit-metadata endpoints for /api/v1.
+
+Reuses cps/editbooks.py's edit_book_param — the canonical single-field editor
+behind the legacy inline books-table editor — so every metadata write goes
+through the same logic (directory restructuring on title/author change, tag/
+series/language parsing, activity logging, commit/rollback). The SPA edit form
+presents all fields together; we apply each changed field through that core.
+"""
+import json
+
+from flask import jsonify, request, Response
+from flask_babel import get_locale
+
+from . import api_v1
+from .serializers import serialize_book_detail
+from .. import calibre_db, config, db, ub, isoLanguages
+from ..cw_login import current_user
+from ..usermanagement import login_required_if_no_ano
+from ..editbooks import edit_book_param
+
+# Fields the SPA edit form can change, applied in this order. Title/authors come
+# first because they may restructure the book's directory; the rest follow.
+EDITABLE_FIELDS = [
+    "title", "authors", "series", "series_index",
+    "tags", "publishers", "languages", "comments", "rating",
+]
+
+
+def _err(code, message, status):
+    return jsonify({"error": {"code": code, "message": message}}), status
+
+
+def _require_edit():
+    if not current_user.is_authenticated or current_user.is_anonymous:
+        return _err("unauthorized", "You must be signed in", 401)
+    if not current_user.role_edit():
+        return _err("forbidden", "You are not allowed to edit metadata", 403)
+    return None
+
+
+def _parse_edit_result(result):
+    """edit_book_param returns a JSON Response, an empty string, or a
+    ``(message, status)`` tuple. Normalize to ``(ok: bool, message: str)``."""
+    if isinstance(result, Response):
+        try:
+            payload = json.loads(result.get_data(as_text=True) or "{}")
+        except ValueError:
+            return True, ""  # non-JSON success body
+        if payload.get("success") is False:
+            return False, payload.get("msg", "Update failed")
+        return True, ""
+    if isinstance(result, tuple):  # (message, status) — an error
+        return False, str(result[0])
+    return True, ""  # "" / None — success with no body
+
+
+def _editable_metadata(book):
+    """Current values for seeding the edit form (raw comments + rating included)."""
+    comments = getattr(book, "comments", None) or []
+    rating_rows = getattr(book, "ratings", None) or []
+    languages = [
+        isoLanguages.get_language_name(get_locale(), l.lang_code)
+        for l in (getattr(book, "languages", None) or [])
+    ]
+    return {
+        "id": book.id,
+        "title": book.title or "",
+        # calibre stores authors '|'-joined internally; present them '&'-joined
+        # (the format edit_book_param's author handler expects back).
+        "authors": " & ".join(a.name.replace("|", ",") for a in (book.authors or [])),
+        "series": book.series[0].name if getattr(book, "series", None) else "",
+        "series_index": book.series_index,
+        "tags": ", ".join(t.name for t in (getattr(book, "tags", None) or [])),
+        "publishers": ", ".join(p.name for p in (getattr(book, "publishers", None) or [])),
+        "languages": ", ".join(languages),
+        "comments": comments[0].text if comments else "",
+        # calibre ratings are stored 0-10 (half-stars); expose 0-5.
+        "rating": (rating_rows[0].rating / 2) if rating_rows else 0,
+    }
+
+
+@api_v1.route("/books/<int:book_id>/metadata")
+@login_required_if_no_ano
+def get_metadata(book_id):
+    guard = _require_edit()
+    if guard:
+        return guard
+    book = calibre_db.get_book(book_id)
+    if not book:
+        return _err("not_found", "Book not found", 404)
+    return jsonify(_editable_metadata(book))
+
+
+@api_v1.route("/books/<int:book_id>/metadata", methods=["POST"])
+@login_required_if_no_ano
+def update_metadata(book_id):
+    guard = _require_edit()
+    if guard:
+        return guard
+    book = calibre_db.get_book(book_id)
+    if not book:
+        return _err("not_found", "Book not found", 404)
+
+    data = request.get_json(silent=True) or {}
+    errors = {}
+    for field in EDITABLE_FIELDS:
+        if field not in data:
+            continue
+        raw = data[field]
+        value = "" if raw is None else str(raw)
+        # edit_book_param reads vals['pk'] + vals['value']; checkA auto-syncs the
+        # author sort key from the authors string (the inline-editor default).
+        vals = {"pk": str(book_id), "value": value, "checkA": "true"}
+        ok, message = _parse_edit_result(edit_book_param(field, vals))
+        if not ok:
+            errors[field] = message
+
+    # Re-fetch so the response reflects the committed state.
+    fresh = calibre_db.get_book(book_id)
+    body = _editable_metadata(fresh) if fresh else {}
+    if errors:
+        body["errors"] = errors
+    return jsonify(body)

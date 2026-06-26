@@ -1,6 +1,6 @@
 import { Link, useParams } from 'wouter';
-import { Download } from 'lucide-react';
-import { useBook, useToggleRead } from '../lib/queries';
+import { Download, Pencil } from 'lucide-react';
+import { useBook, useToggleRead, useMe } from '../lib/queries';
 import { Pill } from '../components/Pill';
 import { AddToShelf } from '../components/AddToShelf';
 import { SpinnerCentered } from '../components/Spinner';
@@ -39,6 +39,7 @@ export function BookDetail() {
 
   const { data: book, isLoading, error } = useBook(id);
   const toggleRead = useToggleRead(id);
+  const me = useMe().data;
 
   if (isLoading) return <SpinnerCentered size={40} />;
   if (error || !book) {
@@ -135,6 +136,13 @@ export function BookDetail() {
                 {fmt.format} · {formatBytes(fmt.size_bytes)}
               </a>
             ))}
+
+            {me?.role?.edit && (
+              <Link href={`/book/${book.id}/edit`} className={styles.downloadBtn}>
+                <Pencil size={14} />
+                Edit
+              </Link>
+            )}
           </div>
 
           {/* Tags */}

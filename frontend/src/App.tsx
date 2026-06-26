@@ -9,6 +9,7 @@ import { Shelves } from './pages/Shelves';
 import { Shelf } from './pages/Shelf';
 import { AdvancedSearch } from './pages/AdvancedSearch';
 import { Account } from './pages/Account';
+import { EditBook } from './pages/EditBook';
 import { AppShell } from './components/AppShell';
 import { SpinnerCentered } from './components/Spinner';
 
@@ -44,6 +45,7 @@ export function App() {
         <Route>
           <AppShell userName={me.name} onLogout={() => logout.mutate()}>
             <Switch>
+          <Route path="/book/:id/edit">{(p) => <EditBook id={p.id} />}</Route>
           <Route path="/book/:id" component={BookDetail} />
 
           {/* Browse: entity lists + per-entity filtered catalog */}
