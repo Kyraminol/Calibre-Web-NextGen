@@ -17,6 +17,7 @@ import { Tasks } from './pages/Tasks';
 import { Table } from './pages/Table';
 import { Duplicates } from './pages/Duplicates';
 import { Annotations } from './pages/Annotations';
+import { MagicShelf } from './pages/MagicShelf';
 import { AppShell } from './components/AppShell';
 import { SpinnerCentered } from './components/Spinner';
 import { I18nProvider } from './lib/i18n';
@@ -123,6 +124,7 @@ export function App() {
           <Route path="/tasks">{() => <Tasks />}</Route>
           <Route path="/table">{() => <Table />}</Route>
           <Route path="/duplicates">{() => <Duplicates />}</Route>
+          <Route path="/magic">{() => <MagicShelf />}</Route>
 
           <Route path="/">{() => <Catalog />}</Route>
             </Switch>

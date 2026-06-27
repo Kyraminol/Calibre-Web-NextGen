@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'wouter';
 import {
   Library, Users, Layers, Tag, Building2, Languages, BookCopy, UploadCloud, Shield,
-  Flame, Shuffle, Star, Archive, Info, ListChecks, Table2, Wand2, Files, ExternalLink,
+  Flame, Shuffle, Star, Archive, Info, ListChecks, Table2, Wand2, Files,
 } from 'lucide-react';
 import { useShelves, useMe } from '../lib/queries';
 import { useT } from '../lib/i18n';
@@ -171,11 +171,15 @@ export function Sidebar({ open, onNavigate }: SidebarProps) {
             </Link>
           </li>
           <li>
-            <a href="/magicshelf" className={styles.item}>
+            <Link
+              href="/magic"
+              className={isActive(location, '/magic', true) ? styles.itemActive : styles.item}
+              aria-current={isActive(location, '/magic', true) ? 'page' : undefined}
+              onClick={onNavigate}
+            >
               <Wand2 size={18} className={styles.icon} />
               <span>{t('Smart shelves')}</span>
-              <ExternalLink size={12} className={styles.icon} style={{ marginLeft: 'auto', opacity: 0.5 }} />
-            </a>
+            </Link>
           </li>
           {(canUpload || isAdmin) && (
             <li>

@@ -575,6 +575,26 @@ export function useShelfMembership() {
   return { add, remove };
 }
 
+// ── Magic shelves (smart collections) ────────────────────────────────────────
+
+export interface MagicRule { id: string; operator: string; value: string }
+export interface MagicRuleSet { condition: 'AND' | 'OR'; rules: MagicRule[] }
+
+export function useMagicShelfPreview() {
+  return useMutation({
+    mutationFn: (rules: MagicRuleSet) =>
+      apiPost<{ success: boolean; count: number; sample_books: string[]; message?: string }>(
+        '/magicshelf/preview', { rules }),
+  });
+}
+
+export function useCreateMagicShelf() {
+  return useMutation({
+    mutationFn: (v: { name: string; icon: string; rules: MagicRuleSet }) =>
+      apiPost<{ success: boolean; shelf_id?: number; message?: string }>('/magicshelf', v),
+  });
+}
+
 // ── Duplicates ───────────────────────────────────────────────────────────────
 
 export interface DuplicateBook {
