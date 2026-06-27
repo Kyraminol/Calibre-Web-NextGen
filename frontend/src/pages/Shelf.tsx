@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'wouter';
-import { ChevronLeft, Globe, Lock, Pencil, Trash2, Check, X } from 'lucide-react';
-import { useShelf, useUpdateShelf, useDeleteShelf, useShelfMembership } from '../lib/queries';
+import {
+  ChevronLeft, Globe, Lock, Pencil, Trash2, Check, X, ArrowUpDown, ArrowUp, ArrowDown, Smartphone,
+} from 'lucide-react';
+import {
+  useShelf, useUpdateShelf, useDeleteShelf, useShelfMembership, useReorderShelfBooks, useMe,
+} from '../lib/queries';
 import { BookCard } from '../components/BookCard';
 import { Button } from '../components/Button';
 import { Spinner, SpinnerCentered } from '../components/Spinner';
@@ -25,11 +29,14 @@ export function Shelf({ id }: { id: string }) {
   const { data, isLoading, isFetching, error } = useShelf(id, page);
   const updateShelf = useUpdateShelf(id);
   const deleteShelf = useDeleteShelf();
+  const reorder = useReorderShelfBooks(id);
   const { remove } = useShelfMembership();
+  const me = useMe().data;
 
   const [editing, setEditing] = useState(false);
   const [draftName, setDraftName] = useState('');
   const [actionError, setActionError] = useState<string | null>(null);
+  const [reordering, setReordering] = useState(false);
 
   // Reset accumulation if the shelf id changes (route reuse) or membership shrinks.
   useEffect(() => {
@@ -96,6 +103,32 @@ export function Shelf({ id }: { id: string }) {
     remove.mutate({ shelfId: Number(id), bookId: book.id });
   };
 
+  const toggleVisibility = () => {
+    setActionError(null);
+    updateShelf.mutate({ is_public: !data.is_public }, {
+      onError: (err) => setActionError(err instanceof ApiError ? err.message : 'Could not update shelf.'),
+    });
+  };
+
+  const toggleKoboSync = () => {
+    setActionError(null);
+    updateShelf.mutate({ kobo_sync: !data.kobo_sync }, {
+      onError: (err) => setActionError(err instanceof ApiError ? err.message : 'Could not update shelf.'),
+    });
+  };
+
+  // Move a book up/down in the loaded order, then persist the full order.
+  const moveBook = (index: number, dir: -1 | 1) => {
+    const next = [...books];
+    const target = index + dir;
+    if (target < 0 || target >= next.length) return;
+    [next[index], next[target]] = [next[target], next[index]];
+    setBooks(next);
+    reorder.mutate(next.map((b) => b.id), {
+      onError: (err) => setActionError(err instanceof ApiError ? err.message : 'Could not save order.'),
+    });
+  };
+
   return (
     <main className={styles.container}>
       <Link href="/shelves" className={styles.back}>
@@ -152,6 +185,22 @@ export function Shelf({ id }: { id: string }) {
               <button className={styles.manageBtn} onClick={startRename}>
                 <Pencil size={14} /> Rename
               </button>
+              <button className={styles.manageBtn} onClick={toggleVisibility} disabled={updateShelf.isPending}>
+                {data.is_public ? <Lock size={14} /> : <Globe size={14} />}
+                {data.is_public ? 'Make private' : 'Make public'}
+              </button>
+              {me?.features?.kobo_sync && (
+                <button className={data.kobo_sync ? styles.manageBtnActive : styles.manageBtn}
+                  onClick={toggleKoboSync} disabled={updateShelf.isPending}>
+                  <Smartphone size={14} /> {data.kobo_sync ? 'Kobo sync on' : 'Enable Kobo sync'}
+                </button>
+              )}
+              {books.length > 1 && !hasMore && (
+                <button className={reordering ? styles.manageBtnActive : styles.manageBtn}
+                  onClick={() => setReordering((v) => !v)}>
+                  <ArrowUpDown size={14} /> {reordering ? 'Done reordering' : 'Reorder'}
+                </button>
+              )}
               <button className={styles.manageBtnDanger} onClick={onDelete} disabled={deleteShelf.isPending}>
                 <Trash2 size={14} /> Delete
               </button>
@@ -163,6 +212,25 @@ export function Shelf({ id }: { id: string }) {
 
       {books.length === 0 && !isFetching ? (
         <EmptyState message="This shelf is empty. Add books from any book's page." />
+      ) : reordering ? (
+        <ol className={styles.reorderList}>
+          {books.map((book, i) => (
+            <li key={book.id} className={styles.reorderItem}>
+              <span className={styles.reorderPos}>{i + 1}</span>
+              <span className={styles.reorderTitle}>{book.title}</span>
+              <span className={styles.reorderControls}>
+                <button className={styles.iconBtn} onClick={() => moveBook(i, -1)}
+                  disabled={i === 0 || reorder.isPending} aria-label="Move up">
+                  <ArrowUp size={16} />
+                </button>
+                <button className={styles.iconBtn} onClick={() => moveBook(i, 1)}
+                  disabled={i === books.length - 1 || reorder.isPending} aria-label="Move down">
+                  <ArrowDown size={16} />
+                </button>
+              </span>
+            </li>
+          ))}
+        </ol>
       ) : (
         <>
           <div className={styles.grid}>

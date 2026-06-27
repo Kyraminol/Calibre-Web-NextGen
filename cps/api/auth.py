@@ -47,6 +47,7 @@ def _server_features():
         "mail_configured": mail_ok,
         "public_registration": bool(getattr(config, "config_public_reg", False)),
         "anon_browse": bool(getattr(config, "config_anonbrowse", False)),
+        "kobo_sync": bool(getattr(config, "config_kobo_sync", False)),
     }
 
 

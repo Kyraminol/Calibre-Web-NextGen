@@ -223,6 +223,28 @@ export function useDeleteShelf() {
   });
 }
 
+/** Persist a new book order for a shelf (full ordered id list). */
+export function useReorderShelfBooks(id: string | number) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (order: number[]) => apiPost<{ ok: boolean }>(`/api/v1/shelves/${id}/order`, { order }),
+    onSuccess: () => void qc.invalidateQueries({ queryKey: ['shelf', String(id)] }),
+  });
+}
+
+/** Add every book of a series to a shelf (series_index order). */
+export function useAddSeriesToShelf() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (v: { shelfId: number; seriesId: number }) =>
+      apiPost<{ added: number }>(`/api/v1/shelves/${v.shelfId}/series/${v.seriesId}`),
+    onSuccess: (_d, v) => {
+      void qc.invalidateQueries({ queryKey: ['shelf', String(v.shelfId)] });
+      void qc.invalidateQueries({ queryKey: ['shelves'] });
+    },
+  });
+}
+
 // ── Admin (user management) ──────────────────────────────────────────────────
 
 export function useAdminUsers() {

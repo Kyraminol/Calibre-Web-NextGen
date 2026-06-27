@@ -203,3 +203,22 @@ def test_delete_ok_204():
             mock_ub.session.query.return_value.filter.return_value.first.return_value = _shelf()
             resp = inspect.unwrap(mod.delete_shelf_api)(1)
     assert resp[1] == 204
+
+
+@pytest.mark.unit
+def test_shelves_has_reorder_and_series_endpoints():
+    """Source-pin: the depth endpoints exist + reuse the shared cores (reorder via
+    compute_shelf_positions, add-series queues hardcover sync). Reorder verified
+    live in the container; this guards the wiring."""
+    import inspect as _inspect
+    from cps.api import shelves as mod
+    assert callable(mod.reorder_shelf_books_api)
+    assert callable(mod.add_series_to_shelf_api)
+    reorder_src = _inspect.getsource(mod.reorder_shelf_books_api)
+    assert "compute_shelf_positions" in reorder_src
+    assert "check_shelf_edit_permissions" in reorder_src
+    series_src = _inspect.getsource(mod.add_series_to_shelf_api)
+    assert "queue_hardcover_sync" in series_src
+    assert "series_index" in series_src
+    # create now honours kobo_sync
+    assert "kobo_sync" in _inspect.getsource(mod.create_shelf_api)

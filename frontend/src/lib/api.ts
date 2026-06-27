@@ -5,6 +5,7 @@ export interface ServerFeatures {
   mail_configured: boolean;
   public_registration: boolean;
   anon_browse: boolean;
+  kobo_sync: boolean;
 }
 
 export interface Me {
