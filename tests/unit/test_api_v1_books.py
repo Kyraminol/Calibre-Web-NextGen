@@ -342,3 +342,15 @@ def test_build_entity_filter_language_none_negates_relationship():
 def test_build_entity_filter_no_params_returns_true():
     from cps.api.books import _build_entity_filter
     assert _build_entity_filter(None, None, None, None, None) is True
+
+
+@pytest.mark.unit
+def test_list_books_handles_discovery_filters():
+    """Source-pin: list_books recognises the discovery ?filter= categories so a
+    refactor can't silently drop a sidebar view (verified live in the container;
+    this guards the branch wiring)."""
+    import inspect as _inspect
+    from cps.api import books as books_mod
+    src = _inspect.getsource(books_mod.list_books)
+    for value in ('favorites', 'rated', 'discover', 'hot'):
+        assert 'filter_val == "%s"' % value in src, "discovery filter %r missing" % value

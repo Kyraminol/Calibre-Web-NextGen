@@ -7,9 +7,17 @@ import { Button } from '../components/Button';
 import { Spinner, SpinnerCentered } from '../components/Spinner';
 import { EmptyState } from '../components/EmptyState';
 import { useBooks, useEntityList, ENTITY_PLURAL } from '../lib/queries';
-import type { EntityKind, ReadFilter } from '../lib/queries';
+import type { EntityKind, ReadFilter, DiscoveryView } from '../lib/queries';
 import type { Book } from '../lib/api';
 import styles from './Catalog.module.css';
+
+const VIEW_LABEL: Record<DiscoveryView, string> = {
+  hot: 'Hot — Most Downloaded',
+  discover: 'Discover — Random Picks',
+  rated: 'Top Rated',
+  favorites: 'Favorites',
+  archived: 'Archived',
+};
 
 const SORT_OPTIONS = [
   { label: 'Newest', value: 'new' },
@@ -40,6 +48,8 @@ interface CatalogProps {
   /** When set, the catalog is scoped to books linked to this entity. */
   entityKind?: EntityKind;
   entityId?: string | number;
+  /** When set, render a fixed discovery view (hot/discover/rated/favorites/archived). */
+  view?: DiscoveryView;
 }
 
 function dedupAppend(prev: Book[], next: Book[]): Book[] {
@@ -48,8 +58,12 @@ function dedupAppend(prev: Book[], next: Book[]): Book[] {
   return fresh.length ? [...prev, ...fresh] : prev;
 }
 
-export function Catalog({ entityKind, entityId }: CatalogProps) {
+export function Catalog({ entityKind, entityId, view }: CatalogProps) {
   const filtered = !!entityKind;
+  const isView = !!view;
+  // Library-only controls (search box, advanced link, read-status filter) are
+  // hidden for both entity-scoped and discovery views.
+  const hideLibraryControls = filtered || isView;
 
   const [page, setPage] = useState(1);
   const [allBooks, setAllBooks] = useState<Book[]>([]);
@@ -82,7 +96,7 @@ export function Catalog({ entityKind, entityId }: CatalogProps) {
     };
   }, [searchInput, filtered]);
 
-  const resetKey = [search, sort, readFilter, entityKind ?? '', entityId ?? ''].join('|');
+  const resetKey = [search, sort, readFilter, entityKind ?? '', entityId ?? '', view ?? ''].join('|');
 
   // Any filter change resets paging to the first page.
   useEffect(() => {
@@ -96,6 +110,7 @@ export function Catalog({ entityKind, entityId }: CatalogProps) {
     readFilter,
     entityKind,
     entityId,
+    view,
   });
 
   // Accumulate pages; replace the accumulator whenever the filter set changes.
@@ -117,7 +132,7 @@ export function Catalog({ entityKind, entityId }: CatalogProps) {
   const hasMore = allBooks.length < total;
   const isFirstLoad = isLoading && allBooks.length === 0;
 
-  const heading = filtered ? (entityName ?? '…') : 'Your Library';
+  const heading = isView ? VIEW_LABEL[view!] : filtered ? (entityName ?? '…') : 'Your Library';
   const countLabel =
     total > 0
       ? search && !filtered
@@ -142,7 +157,7 @@ export function Catalog({ entityKind, entityId }: CatalogProps) {
 
       {/* Toolbar */}
       <div className={styles.toolbar}>
-        {!filtered && (
+        {!hideLibraryControls && (
           <div className={styles.searchWrap}>
             <Search size={15} className={styles.searchIcon} />
             <input
@@ -156,7 +171,7 @@ export function Catalog({ entityKind, entityId }: CatalogProps) {
           </div>
         )}
 
-        {!filtered && (
+        {!hideLibraryControls && (
           <Link href="/search" className={styles.advancedLink} title="Advanced search">
             <SlidersHorizontal size={15} />
             <span className={styles.advancedLabel}>Advanced</span>
@@ -164,7 +179,9 @@ export function Catalog({ entityKind, entityId }: CatalogProps) {
         )}
 
         {/* Read-status segmented control (disabled while a text search is active,
-            which the API resolves on a separate code path). */}
+            which the API resolves on a separate code path). Hidden in a fixed
+            discovery view, which owns the server-side filter. */}
+        {!isView && (
         <div className={styles.segmented} role="group" aria-label="Read status filter">
           {READ_FILTERS.map((rf) => (
             <button
@@ -179,6 +196,7 @@ export function Catalog({ entityKind, entityId }: CatalogProps) {
             </button>
           ))}
         </div>
+        )}
 
         <select
           className={styles.sortSelect}

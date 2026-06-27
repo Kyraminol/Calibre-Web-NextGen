@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'wouter';
 import {
   Library, Users, Layers, Tag, Building2, Languages, BookCopy, UploadCloud, Shield,
+  Flame, Shuffle, Star, Archive,
 } from 'lucide-react';
 import { useShelves, useMe } from '../lib/queries';
 import { useT } from '../lib/i18n';
@@ -13,6 +14,16 @@ const NAV = [
   { href: '/tags', label: 'Tags', icon: Tag },
   { href: '/publishers', label: 'Publishers', icon: Building2 },
   { href: '/languages', label: 'Languages', icon: Languages },
+];
+
+// Discovery views — fixed server-side filter categories (parity with the
+// legacy sidebar's Hot/Discover/Rated + per-user Favorites/Archived).
+const DISCOVER = [
+  { href: '/favorites', label: 'Favorites', icon: Star },
+  { href: '/hot', label: 'Hot', icon: Flame },
+  { href: '/discover', label: 'Discover', icon: Shuffle },
+  { href: '/rated', label: 'Top Rated', icon: Star },
+  { href: '/archived', label: 'Archived', icon: Archive },
 ];
 
 function isActive(location: string, href: string, exact?: boolean): boolean {
@@ -42,6 +53,25 @@ export function Sidebar({ open, onNavigate }: SidebarProps) {
         <ul className={styles.list}>
           {NAV.map(({ href, label, icon: Icon, exact }) => {
             const active = isActive(location, href, exact);
+            return (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={active ? styles.itemActive : styles.item}
+                  aria-current={active ? 'page' : undefined}
+                  onClick={onNavigate}
+                >
+                  <Icon size={18} className={styles.icon} />
+                  <span>{t(label)}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        <ul className={styles.list}>
+          {DISCOVER.map(({ href, label, icon: Icon }) => {
+            const active = isActive(location, href, true);
             return (
               <li key={href}>
                 <Link

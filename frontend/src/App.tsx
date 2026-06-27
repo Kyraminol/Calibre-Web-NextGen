@@ -82,6 +82,13 @@ export function App() {
           <Route path="/shelves">{() => <Shelves />}</Route>
           <Route path="/shelf/:id">{(p) => <Shelf id={p.id} />}</Route>
 
+          {/* Discovery views (fixed server-side ?filter= categories) */}
+          <Route path="/hot">{() => <Catalog view="hot" />}</Route>
+          <Route path="/discover">{() => <Catalog view="discover" />}</Route>
+          <Route path="/rated">{() => <Catalog view="rated" />}</Route>
+          <Route path="/favorites">{() => <Catalog view="favorites" />}</Route>
+          <Route path="/archived">{() => <Catalog view="archived" />}</Route>
+
           {/* Advanced search */}
           <Route path="/search">{() => <AdvancedSearch />}</Route>
 

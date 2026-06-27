@@ -3,7 +3,7 @@
 """Catalog endpoints for /api/v1."""
 from flask import jsonify, request
 from flask_babel import get_locale
-from sqlalchemy import and_
+from sqlalchemy import and_, func
 from sqlalchemy.sql.functions import coalesce
 
 from . import api_v1
@@ -139,6 +139,58 @@ def list_books():
             "per_page": pagination.per_page,
             "total": pagination.total_count,
         })
+
+    series_join = (db.books_series_link, db.Books.id == db.books_series_link.c.book, db.Series)
+
+    # --- discovery views (mirror web.py books_list categories) ---
+    if filter_val == "favorites":
+        fav_ids = [f.book_id for f in (ub.session.query(ub.FavoriteBook)
+                   .filter(ub.FavoriteBook.user_id == int(current_user.id)).all())]
+        entries, _random, pagination = calibre_db.fill_indexpage(
+            page, per_page, db.Books, db.Books.id.in_(fav_ids), order,
+            True, config.config_read_column, *series_join)
+        return jsonify({"items": [_row_to_item(e) for e in entries],
+                        "page": pagination.page, "per_page": pagination.per_page,
+                        "total": pagination.total_count})
+
+    if filter_val == "rated":
+        # Top-rated: Calibre stores rating 0–10 (half-stars); >9 == 5 stars.
+        rated_filter = db.Books.ratings.any(db.Ratings.rating > 9)
+        entries, _random, pagination = calibre_db.fill_indexpage(
+            page, per_page, db.Books, rated_filter, order,
+            True, config.config_read_column, *series_join)
+        return jsonify({"items": [_row_to_item(e) for e in entries],
+                        "page": pagination.page, "per_page": pagination.per_page,
+                        "total": pagination.total_count})
+
+    if filter_val == "discover":
+        # Random unread books (single page, like the legacy Discover view).
+        if not config.config_read_column:
+            disc_filter = coalesce(ub.ReadBook.read_status, 0) != ub.ReadBook.STATUS_FINISHED
+        else:
+            disc_filter = True
+        entries, _random, _pg = calibre_db.fill_indexpage(
+            1, per_page, db.Books, disc_filter, [func.randomblob(2)],
+            True, config.config_read_column)
+        items = [_row_to_item(e) for e in entries]
+        return jsonify({"items": items, "page": 1, "per_page": per_page, "total": len(items)})
+
+    if filter_val == "hot":
+        # Most-downloaded, paginated by the downloads table (mirrors render_hot_books).
+        off = per_page * (page - 1)
+        total = ub.session.query(func.count(ub.Downloads.book_id.distinct())).scalar() or 0
+        hot_ids = [row[0] for row in (ub.session.query(ub.Downloads.book_id)
+                   .group_by(ub.Downloads.book_id)
+                   .order_by(func.count(ub.Downloads.book_id).desc())
+                   .offset(off).limit(per_page))]
+        entries = []
+        if hot_ids:
+            q = calibre_db.generate_linked_query(config.config_read_column, db.Books)
+            rows = q.filter(calibre_db.common_filters()).filter(db.Books.id.in_(hot_ids)).all()
+            book_map = {r.Books.id: r for r in rows}
+            entries = [book_map[i] for i in hot_ids if i in book_map]  # preserve hotness order
+        return jsonify({"items": [_row_to_item(e) for e in entries],
+                        "page": page, "per_page": per_page, "total": total})
 
     # --- entity + read/unread path ---
     entity_filter = _build_entity_filter(author_id, series_id, tag_id, publisher_id, language_code)

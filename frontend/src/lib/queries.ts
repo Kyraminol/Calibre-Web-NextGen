@@ -10,6 +10,8 @@ import type {
  *  endpoints/routes use the plural (author -> authors). */
 export type EntityKind = 'author' | 'series' | 'tag' | 'publisher' | 'language';
 export type ReadFilter = 'all' | 'read' | 'unread';
+/** Discovery "views" — server-side ?filter= categories beyond read/unread. */
+export type DiscoveryView = 'hot' | 'discover' | 'rated' | 'favorites' | 'archived';
 
 /** Map a singular entity kind to its plural browse endpoint/route segment. */
 export const ENTITY_PLURAL: Record<EntityKind, string> = {
@@ -27,6 +29,8 @@ export interface BooksQuery {
   readFilter?: ReadFilter;
   entityKind?: EntityKind;
   entityId?: string | number;
+  /** Discovery view (hot/discover/rated/favorites/archived) — sent as ?filter=. */
+  view?: DiscoveryView;
 }
 
 export function useMe() {
@@ -69,7 +73,7 @@ export function useLogout() {
 }
 
 export function useBooks(q: BooksQuery) {
-  const { page, search = '', sort = 'new', readFilter = 'all', entityKind, entityId } = q;
+  const { page, search = '', sort = 'new', readFilter = 'all', entityKind, entityId, view } = q;
   const params = new URLSearchParams();
   params.set('page', String(page));
   params.set('per_page', '24');
@@ -77,13 +81,16 @@ export function useBooks(q: BooksQuery) {
   // The API's search path is separate from entity/read filtering, so search is
   // only sent in the unfiltered library view (the UI hides the search box when
   // an entity filter is active).
-  if (search && !entityKind) params.set('search', search);
-  if (readFilter !== 'all') params.set('filter', readFilter);
+  if (search && !entityKind && !view) params.set('search', search);
+  // A discovery view (hot/discover/rated/favorites/archived) owns ?filter=;
+  // otherwise the read/unread segmented control does.
+  if (view) params.set('filter', view);
+  else if (readFilter !== 'all') params.set('filter', readFilter);
   if (entityKind && entityId !== undefined && entityId !== '') {
     params.set(entityKind, String(entityId));
   }
   return useQuery<BooksPage>({
-    queryKey: ['books', page, search, sort, readFilter, entityKind ?? '', entityId ?? ''],
+    queryKey: ['books', page, search, sort, readFilter, entityKind ?? '', entityId ?? '', view ?? ''],
     queryFn: () => apiGet<BooksPage>(`/api/v1/books?${params.toString()}`),
     placeholderData: (prev) => prev,
   });
