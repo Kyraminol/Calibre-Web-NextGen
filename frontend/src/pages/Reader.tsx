@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { useBook, useBookmark, useSaveBookmark } from '../lib/queries';
 import { EmptyState } from '../components/EmptyState';
+import { useT } from '../lib/i18n';
 import styles from './Reader.module.css';
 
 type ReaderTheme = 'light' | 'sepia' | 'dark';
@@ -43,6 +44,7 @@ function loadFont(): number {
 }
 
 export function Reader({ id }: { id: string }) {
+  const t = useT();
   const { data: book, isLoading, error } = useBook(id);
   const { data: savedBookmark } = useBookmark(id, 'epub');
   const saveBookmark = useSaveBookmark(id);
@@ -236,8 +238,8 @@ export function Reader({ id }: { id: string }) {
   if (error || !book) {
     return (
       <div className={styles.fullCenter}>
-        <EmptyState message={error instanceof Error ? error.message : 'Book not found.'} />
-        <Link href="/" className={styles.exitLink}>← Library</Link>
+        <EmptyState message={error instanceof Error ? error.message : t('Book not found.')} />
+        <Link href="/" className={styles.exitLink}>{t('← Library')}</Link>
       </div>
     );
   }
@@ -247,10 +249,10 @@ export function Reader({ id }: { id: string }) {
     const other = book.formats[0];
     return (
       <div className={styles.fullCenter}>
-        <EmptyState message="In-browser reading currently supports EPUB. Use download or the classic reader for other formats." />
+        <EmptyState message={t('In-browser reading currently supports EPUB. Use download or the classic reader for other formats.')} />
         <div className={styles.fallbackRow}>
-          {other && <a className={styles.exitLink} href={other.read_url}>Open classic reader</a>}
-          <Link href={`/book/${id}`} className={styles.exitLink}>← Back to book</Link>
+          {other && <a className={styles.exitLink} href={other.read_url}>{t('Open classic reader')}</a>}
+          <Link href={`/book/${id}`} className={styles.exitLink}>{t('← Back to book')}</Link>
         </div>
       </div>
     );
@@ -260,26 +262,26 @@ export function Reader({ id }: { id: string }) {
     <div className={`${styles.reader} ${styles[`bg_${theme}`]}`}>
       {/* Top bar */}
       <header className={styles.bar}>
-        <Link href={`/book/${id}`} className={styles.iconBtn} title="Close reader" aria-label="Close reader">
+        <Link href={`/book/${id}`} className={styles.iconBtn} title={t('Close reader')} aria-label={t('Close reader')}>
           <X size={20} />
         </Link>
         <span className={styles.bookTitle}>{book.title}</span>
         <div className={styles.barControls}>
-          <button className={styles.iconBtn} onClick={() => setTocOpen((o) => !o)} aria-label="Table of contents" title="Contents">
+          <button className={styles.iconBtn} onClick={() => setTocOpen((o) => !o)} aria-label={t('Table of contents')} title={t('Contents')}>
             <List size={19} />
           </button>
           <div className={styles.fontControls}>
-            <button className={styles.iconBtn} onClick={() => setFontPct((p) => Math.max(FONT_MIN, p - 10))} aria-label="Smaller text" title="Smaller">
+            <button className={styles.iconBtn} onClick={() => setFontPct((p) => Math.max(FONT_MIN, p - 10))} aria-label={t('Smaller text')} title={t('Smaller')}>
               <Type size={14} />
             </button>
-            <button className={styles.iconBtn} onClick={() => setFontPct((p) => Math.min(FONT_MAX, p + 10))} aria-label="Larger text" title="Larger">
+            <button className={styles.iconBtn} onClick={() => setFontPct((p) => Math.min(FONT_MAX, p + 10))} aria-label={t('Larger text')} title={t('Larger')}>
               <Type size={20} />
             </button>
           </div>
           <div className={styles.themeControls}>
-            <button className={theme === 'light' ? styles.themeActive : styles.iconBtn} onClick={() => setTheme('light')} aria-label="Light theme" title="Light"><Sun size={17} /></button>
-            <button className={theme === 'sepia' ? styles.themeActive : styles.iconBtn} onClick={() => setTheme('sepia')} aria-label="Sepia theme" title="Sepia"><Coffee size={17} /></button>
-            <button className={theme === 'dark' ? styles.themeActive : styles.iconBtn} onClick={() => setTheme('dark')} aria-label="Dark theme" title="Dark"><Moon size={17} /></button>
+            <button className={theme === 'light' ? styles.themeActive : styles.iconBtn} onClick={() => setTheme('light')} aria-label={t('Light theme')} title={t('Light')}><Sun size={17} /></button>
+            <button className={theme === 'sepia' ? styles.themeActive : styles.iconBtn} onClick={() => setTheme('sepia')} aria-label={t('Sepia theme')} title={t('Sepia')}><Coffee size={17} /></button>
+            <button className={theme === 'dark' ? styles.themeActive : styles.iconBtn} onClick={() => setTheme('dark')} aria-label={t('Dark theme')} title={t('Dark')}><Moon size={17} /></button>
           </div>
         </div>
       </header>
@@ -288,15 +290,15 @@ export function Reader({ id }: { id: string }) {
       {tocOpen && (
         <>
           <div className={styles.tocScrim} onClick={() => setTocOpen(false)} aria-hidden="true" />
-          <nav className={styles.toc} aria-label="Table of contents">
-            <p className={styles.tocHeading}>Contents</p>
+          <nav className={styles.toc} aria-label={t('Table of contents')}>
+            <p className={styles.tocHeading}>{t('Contents')}</p>
             {toc.length === 0 ? (
-              <p className={styles.tocEmpty}>No contents found.</p>
+              <p className={styles.tocEmpty}>{t('No contents found.')}</p>
             ) : (
               <ul>
-                {toc.map((t, i) => (
-                  <li key={`${t.href}-${i}`}>
-                    <button className={styles.tocItem} onClick={() => goToc(t.href)}>{t.label || 'Untitled'}</button>
+                {toc.map((tocItem, i) => (
+                  <li key={`${tocItem.href}-${i}`}>
+                    <button className={styles.tocItem} onClick={() => goToc(tocItem.href)}>{tocItem.label || t('Untitled')}</button>
                   </li>
                 ))}
               </ul>
@@ -307,11 +309,11 @@ export function Reader({ id }: { id: string }) {
 
       {/* Viewer + page-turn zones */}
       <div className={styles.stage}>
-        <button className={`${styles.navZone} ${styles.navPrev}`} onClick={goPrev} aria-label="Previous page">
+        <button className={`${styles.navZone} ${styles.navPrev}`} onClick={goPrev} aria-label={t('Previous page')}>
           <ChevronLeft size={28} />
         </button>
         <div ref={viewerRef} className={styles.viewer} />
-        <button className={`${styles.navZone} ${styles.navNext}`} onClick={goNext} aria-label="Next page">
+        <button className={`${styles.navZone} ${styles.navNext}`} onClick={goNext} aria-label={t('Next page')}>
           <ChevronRight size={28} />
         </button>
 

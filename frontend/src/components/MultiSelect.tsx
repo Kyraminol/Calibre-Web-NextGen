@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { X, ChevronDown } from 'lucide-react';
+import { useT } from '../lib/i18n';
 import styles from './MultiSelect.module.css';
 
 export interface Option {
@@ -18,6 +19,7 @@ interface MultiSelectProps {
 /** Chip-based searchable multi-select. Reused by the advanced-search form for
  *  tags / series / languages / formats (include and exclude pickers). */
 export function MultiSelect({ options, value, onChange, placeholder = 'Select…' }: MultiSelectProps) {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -58,7 +60,7 @@ export function MultiSelect({ options, value, onChange, placeholder = 'Select…
             <button
               type="button"
               className={styles.chipX}
-              aria-label="Remove"
+              aria-label={t('Remove')}
               onClick={(e) => {
                 e.stopPropagation();
                 remove(id);

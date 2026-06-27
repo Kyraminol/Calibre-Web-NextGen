@@ -10,6 +10,7 @@ import { Spinner, SpinnerCentered } from '../components/Spinner';
 import { EmptyState } from '../components/EmptyState';
 import type { MetadataUpdate, MetaResult } from '../lib/api';
 import { ApiError } from '../lib/api';
+import { useT } from '../lib/i18n';
 import styles from './EditBook.module.css';
 
 interface FormState {
@@ -27,6 +28,7 @@ interface FormState {
 const RATINGS = ['', '1', '2', '3', '4', '5'];
 
 export function EditBook({ id }: { id: string }) {
+  const t = useT();
   const { data: meta, isLoading, error } = useBookMetadata(id);
   const update = useUpdateMetadata(id);
   const [, navigate] = useLocation();
@@ -111,61 +113,61 @@ export function EditBook({ id }: { id: string }) {
   return (
     <main className={styles.container}>
       <Link href={`/book/${id}`} className={styles.back}>
-        <ChevronLeft size={16} /> Back to book
+        <ChevronLeft size={16} /> {t('Back to book')}
       </Link>
-      <h1 className={styles.title}>Edit metadata</h1>
+      <h1 className={styles.title}>{t('Edit metadata')}</h1>
 
       <CoverManager id={id} />
 
       <MetadataFetch defaultQuery={form.title} onApply={applyResult} />
 
       <form className={styles.form} onSubmit={onSubmit}>
-        <Field label="Title" error={fieldErrors.title}>
+        <Field label={t('Title')} error={fieldErrors.title}>
           <input className={styles.input} value={form.title} onChange={(e) => set('title', e.target.value)} />
         </Field>
-        <Field label="Authors (separate with &)" error={fieldErrors.authors}>
+        <Field label={t('Authors (separate with &)')} error={fieldErrors.authors}>
           <input className={styles.input} value={form.authors} onChange={(e) => set('authors', e.target.value)} />
         </Field>
 
         <div className={styles.row}>
-          <Field label="Series" error={fieldErrors.series}>
+          <Field label={t('Series')} error={fieldErrors.series}>
             <input className={styles.input} value={form.series} onChange={(e) => set('series', e.target.value)} />
           </Field>
-          <Field label="Series index" error={fieldErrors.series_index} grow={false}>
+          <Field label={t('Series index')} error={fieldErrors.series_index} grow={false}>
             <input className={styles.inputNarrow} type="number" step="0.01" value={form.series_index}
               onChange={(e) => set('series_index', e.target.value)} />
           </Field>
         </div>
 
-        <Field label="Tags (comma separated)" error={fieldErrors.tags}>
+        <Field label={t('Tags (comma separated)')} error={fieldErrors.tags}>
           <input className={styles.input} value={form.tags} onChange={(e) => set('tags', e.target.value)} />
         </Field>
-        <Field label="Publishers (comma separated)" error={fieldErrors.publishers}>
+        <Field label={t('Publishers (comma separated)')} error={fieldErrors.publishers}>
           <input className={styles.input} value={form.publishers} onChange={(e) => set('publishers', e.target.value)} />
         </Field>
 
         <div className={styles.row}>
-          <Field label="Languages (comma separated)" error={fieldErrors.languages}>
+          <Field label={t('Languages (comma separated)')} error={fieldErrors.languages}>
             <input className={styles.input} value={form.languages} onChange={(e) => set('languages', e.target.value)} />
           </Field>
-          <Field label="Rating" error={fieldErrors.rating} grow={false}>
+          <Field label={t('Rating')} error={fieldErrors.rating} grow={false}>
             <select className={styles.inputNarrow} value={form.rating} onChange={(e) => set('rating', e.target.value)}>
               {RATINGS.map((r) => <option key={r} value={r}>{r ? `${r} ★` : '—'}</option>)}
             </select>
           </Field>
         </div>
 
-        <Field label="Description" error={fieldErrors.comments}>
+        <Field label={t('Description')} error={fieldErrors.comments}>
           <textarea className={styles.textarea} rows={8} value={form.comments}
             onChange={(e) => set('comments', e.target.value)} />
-          <span className={styles.hint}>HTML is allowed and sanitized on display.</span>
+          <span className={styles.hint}>{t('HTML is allowed and sanitized on display.')}</span>
         </Field>
 
         <div className={styles.actions}>
           <Button type="submit" disabled={update.isPending}>
-            <Save size={16} /> Save changes
+            <Save size={16} /> {t('Save changes')}
           </Button>
-          <Link href={`/book/${id}`} className={styles.cancel}>Cancel</Link>
+          <Link href={`/book/${id}`} className={styles.cancel}>{t('Cancel')}</Link>
           {banner && <span className={banner.ok ? styles.msgOk : styles.msgErr}>{banner.text}</span>}
         </div>
       </form>
@@ -179,6 +181,7 @@ export function EditBook({ id }: { id: string }) {
  *  ComicVine, …) and apply a result to the form. Reuses the legacy
  *  /metadata/search endpoint (per-user provider toggles live there). */
 function MetadataFetch({ defaultQuery, onApply }: { defaultQuery: string; onApply: (r: MetaResult) => void }) {
+  const t = useT();
   const search = useMetadataSearch();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState(defaultQuery);
@@ -198,17 +201,17 @@ function MetadataFetch({ defaultQuery, onApply }: { defaultQuery: string; onAppl
     <section className={styles.metaFetch}>
       {!open ? (
         <Button type="button" variant="ghost" onClick={() => { setOpen(true); setQuery(defaultQuery); }}>
-          <Sparkles size={15} /> Fetch metadata from web
+          <Sparkles size={15} /> {t('Fetch metadata from web')}
         </Button>
       ) : (
         <div className={styles.metaPanel}>
           <form className={styles.metaSearchRow} onSubmit={run}>
             <input className={styles.input} value={query} onChange={(e) => setQuery(e.target.value)}
-              placeholder="Title, author, or ISBN" autoFocus />
+              placeholder={t('Title, author, or ISBN')} autoFocus />
             <Button type="submit" disabled={search.isPending || !query.trim()}>
-              {search.isPending ? <Spinner size={15} /> : <Search size={15} />} Search
+              {search.isPending ? <Spinner size={15} /> : <Search size={15} />} {t('Search')}
             </Button>
-            <button type="button" className={styles.cancel} onClick={() => setOpen(false)}>Close</button>
+            <button type="button" className={styles.cancel} onClick={() => setOpen(false)}>{t('Close')}</button>
           </form>
           {err && <span className={styles.msgErr}>{err}</span>}
           {results.length > 0 && (
@@ -221,7 +224,7 @@ function MetadataFetch({ defaultQuery, onApply }: { defaultQuery: string; onAppl
                     <span className={styles.metaAuthors}>{(r.authors || []).join(', ')}</span>
                     {r.source?.id && <span className={styles.metaSource}>{r.source.id}</span>}
                   </div>
-                  <Button type="button" variant="ghost" onClick={() => onApply(r)}>Use</Button>
+                  <Button type="button" variant="ghost" onClick={() => onApply(r)}>{t('Use')}</Button>
                 </li>
               ))}
             </ul>
@@ -235,6 +238,7 @@ function MetadataFetch({ defaultQuery, onApply }: { defaultQuery: string; onAppl
 /** Replace the book cover: upload a file or paste a URL. The full provider
  *  candidate grid + e-reader padding preview lives at the legacy /book/:id/cover. */
 function CoverManager({ id }: { id: string }) {
+  const t = useT();
   const { data: book } = useBook(id);
   const setCover = useSetCover(id);
   const [url, setUrl] = useState('');
@@ -263,23 +267,23 @@ function CoverManager({ id }: { id: string }) {
     <section className={styles.coverSection}>
       <div className={styles.coverPreview}>
         {book?.cover_url
-          ? <img src={book.cover_url} alt="Current cover" className={styles.coverImg} />
+          ? <img src={book.cover_url} alt={t('Current cover')} className={styles.coverImg} />
           : <div className={styles.coverPlaceholder}><ImageIcon size={28} /></div>}
       </div>
       <div className={styles.coverControls}>
         <label className={styles.coverUploadBtn}>
-          <UploadIcon size={15} /> Upload image
+          <UploadIcon size={15} /> {t('Upload image')}
           <input type="file" accept="image/*" hidden onChange={onFile} disabled={setCover.isPending} />
         </label>
         <div className={styles.coverUrlRow}>
           <input className={styles.input} value={url} onChange={(e) => setUrl(e.target.value)}
-            placeholder="…or paste an image URL" />
+            placeholder={t('…or paste an image URL')} />
           <Button type="button" variant="ghost" onClick={onUrl} disabled={setCover.isPending || !url.trim()}>
-            Fetch
+            {t('Fetch')}
           </Button>
         </div>
         <a className={styles.coverAdvanced} href={`/book/${id}/cover?origin=edit`}>
-          <ExternalLink size={13} /> More cover options (search providers, e-reader preview)
+          <ExternalLink size={13} /> {t('More cover options (search providers, e-reader preview)')}
         </a>
         {msg && <span className={msg.ok ? styles.msgOk : styles.msgErr}>{msg.text}</span>}
       </div>
@@ -289,6 +293,7 @@ function CoverManager({ id }: { id: string }) {
 
 /** Manage a book's files: delete a format, or queue a conversion. */
 function FormatsManager({ id }: { id: string }) {
+  const t = useT();
   const { data: book } = useBook(id);
   const me = useMe().data;
   const deleteFormat = useDeleteFormat(id);
@@ -315,12 +320,12 @@ function FormatsManager({ id }: { id: string }) {
 
   return (
     <section className={styles.formatsSection}>
-      <h2 className={styles.subTitle}>Files</h2>
+      <h2 className={styles.subTitle}>{t('Files')}</h2>
       <ul className={styles.formatList}>
         {book!.formats.map((f) => (
           <li key={f.format} className={styles.formatItem}>
             <span className={styles.formatName}>{f.format}</span>
-            <a className={styles.formatDownload} href={f.download_url} download>Download</a>
+            <a className={styles.formatDownload} href={f.download_url} download>{t('Download')}</a>
             {canDelete && (
               <button className={styles.formatDelete}
                 onClick={() => {
@@ -339,18 +344,18 @@ function FormatsManager({ id }: { id: string }) {
 
       <form className={styles.convertForm} onSubmit={onConvert}>
         <label className={styles.fieldNarrow}>
-          <span className={styles.label}>Convert from</span>
+          <span className={styles.label}>{t('Convert from')}</span>
           <select className={styles.inputNarrow} value={from || formats[0]} onChange={(e) => setFrom(e.target.value)}>
             {formats.map((f) => <option key={f} value={f}>{f}</option>)}
           </select>
         </label>
         <label className={styles.fieldNarrow}>
-          <span className={styles.label}>to</span>
+          <span className={styles.label}>{t('to')}</span>
           <input className={styles.inputNarrow} value={to} onChange={(e) => setTo(e.target.value)}
             placeholder="e.g. MOBI" />
         </label>
         <Button type="submit" variant="ghost" disabled={convertFormat.isPending || !to.trim()}>
-          <RefreshCw size={15} /> Convert
+          <RefreshCw size={15} /> {t('Convert')}
         </Button>
         {msg && <span className={msg.ok ? styles.msgOk : styles.msgErr}>{msg.text}</span>}
       </form>

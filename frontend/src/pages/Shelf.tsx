@@ -12,6 +12,7 @@ import { Spinner, SpinnerCentered } from '../components/Spinner';
 import { EmptyState } from '../components/EmptyState';
 import type { Book } from '../lib/api';
 import { ApiError } from '../lib/api';
+import { useT } from '../lib/i18n';
 import styles from './Shelf.module.css';
 
 function dedupAppend(prev: Book[], next: Book[]): Book[] {
@@ -21,6 +22,7 @@ function dedupAppend(prev: Book[], next: Book[]): Book[] {
 }
 
 export function Shelf({ id }: { id: string }) {
+  const t = useT();
   const [, navigate] = useLocation();
   const [page, setPage] = useState(1);
   const [books, setBooks] = useState<Book[]>([]);
@@ -55,9 +57,9 @@ export function Shelf({ id }: { id: string }) {
     return (
       <main className={styles.container}>
         <Link href="/shelves" className={styles.back}>
-          <ChevronLeft size={16} /> All shelves
+          <ChevronLeft size={16} /> {t('All shelves')}
         </Link>
-        <EmptyState message={error instanceof Error ? error.message : 'Shelf not found.'} />
+        <EmptyState message={error instanceof Error ? error.message : t('Shelf not found.')} />
       </main>
     );
   }
@@ -132,7 +134,7 @@ export function Shelf({ id }: { id: string }) {
   return (
     <main className={styles.container}>
       <Link href="/shelves" className={styles.back}>
-        <ChevronLeft size={16} /> All shelves
+        <ChevronLeft size={16} /> {t('All shelves')}
       </Link>
 
       <div className={styles.header}>
@@ -148,17 +150,17 @@ export function Shelf({ id }: { id: string }) {
                   if (e.key === 'Escape') setEditing(false);
                 }}
                 autoFocus
-                aria-label="Shelf name"
+                aria-label={t('Shelf name')}
                 maxLength={120}
               />
-              <button className={styles.iconBtn} onClick={saveRename} aria-label="Save name" title="Save">
+              <button className={styles.iconBtn} onClick={saveRename} aria-label={t('Save name')} title={t('Save')}>
                 <Check size={18} />
               </button>
               <button
                 className={styles.iconBtn}
                 onClick={() => setEditing(false)}
-                aria-label="Cancel rename"
-                title="Cancel"
+                aria-label={t('Cancel rename')}
+                title={t('Cancel')}
               >
                 <X size={18} />
               </button>
@@ -168,7 +170,7 @@ export function Shelf({ id }: { id: string }) {
               <h1 className={styles.title}>{data.name}</h1>
               <span
                 className={styles.visibility}
-                title={data.is_public ? 'Public shelf' : 'Private shelf'}
+                title={data.is_public ? t('Public shelf') : t('Private shelf')}
               >
                 {data.is_public ? <Globe size={16} /> : <Lock size={16} />}
               </span>
@@ -183,26 +185,26 @@ export function Shelf({ id }: { id: string }) {
           {canEdit && !editing && (
             <div className={styles.manage}>
               <button className={styles.manageBtn} onClick={startRename}>
-                <Pencil size={14} /> Rename
+                <Pencil size={14} /> {t('Rename')}
               </button>
               <button className={styles.manageBtn} onClick={toggleVisibility} disabled={updateShelf.isPending}>
                 {data.is_public ? <Lock size={14} /> : <Globe size={14} />}
-                {data.is_public ? 'Make private' : 'Make public'}
+                {data.is_public ? t('Make private') : t('Make public')}
               </button>
               {me?.features?.kobo_sync && (
                 <button className={data.kobo_sync ? styles.manageBtnActive : styles.manageBtn}
                   onClick={toggleKoboSync} disabled={updateShelf.isPending}>
-                  <Smartphone size={14} /> {data.kobo_sync ? 'Kobo sync on' : 'Enable Kobo sync'}
+                  <Smartphone size={14} /> {data.kobo_sync ? t('Kobo sync on') : t('Enable Kobo sync')}
                 </button>
               )}
               {books.length > 1 && !hasMore && (
                 <button className={reordering ? styles.manageBtnActive : styles.manageBtn}
                   onClick={() => setReordering((v) => !v)}>
-                  <ArrowUpDown size={14} /> {reordering ? 'Done reordering' : 'Reorder'}
+                  <ArrowUpDown size={14} /> {reordering ? t('Done reordering') : t('Reorder')}
                 </button>
               )}
               <button className={styles.manageBtnDanger} onClick={onDelete} disabled={deleteShelf.isPending}>
-                <Trash2 size={14} /> Delete
+                <Trash2 size={14} /> {t('Delete')}
               </button>
             </div>
           )}
@@ -220,11 +222,11 @@ export function Shelf({ id }: { id: string }) {
               <span className={styles.reorderTitle}>{book.title}</span>
               <span className={styles.reorderControls}>
                 <button className={styles.iconBtn} onClick={() => moveBook(i, -1)}
-                  disabled={i === 0 || reorder.isPending} aria-label="Move up">
+                  disabled={i === 0 || reorder.isPending} aria-label={t('Move up')}>
                   <ArrowUp size={16} />
                 </button>
                 <button className={styles.iconBtn} onClick={() => moveBook(i, 1)}
-                  disabled={i === books.length - 1 || reorder.isPending} aria-label="Move down">
+                  disabled={i === books.length - 1 || reorder.isPending} aria-label={t('Move down')}>
                   <ArrowDown size={16} />
                 </button>
               </span>
@@ -240,7 +242,7 @@ export function Shelf({ id }: { id: string }) {
                 book={book}
                 style={{ animationDelay: `${Math.min(i, 24) * 35}ms` }}
                 onRemove={canEdit ? onRemoveBook : undefined}
-                removeLabel="Remove from shelf"
+                removeLabel={t('Remove from shelf')}
               />
             ))}
           </div>
@@ -250,10 +252,10 @@ export function Shelf({ id }: { id: string }) {
               <Button variant="ghost" onClick={() => setPage((p) => p + 1)} disabled={isFetching}>
                 {isFetching ? (
                   <>
-                    <Spinner size={16} /> Loading…
+                    <Spinner size={16} /> {t('Loading…')}
                   </>
                 ) : (
-                  'Load more'
+                  t('Load more')
                 )}
               </Button>
             </div>

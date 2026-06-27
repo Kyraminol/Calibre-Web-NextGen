@@ -7,6 +7,7 @@ import { SpinnerCentered } from '../components/Spinner';
 import { EmptyState } from '../components/EmptyState';
 import type { AdminUser } from '../lib/api';
 import { ApiError } from '../lib/api';
+import { useT } from '../lib/i18n';
 import styles from './Admin.module.css';
 
 // Server-configuration pages. Under the hybrid cutover these open the proven
@@ -38,6 +39,7 @@ const ROLE_FIELDS: { key: string; label: string }[] = [
 ];
 
 export function Admin() {
+  const t = useT();
   const { data, isLoading, error } = useAdminUsers();
   const updateUser = useUpdateAdminUser();
   const deleteUser = useDeleteAdminUser();
@@ -103,14 +105,14 @@ export function Admin() {
     <main className={styles.container}>
       <div className={styles.header}>
         <Shield size={22} className={styles.headerIcon} />
-        <h1 className={styles.title}>User administration</h1>
+        <h1 className={styles.title}>{t('User administration')}</h1>
         <span className={styles.count}>{data.items.length}</span>
         <button
           type="button"
           className={styles.addBtn}
           onClick={() => { setShowNew((v) => !v); setBanner(null); }}
         >
-          <UserPlus size={16} /> New user
+          <UserPlus size={16} /> {t('New user')}
         </button>
       </div>
 
@@ -120,21 +122,21 @@ export function Admin() {
         <form className={styles.newForm} onSubmit={onCreate}>
           <div className={styles.newRow}>
             <label className={styles.field}>
-              <span>Username</span>
+              <span>{t('Username')}</span>
               <input
                 value={form.name} required autoFocus
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
               />
             </label>
             <label className={styles.field}>
-              <span>Password</span>
+              <span>{t('Password')}</span>
               <input
                 type="password" value={form.password} required
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
             </label>
             <label className={styles.field}>
-              <span>Email (optional)</span>
+              <span>{t('Email (optional)')}</span>
               <input
                 type="email" value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -147,10 +149,10 @@ export function Admin() {
                 type="checkbox" checked={form.upload}
                 onChange={(e) => setForm({ ...form, upload: e.target.checked })}
               />
-              Can upload books
+              {t('Can upload books')}
             </label>
             <button type="submit" className={styles.submitBtn} disabled={createUser.isPending}>
-              {createUser.isPending ? 'Creating…' : 'Create user'}
+              {createUser.isPending ? t('Creating…') : t('Create user')}
             </button>
           </div>
         </form>
@@ -165,7 +167,7 @@ export function Admin() {
                 <div>
                   <p className={styles.name}>
                     {user.name}
-                    {isSelf && <span className={styles.youBadge}>you</span>}
+                    {isSelf && <span className={styles.youBadge}>{t('you')}</span>}
                   </p>
                   {user.email && (
                     <p className={styles.email}><Mail size={12} /> {user.email}</p>
@@ -188,7 +190,7 @@ export function Admin() {
                       disabled={updateUser.isPending}
                       onChange={(e) => toggleRole(user, key, e.target.checked)}
                     />
-                    {label}
+                    {t(label)}
                   </label>
                 ))}
               </div>
@@ -199,16 +201,16 @@ export function Admin() {
 
       <div className={styles.settingsHead}>
         <Settings size={18} className={styles.headerIcon} />
-        <h2 className={styles.settingsTitle}>Server configuration</h2>
+        <h2 className={styles.settingsTitle}>{t('Server configuration')}</h2>
       </div>
       <p className={styles.settingsHint}>
-        These open the full configuration pages. Changes there apply to the whole server.
+        {t('These open the full configuration pages. Changes there apply to the whole server.')}
       </p>
       <div className={styles.settingsGrid}>
         {SERVER_SETTINGS.map(({ href, label, icon: Icon }) => (
           <a key={href} href={href} className={styles.settingsCard}>
             <Icon size={18} className={styles.settingsIcon} />
-            <span className={styles.settingsLabel}>{label}</span>
+            <span className={styles.settingsLabel}>{t(label)}</span>
             <ExternalLink size={13} className={styles.settingsExt} />
           </a>
         ))}

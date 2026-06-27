@@ -5,9 +5,11 @@ import { useUploadBooks } from '../lib/queries';
 import { Button } from '../components/Button';
 import type { UploadResult } from '../lib/api';
 import { ApiError } from '../lib/api';
+import { useT } from '../lib/i18n';
 import styles from './Upload.module.css';
 
 export function Upload() {
+  const t = useT();
   const upload = useUploadBooks();
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragover, setDragover] = useState(false);
@@ -35,9 +37,9 @@ export function Upload() {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>Upload books</h1>
+      <h1 className={styles.title}>{t('Upload books')}</h1>
       <p className={styles.subtitle}>
-        Files are queued for the library's ingest process and appear once imported.
+        {t("Files are queued for the library's ingest process and appear once imported.")}
       </p>
 
       <div
@@ -56,7 +58,7 @@ export function Upload() {
           <UploadCloud size={40} className={styles.dropIcon} />
         )}
         <p className={styles.dropText}>
-          {upload.isPending ? 'Uploading…' : 'Drop files here, or click to choose'}
+          {upload.isPending ? t('Uploading…') : t('Drop files here, or click to choose')}
         </p>
         <input
           ref={inputRef}
@@ -98,7 +100,7 @@ export function Upload() {
           )}
           {result.queued.length > 0 && (
             <div className={styles.afterActions}>
-              <Link href="/"><Button variant="ghost">Back to library</Button></Link>
+              <Link href="/"><Button variant="ghost">{t('Back to library')}</Button></Link>
             </div>
           )}
         </div>

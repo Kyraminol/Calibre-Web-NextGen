@@ -1,6 +1,7 @@
 import { BookMarked, LogOut, Menu } from 'lucide-react';
 import { Link } from 'wouter';
 import { Button } from './Button';
+import { useT } from '../lib/i18n';
 import styles from './TopBar.module.css';
 
 interface TopBarProps {
@@ -10,11 +11,12 @@ interface TopBarProps {
 }
 
 export function TopBar({ userName, onLogout, onMenu }: TopBarProps) {
+  const t = useT();
   return (
     <header className={styles.bar}>
       <div className={styles.left}>
         {onMenu && (
-          <button className={styles.menuBtn} onClick={onMenu} aria-label="Open navigation">
+          <button className={styles.menuBtn} onClick={onMenu} aria-label={t('Open navigation')}>
             <Menu size={20} />
           </button>
         )}
@@ -27,12 +29,12 @@ export function TopBar({ userName, onLogout, onMenu }: TopBarProps) {
         </Link>
       </div>
       <div className={styles.right}>
-        <Link href="/account" className={styles.userName} title="Account & settings">
+        <Link href="/account" className={styles.userName} title={t('Account & settings')}>
           {userName}
         </Link>
         <Button variant="ghost" size="sm" onClick={onLogout}>
           <LogOut size={16} />
-          Sign out
+          {t('Sign out')}
         </Button>
       </div>
     </header>

@@ -2,12 +2,14 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from 'wouter';
 import { BookCopy, Check, Plus, Globe, Lock } from 'lucide-react';
 import { useShelves, useBookShelves, useShelfMembership, useMe, useCreateShelf } from '../lib/queries';
+import { useT } from '../lib/i18n';
 import { Spinner } from './Spinner';
 import styles from './AddToShelf.module.css';
 
 /** "Add to shelf" popover for a book — toggles membership on the user's
  *  editable shelves and can create a new shelf inline. */
 export function AddToShelf({ bookId }: { bookId: number }) {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
 
@@ -70,7 +72,7 @@ export function AddToShelf({ bookId }: { bookId: number }) {
         aria-expanded={open}
       >
         <BookCopy size={15} />
-        Add to shelf
+        {t('Add to shelf')}
       </button>
 
       {open && (
@@ -107,30 +109,30 @@ export function AddToShelf({ bookId }: { bookId: number }) {
                   })}
                 </ul>
               ) : (
-                <p className={styles.empty}>No shelves yet — create one below.</p>
+                <p className={styles.empty}>{t('No shelves yet — create one below.')}</p>
               )}
 
               <form className={styles.createRow} onSubmit={onCreate}>
                 <input
                   className={styles.createInput}
-                  placeholder="New shelf…"
+                  placeholder={t('New shelf…')}
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
                   maxLength={120}
-                  aria-label="New shelf name"
+                  aria-label={t('New shelf name')}
                 />
                 <button
                   type="submit"
                   className={styles.createBtn}
                   disabled={!newName.trim() || createShelf.isPending}
-                  aria-label="Create shelf and add book"
+                  aria-label={t('Create shelf and add book')}
                 >
                   <Plus size={15} />
                 </button>
               </form>
 
               <Link href="/shelves" className={styles.manageLink} onClick={() => setOpen(false)}>
-                Manage shelves
+                {t('Manage shelves')}
               </Link>
             </>
           )}

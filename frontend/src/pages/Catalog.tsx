@@ -9,6 +9,7 @@ import { EmptyState } from '../components/EmptyState';
 import { useBooks, useEntityList, ENTITY_PLURAL } from '../lib/queries';
 import type { EntityKind, ReadFilter, DiscoveryView } from '../lib/queries';
 import type { Book } from '../lib/api';
+import { useT } from '../lib/i18n';
 import styles from './Catalog.module.css';
 
 const VIEW_LABEL: Record<DiscoveryView, string> = {
@@ -59,6 +60,7 @@ function dedupAppend(prev: Book[], next: Book[]): Book[] {
 }
 
 export function Catalog({ entityKind, entityId, view }: CatalogProps) {
+  const t = useT();
   const filtered = !!entityKind;
   const isView = !!view;
   // Library-only controls (search box, advanced link, read-status filter) are
@@ -132,7 +134,7 @@ export function Catalog({ entityKind, entityId, view }: CatalogProps) {
   const hasMore = allBooks.length < total;
   const isFirstLoad = isLoading && allBooks.length === 0;
 
-  const heading = isView ? VIEW_LABEL[view!] : filtered ? (entityName ?? '…') : 'Your Library';
+  const heading = isView ? t(VIEW_LABEL[view!]) : filtered ? (entityName ?? '…') : t('Your Library');
   const countLabel =
     total > 0
       ? search && !filtered
@@ -150,7 +152,7 @@ export function Catalog({ entityKind, entityId, view }: CatalogProps) {
       )}
 
       <div className={styles.header}>
-        {filtered && <span className={styles.kindLabel}>{KIND_LABEL[entityKind!]}</span>}
+        {filtered && <span className={styles.kindLabel}>{t(KIND_LABEL[entityKind!])}</span>}
         <h1 className={styles.title}>{heading}</h1>
         {countLabel && <span className={styles.count}>{countLabel}</span>}
       </div>
@@ -163,18 +165,18 @@ export function Catalog({ entityKind, entityId, view }: CatalogProps) {
             <input
               type="search"
               className={styles.searchInput}
-              placeholder="Search title, author…"
+              placeholder={t('Search title, author…')}
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
-              aria-label="Search books"
+              aria-label={t('Search books')}
             />
           </div>
         )}
 
         {!hideLibraryControls && (
-          <Link href="/search" className={styles.advancedLink} title="Advanced search">
+          <Link href="/search" className={styles.advancedLink} title={t('Advanced search')}>
             <SlidersHorizontal size={15} />
-            <span className={styles.advancedLabel}>Advanced</span>
+            <span className={styles.advancedLabel}>{t('Advanced')}</span>
           </Link>
         )}
 
@@ -182,7 +184,7 @@ export function Catalog({ entityKind, entityId, view }: CatalogProps) {
             which the API resolves on a separate code path). Hidden in a fixed
             discovery view, which owns the server-side filter. */}
         {!isView && (
-        <div className={styles.segmented} role="group" aria-label="Read status filter">
+        <div className={styles.segmented} role="group" aria-label={t('Read status filter')}>
           {READ_FILTERS.map((rf) => (
             <button
               key={rf.value}
@@ -192,7 +194,7 @@ export function Catalog({ entityKind, entityId, view }: CatalogProps) {
               disabled={!!search && !filtered}
               onClick={() => setReadFilter(rf.value)}
             >
-              {rf.label}
+              {t(rf.label)}
             </button>
           ))}
         </div>
@@ -202,11 +204,11 @@ export function Catalog({ entityKind, entityId, view }: CatalogProps) {
           className={styles.sortSelect}
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          aria-label="Sort order"
+          aria-label={t('Sort order')}
         >
           {SORT_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>
-              {opt.label}
+              {t(opt.label)}
             </option>
           ))}
         </select>
@@ -219,10 +221,10 @@ export function Catalog({ entityKind, entityId, view }: CatalogProps) {
             setSelected(new Set());
           }}
           aria-pressed={selecting}
-          title="Select multiple"
+          title={t('Select multiple')}
         >
           <ListChecks size={15} />
-          <span className={styles.selectLabel}>{selecting ? 'Done' : 'Select'}</span>
+          <span className={styles.selectLabel}>{selecting ? t('Done') : t('Select')}</span>
         </button>
       </div>
 
@@ -268,10 +270,10 @@ export function Catalog({ entityKind, entityId, view }: CatalogProps) {
                 {isFetching ? (
                   <>
                     <Spinner size={16} />
-                    Loading…
+                    {t('Loading…')}
                   </>
                 ) : (
-                  'Load more'
+                  t('Load more')
                 )}
               </Button>
             </div>

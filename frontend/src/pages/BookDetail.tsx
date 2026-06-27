@@ -11,6 +11,7 @@ import { SpinnerCentered } from '../components/Spinner';
 import { EmptyState } from '../components/EmptyState';
 import type { BookFormat } from '../lib/api';
 import { ApiError } from '../lib/api';
+import { useT } from '../lib/i18n';
 import styles from './BookDetail.module.css';
 
 function formatBytes(bytes: number): string {
@@ -57,6 +58,7 @@ interface SendPanelProps {
 /** Compact send-to-e-reader form: pick a format, optionally convert, optionally
  *  override the recipient(s). Empty recipient → user's configured e-reader email. */
 function SendPanel({ formats, pending, banner, onSend }: SendPanelProps) {
+  const t = useT();
   const [format, setFormat] = useState(formats[0] ?? '');
   const [convert, setConvert] = useState(false);
   const [emails, setEmails] = useState('');
@@ -64,13 +66,13 @@ function SendPanel({ formats, pending, banner, onSend }: SendPanelProps) {
     <div className={styles.sendPanel}>
       <div className={styles.sendRow}>
         <label className={styles.sendField}>
-          <span>Format</span>
+          <span>{t('Format')}</span>
           <select value={format} onChange={(e) => setFormat(e.target.value)}>
             {formats.map((f) => <option key={f} value={f}>{f.toUpperCase()}</option>)}
           </select>
         </label>
         <label className={styles.sendField}>
-          <span>Recipient(s) — blank = your e-reader email</span>
+          <span>{t('Recipient(s) — blank = your e-reader email')}</span>
           <input
             type="text" value={emails} placeholder="a@kindle.com, b@kindle.com"
             onChange={(e) => setEmails(e.target.value)}
@@ -80,14 +82,14 @@ function SendPanel({ formats, pending, banner, onSend }: SendPanelProps) {
       <div className={styles.sendActions}>
         <label className={styles.sendConvert}>
           <input type="checkbox" checked={convert} onChange={(e) => setConvert(e.target.checked)} />
-          Convert before sending
+          {t('Convert before sending')}
         </label>
         <button
           className={styles.actionPrimary}
           disabled={pending || !format}
           onClick={() => onSend(format, convert, emails.trim())}
         >
-          {pending ? 'Sending…' : 'Send'}
+          {pending ? t('Sending…') : t('Send')}
         </button>
       </div>
       {banner && <p className={banner.ok ? styles.sendOk : styles.sendErr}>{banner.text}</p>}
@@ -96,6 +98,7 @@ function SendPanel({ formats, pending, banner, onSend }: SendPanelProps) {
 }
 
 export function BookDetail() {
+  const t = useT();
   const params = useParams<{ id: string }>();
   const id = params.id;
 
@@ -113,8 +116,8 @@ export function BookDetail() {
   if (error || !book) {
     return (
       <main className={styles.container}>
-        <Link href="/" className={styles.back}>← Library</Link>
-        <EmptyState message={error instanceof Error ? error.message : 'Book not found.'} />
+        <Link href="/" className={styles.back}>{t('← Library')}</Link>
+        <EmptyState message={error instanceof Error ? error.message : t('Book not found.')} />
       </main>
     );
   }
@@ -126,7 +129,7 @@ export function BookDetail() {
 
   return (
     <main className={styles.container}>
-      <Link href="/" className={styles.back}>← Library</Link>
+      <Link href="/" className={styles.back}>{t('← Library')}</Link>
 
       <div className={styles.layout}>
         {/* LEFT: cover */}
@@ -174,12 +177,12 @@ export function BookDetail() {
             {hasEpub ? (
               // EPUB opens in the in-browser SPA reader (resumes saved progress).
               <Link href={`/read/${book.id}`} className={styles.actionPrimary}>
-                Read
+                {t('Read')}
               </Link>
             ) : primaryReadable ? (
               // Other readable formats (PDF, …) use the classic full-page reader.
               <a href={primaryReadable.read_url} className={styles.actionPrimary}>
-                Read
+                {t('Read')}
               </a>
             ) : null}
 
@@ -187,9 +190,9 @@ export function BookDetail() {
               className={book.read ? styles.readToggleActive : styles.readToggleGhost}
               onClick={() => toggleRead.mutate(!book.read)}
               disabled={toggleRead.isPending}
-              aria-label={book.read ? 'Mark as unread' : 'Mark as read'}
+              aria-label={book.read ? t('Mark as unread') : t('Mark as read')}
             >
-              {book.read ? 'Read ✓' : 'Mark as read'}
+              {book.read ? t('Read ✓') : t('Mark as read')}
             </button>
 
             <AddToShelf bookId={book.id} />
@@ -199,10 +202,10 @@ export function BookDetail() {
               className={book.favorited ? styles.readToggleActive : styles.readToggleGhost}
               onClick={() => toggleFavorite.mutate()}
               disabled={toggleFavorite.isPending}
-              aria-label={book.favorited ? 'Remove from favorites' : 'Add to favorites'}
+              aria-label={book.favorited ? t('Remove from favorites') : t('Add to favorites')}
             >
               <Star size={14} fill={book.favorited ? 'currentColor' : 'none'} />
-              {book.favorited ? 'Favorited' : 'Favorite'}
+              {book.favorited ? t('Favorited') : t('Favorite')}
             </button>
 
             {/* Archive (sync-pause) */}
@@ -210,10 +213,10 @@ export function BookDetail() {
               className={book.archived ? styles.readToggleActive : styles.readToggleGhost}
               onClick={() => toggleArchived.mutate()}
               disabled={toggleArchived.isPending}
-              aria-label={book.archived ? 'Unarchive' : 'Archive'}
+              aria-label={book.archived ? t('Unarchive') : t('Archive')}
             >
               <Archive size={14} />
-              {book.archived ? 'Archived' : 'Archive'}
+              {book.archived ? t('Archived') : t('Archive')}
             </button>
 
             {/* Hide / unhide — only shown when hiding is enabled, or to unhide an
@@ -223,10 +226,10 @@ export function BookDetail() {
                 className={book.hidden ? styles.readToggleActive : styles.readToggleGhost}
                 onClick={() => toggleHidden.mutate()}
                 disabled={toggleHidden.isPending}
-                aria-label={book.hidden ? 'Unhide' : 'Hide'}
+                aria-label={book.hidden ? t('Unhide') : t('Hide')}
               >
                 {book.hidden ? <Eye size={14} /> : <EyeOff size={14} />}
-                {book.hidden ? 'Unhide' : 'Hide'}
+                {book.hidden ? t('Unhide') : t('Hide')}
               </button>
             )}
 
@@ -247,17 +250,17 @@ export function BookDetail() {
               <button
                 className={styles.downloadBtn}
                 onClick={() => { setSendOpen((v) => !v); setSendBanner(null); }}
-                aria-label="Send to e-reader"
+                aria-label={t('Send to e-reader')}
               >
                 <Send size={14} />
-                Send to e-reader
+                {t('Send to e-reader')}
               </button>
             )}
 
             {me?.role?.edit && (
               <Link href={`/book/${book.id}/edit`} className={styles.downloadBtn}>
                 <Pencil size={14} />
-                Edit
+                {t('Edit')}
               </Link>
             )}
 
@@ -266,7 +269,7 @@ export function BookDetail() {
                 flagship reader phase-2 (tracked separately). */}
             <a href={`/annotations/${book.id}`} className={styles.downloadBtn}>
               <Highlighter size={14} />
-              Highlights
+              {t('Highlights')}
             </a>
           </div>
 
@@ -305,13 +308,13 @@ export function BookDetail() {
           <dl className={styles.meta}>
             {book.pubdate && (
               <>
-                <dt className={styles.metaLabel}>Published</dt>
+                <dt className={styles.metaLabel}>{t('Published')}</dt>
                 <dd className={styles.metaValue}>{formatPubdate(book.pubdate)}</dd>
               </>
             )}
             {book.languages.length > 0 && (
               <>
-                <dt className={styles.metaLabel}>{book.languages.length === 1 ? 'Language' : 'Languages'}</dt>
+                <dt className={styles.metaLabel}>{book.languages.length === 1 ? t('Language') : t('Languages')}</dt>
                 <dd className={styles.metaValue}>
                   {book.languages.map((l, i) => (
                     <span key={l.id}>
@@ -324,7 +327,7 @@ export function BookDetail() {
             )}
             {book.publishers.length > 0 && (
               <>
-                <dt className={styles.metaLabel}>{book.publishers.length === 1 ? 'Publisher' : 'Publishers'}</dt>
+                <dt className={styles.metaLabel}>{book.publishers.length === 1 ? t('Publisher') : t('Publishers')}</dt>
                 <dd className={styles.metaValue}>
                   {book.publishers.map((p, i) => (
                     <span key={p.id}>

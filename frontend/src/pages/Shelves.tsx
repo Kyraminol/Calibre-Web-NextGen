@@ -6,9 +6,11 @@ import { Button } from '../components/Button';
 import { SpinnerCentered } from '../components/Spinner';
 import { EmptyState } from '../components/EmptyState';
 import { ApiError } from '../lib/api';
+import { useT } from '../lib/i18n';
 import styles from './Shelves.module.css';
 
 export function Shelves() {
+  const t = useT();
   const { data, isLoading, error } = useShelves();
   const me = useMe().data;
   const create = useCreateShelf();
@@ -42,7 +44,7 @@ export function Shelves() {
   return (
     <main className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Shelves</h1>
+        <h1 className={styles.title}>{t('Shelves')}</h1>
         {data && <span className={styles.count}>{data.items.length}</span>}
       </div>
 
@@ -50,10 +52,10 @@ export function Shelves() {
       <form className={styles.createForm} onSubmit={onCreate}>
         <input
           className={styles.createInput}
-          placeholder="New shelf name…"
+          placeholder={t('New shelf name…')}
           value={name}
           onChange={(e) => setName(e.target.value)}
-          aria-label="New shelf name"
+          aria-label={t('New shelf name')}
           maxLength={120}
         />
         {canMakePublic && (
@@ -63,12 +65,12 @@ export function Shelves() {
               checked={isPublic}
               onChange={(e) => setIsPublic(e.target.checked)}
             />
-            Public
+            {t('Public')}
           </label>
         )}
         <Button type="submit" disabled={!name.trim() || create.isPending}>
           <Plus size={16} />
-          Create
+          {t('Create')}
         </Button>
       </form>
       {formError && <p className={styles.formError}>{formError}</p>}
@@ -88,7 +90,7 @@ export function Shelves() {
                   <span className={styles.shelfName}>{shelf.name}</span>
                   <span
                     className={styles.visibility}
-                    title={shelf.is_public ? 'Public shelf' : 'Private shelf'}
+                    title={shelf.is_public ? t('Public shelf') : t('Private shelf')}
                   >
                     {shelf.is_public ? <Globe size={14} /> : <Lock size={14} />}
                   </span>
@@ -97,7 +99,7 @@ export function Shelves() {
                   <span className={styles.bookCount}>
                     {shelf.count} book{shelf.count !== 1 ? 's' : ''}
                   </span>
-                  {!shelf.is_owner && <span className={styles.sharedBadge}>shared</span>}
+                  {!shelf.is_owner && <span className={styles.sharedBadge}>{t('shared')}</span>}
                 </div>
               </Link>
             </li>

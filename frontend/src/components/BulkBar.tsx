@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Check, X, BookCopy, Trash2, CheckCheck } from 'lucide-react';
 import { useBulkActions, useShelves, useMe } from '../lib/queries';
+import { useT } from '../lib/i18n';
 import { Spinner } from './Spinner';
 import styles from './BulkBar.module.css';
 
@@ -15,6 +16,7 @@ interface BulkBarProps {
 /** Floating action bar for the catalog's multi-select mode. Fans each action
  *  out over the selected book ids via the existing per-book endpoints. */
 export function BulkBar({ ids, onClear, onChanged }: BulkBarProps) {
+  const t = useT();
   const me = useMe().data;
   const { markRead, addToShelf, remove } = useBulkActions();
   const { data: shelvesData } = useShelves();
@@ -52,23 +54,23 @@ export function BulkBar({ ids, onClear, onChanged }: BulkBarProps) {
   };
 
   return (
-    <div className={styles.bar} role="toolbar" aria-label="Bulk actions">
+    <div className={styles.bar} role="toolbar" aria-label={t('Bulk actions')}>
       <span className={styles.count}>{count} selected</span>
 
       <div className={styles.actions}>
         <button className={styles.action} disabled={busy}
           onClick={() => doMarkRead(true)}>
-          <CheckCheck size={15} /> Mark read
+          <CheckCheck size={15} /> {t('Mark read')}
         </button>
         <button className={styles.action} disabled={busy}
           onClick={() => doMarkRead(false)}>
-          <Check size={15} /> Mark unread
+          <Check size={15} /> {t('Mark unread')}
         </button>
 
         <div className={styles.shelfWrap} ref={shelfRef}>
           <button className={styles.action} disabled={busy || editableShelves.length === 0}
             onClick={() => setShelfOpen((o) => !o)}>
-            <BookCopy size={15} /> Add to shelf
+            <BookCopy size={15} /> {t('Add to shelf')}
           </button>
           {shelfOpen && (
             <div className={styles.shelfMenu} role="menu">
@@ -84,14 +86,14 @@ export function BulkBar({ ids, onClear, onChanged }: BulkBarProps) {
 
         {canDelete && (
           <button className={styles.actionDanger} disabled={busy} onClick={onDelete}>
-            <Trash2 size={15} /> Delete
+            <Trash2 size={15} /> {t('Delete')}
           </button>
         )}
 
         {busy && <Spinner size={16} />}
       </div>
 
-      <button className={styles.clear} onClick={onClear} aria-label="Clear selection">
+      <button className={styles.clear} onClick={onClear} aria-label={t('Clear selection')}>
         <X size={18} />
       </button>
     </div>

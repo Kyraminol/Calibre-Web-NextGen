@@ -7,6 +7,7 @@ import { Button } from '../components/Button';
 import { Spinner, SpinnerCentered } from '../components/Spinner';
 import { EmptyState } from '../components/EmptyState';
 import type { Book, AdvancedSearchParams } from '../lib/api';
+import { useT } from '../lib/i18n';
 import styles from './AdvancedSearch.module.css';
 
 type ReadStatus = 'all' | 'read' | 'unread';
@@ -47,6 +48,7 @@ function dedupAppend(prev: Book[], next: Book[]): Book[] {
 }
 
 export function AdvancedSearch() {
+  const t = useT();
   const { data: options } = useSearchOptions();
   const [form, setForm] = useState<FormState>(EMPTY);
   const [submitted, setSubmitted] = useState<AdvancedSearchParams | null>(null);
@@ -93,97 +95,97 @@ export function AdvancedSearch() {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>Advanced search</h1>
+      <h1 className={styles.title}>{t('Advanced search')}</h1>
 
       <form className={styles.form} onSubmit={onSubmit}>
         <div className={styles.grid}>
-          <Field label="Title">
+          <Field label={t('Title')}>
             <input className={styles.input} value={form.title}
               onChange={(e) => set('title', e.target.value)} />
           </Field>
-          <Field label="Author">
+          <Field label={t('Author')}>
             <input className={styles.input} value={form.authors}
               onChange={(e) => set('authors', e.target.value)} />
           </Field>
-          <Field label="Publisher">
+          <Field label={t('Publisher')}>
             <input className={styles.input} value={form.publisher}
               onChange={(e) => set('publisher', e.target.value)} />
           </Field>
-          <Field label="Description contains">
+          <Field label={t('Description contains')}>
             <input className={styles.input} value={form.comments}
               onChange={(e) => set('comments', e.target.value)} />
           </Field>
 
-          <Field label="Read status">
+          <Field label={t('Read status')}>
             <div className={styles.segmented}>
               {(['all', 'unread', 'read'] as ReadStatus[]).map((rs) => (
                 <button key={rs} type="button"
                   className={form.read_status === rs ? styles.segActive : styles.seg}
                   onClick={() => set('read_status', rs)}>
-                  {rs === 'all' ? 'Any' : rs[0].toUpperCase() + rs.slice(1)}
+                  {rs === 'all' ? t('Any') : rs[0].toUpperCase() + rs.slice(1)}
                 </button>
               ))}
             </div>
           </Field>
 
-          <Field label="Published">
+          <Field label={t('Published')}>
             <div className={styles.rangeRow}>
               <input type="date" className={styles.input} value={form.publishstart}
-                onChange={(e) => set('publishstart', e.target.value)} aria-label="Published after" />
+                onChange={(e) => set('publishstart', e.target.value)} aria-label={t('Published after')} />
               <span className={styles.rangeSep}>→</span>
               <input type="date" className={styles.input} value={form.publishend}
-                onChange={(e) => set('publishend', e.target.value)} aria-label="Published before" />
+                onChange={(e) => set('publishend', e.target.value)} aria-label={t('Published before')} />
             </div>
           </Field>
 
-          <Field label="Rating (stars)">
+          <Field label={t('Rating (stars)')}>
             <div className={styles.rangeRow}>
               <select className={styles.input} value={form.rating_low}
-                onChange={(e) => set('rating_low', e.target.value)} aria-label="Minimum rating">
-                {RATINGS.map((r) => <option key={r} value={r}>{r ? `≥ ${r}` : 'Min'}</option>)}
+                onChange={(e) => set('rating_low', e.target.value)} aria-label={t('Minimum rating')}>
+                {RATINGS.map((r) => <option key={r} value={r}>{r ? `≥ ${r}` : t('Min')}</option>)}
               </select>
               <span className={styles.rangeSep}>→</span>
               <select className={styles.input} value={form.rating_high}
-                onChange={(e) => set('rating_high', e.target.value)} aria-label="Maximum rating">
-                {RATINGS.map((r) => <option key={r} value={r}>{r ? `≤ ${r}` : 'Max'}</option>)}
+                onChange={(e) => set('rating_high', e.target.value)} aria-label={t('Maximum rating')}>
+                {RATINGS.map((r) => <option key={r} value={r}>{r ? `≤ ${r}` : t('Max')}</option>)}
               </select>
             </div>
           </Field>
 
-          <Field label="Tags — include">
+          <Field label={t('Tags — include')}>
             <MultiSelect options={options?.tags ?? []} value={form.include_tag}
-              onChange={(v) => set('include_tag', v)} placeholder="Any tags" />
+              onChange={(v) => set('include_tag', v)} placeholder={t('Any tags')} />
           </Field>
-          <Field label="Tags — exclude">
+          <Field label={t('Tags — exclude')}>
             <MultiSelect options={options?.tags ?? []} value={form.exclude_tag}
-              onChange={(v) => set('exclude_tag', v)} placeholder="No excluded tags" />
+              onChange={(v) => set('exclude_tag', v)} placeholder={t('No excluded tags')} />
           </Field>
 
-          <Field label="Series — include">
+          <Field label={t('Series — include')}>
             <MultiSelect options={options?.series ?? []} value={form.include_serie}
-              onChange={(v) => set('include_serie', v)} placeholder="Any series" />
+              onChange={(v) => set('include_serie', v)} placeholder={t('Any series')} />
           </Field>
-          <Field label="Languages — include">
+          <Field label={t('Languages — include')}>
             <MultiSelect options={options?.languages ?? []} value={form.include_language}
-              onChange={(v) => set('include_language', v)} placeholder="Any language" />
+              onChange={(v) => set('include_language', v)} placeholder={t('Any language')} />
           </Field>
 
-          <Field label="Formats — include">
+          <Field label={t('Formats — include')}>
             <MultiSelect options={formatOptions} value={form.include_extension}
-              onChange={(v) => set('include_extension', v.map(String))} placeholder="Any format" />
+              onChange={(v) => set('include_extension', v.map(String))} placeholder={t('Any format')} />
           </Field>
-          <Field label="Formats — exclude">
+          <Field label={t('Formats — exclude')}>
             <MultiSelect options={formatOptions} value={form.exclude_extension}
-              onChange={(v) => set('exclude_extension', v.map(String))} placeholder="None" />
+              onChange={(v) => set('exclude_extension', v.map(String))} placeholder={t('None')} />
           </Field>
         </div>
 
         <div className={styles.actions}>
           <Button type="submit">
-            <SearchIcon size={16} /> Search
+            <SearchIcon size={16} /> {t('Search')}
           </Button>
           <Button type="button" variant="ghost" onClick={onReset}>
-            <RotateCcw size={15} /> Reset
+            <RotateCcw size={15} /> {t('Reset')}
           </Button>
         </div>
       </form>
@@ -196,7 +198,7 @@ export function AdvancedSearch() {
           ) : isFetching && results.length === 0 ? (
             <SpinnerCentered size={32} />
           ) : results.length === 0 ? (
-            <EmptyState message="No books match those criteria." />
+            <EmptyState message={t('No books match those criteria.')} />
           ) : (
             <>
               <p className={styles.resultCount}>
@@ -212,7 +214,7 @@ export function AdvancedSearch() {
               {hasMore && (
                 <div className={styles.loadMore}>
                   <Button variant="ghost" onClick={() => setPage((p) => p + 1)} disabled={isFetching}>
-                    {isFetching ? (<><Spinner size={16} /> Loading…</>) : 'Load more'}
+                    {isFetching ? (<><Spinner size={16} /> {t('Loading…')}</>) : t('Load more')}
                   </Button>
                 </div>
               )}

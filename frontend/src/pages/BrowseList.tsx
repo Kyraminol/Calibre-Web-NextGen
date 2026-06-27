@@ -4,6 +4,7 @@ import { Search } from 'lucide-react';
 import { useEntityList } from '../lib/queries';
 import { SpinnerCentered } from '../components/Spinner';
 import { EmptyState } from '../components/EmptyState';
+import { useT } from '../lib/i18n';
 import styles from './BrowseList.module.css';
 
 interface BrowseListProps {
@@ -14,6 +15,7 @@ interface BrowseListProps {
 }
 
 export function BrowseList({ plural, title }: BrowseListProps) {
+  const t = useT();
   const { data, isLoading, error } = useEntityList(plural);
   const [q, setQ] = useState('');
 
@@ -48,7 +50,7 @@ export function BrowseList({ plural, title }: BrowseListProps) {
       {isLoading ? (
         <SpinnerCentered size={36} />
       ) : error ? (
-        <EmptyState message={error instanceof Error ? error.message : 'Failed to load.'} />
+        <EmptyState message={error instanceof Error ? error.message : t('Failed to load.')} />
       ) : items.length === 0 ? (
         <EmptyState message={q ? `No ${title.toLowerCase()} match "${q}".` : `No ${title.toLowerCase()} yet.`} />
       ) : (

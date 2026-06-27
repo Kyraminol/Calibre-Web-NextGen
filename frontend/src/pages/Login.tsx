@@ -4,11 +4,13 @@ import { Button } from '../components/Button';
 import { Spinner } from '../components/Spinner';
 import { useLogin, useAuthConfig, useRegister, useForgotPassword } from '../lib/queries';
 import { ApiError } from '../lib/api';
+import { useT } from '../lib/i18n';
 import styles from './Login.module.css';
 
 type Mode = 'login' | 'register' | 'forgot';
 
 export function Login() {
+  const t = useT();
   const [mode, setMode] = useState<Mode>('login');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -64,9 +66,9 @@ export function Login() {
           <span className={styles.brandText}>Calibre-Web <span className={styles.brandAccent}>NextGen</span></span>
         </div>
         <p className={styles.tagline}>
-          {mode === 'register' ? 'Create your account'
-            : mode === 'forgot' ? 'Reset your password'
-              : 'Your personal digital library'}
+          {mode === 'register' ? t('Create your account')
+            : mode === 'forgot' ? t('Reset your password')
+              : t('Your personal digital library')}
         </p>
 
         {okMsg && <div className={styles.ok} role="status">{okMsg}</div>}
@@ -75,18 +77,18 @@ export function Login() {
         {mode === 'login' && !standardDisabled && (
           <form className={styles.form} onSubmit={handleLogin} noValidate>
             <label className={styles.field}>
-              <span className={styles.label}>Username</span>
+              <span className={styles.label}>{t('Username')}</span>
               <input type="text" className={styles.input} value={username}
                 onChange={(e) => setUsername(e.target.value)} autoComplete="username" autoFocus required />
             </label>
             <label className={styles.field}>
-              <span className={styles.label}>Password</span>
+              <span className={styles.label}>{t('Password')}</span>
               <input type="password" className={styles.input} value={password}
                 onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required />
             </label>
             {errorMsg && <div className={styles.error} role="alert">{errorMsg}</div>}
             <Button type="submit" variant="primary" className={styles.submitBtn} disabled={login.isPending}>
-              {login.isPending ? (<><Spinner size={16} /> Signing in…</>) : 'Sign in'}
+              {login.isPending ? (<><Spinner size={16} /> {t('Signing in…')}</>) : t('Sign in')}
             </Button>
           </form>
         )}
@@ -96,20 +98,20 @@ export function Login() {
           <form className={styles.form} onSubmit={handleRegister} noValidate>
             {!cfg?.register_email && (
               <label className={styles.field}>
-                <span className={styles.label}>Username</span>
+                <span className={styles.label}>{t('Username')}</span>
                 <input type="text" className={styles.input} value={username}
                   onChange={(e) => setUsername(e.target.value)} autoComplete="username" autoFocus required />
               </label>
             )}
             <label className={styles.field}>
-              <span className={styles.label}>Email</span>
+              <span className={styles.label}>{t('Email')}</span>
               <input type="email" className={styles.input} value={email}
                 onChange={(e) => setEmail(e.target.value)} autoComplete="email"
                 autoFocus={!!cfg?.register_email} required />
             </label>
             {errorMsg && <div className={styles.error} role="alert">{errorMsg}</div>}
             <Button type="submit" variant="primary" className={styles.submitBtn} disabled={register.isPending}>
-              {register.isPending ? (<><Spinner size={16} /> Registering…</>) : 'Create account'}
+              {register.isPending ? (<><Spinner size={16} /> {t('Registering…')}</>) : t('Create account')}
             </Button>
           </form>
         )}
@@ -118,13 +120,13 @@ export function Login() {
         {mode === 'forgot' && (
           <form className={styles.form} onSubmit={handleForgot} noValidate>
             <label className={styles.field}>
-              <span className={styles.label}>Username</span>
+              <span className={styles.label}>{t('Username')}</span>
               <input type="text" className={styles.input} value={username}
                 onChange={(e) => setUsername(e.target.value)} autoComplete="username" autoFocus required />
             </label>
             {errorMsg && <div className={styles.error} role="alert">{errorMsg}</div>}
             <Button type="submit" variant="primary" className={styles.submitBtn} disabled={forgot.isPending}>
-              {forgot.isPending ? (<><Spinner size={16} /> Sending…</>) : 'Email me a reset'}
+              {forgot.isPending ? (<><Spinner size={16} /> {t('Sending…')}</>) : t('Email me a reset')}
             </Button>
           </form>
         )}
@@ -132,7 +134,7 @@ export function Login() {
         {/* OAuth providers */}
         {providers.length > 0 && mode === 'login' && (
           <div className={styles.oauth}>
-            <div className={styles.divider}><span>or continue with</span></div>
+            <div className={styles.divider}><span>{t('or continue with')}</span></div>
             {providers.map((p) => (
               <a key={p.id} href={p.url} className={styles.oauthBtn}>{p.name}</a>
             ))}
@@ -143,17 +145,17 @@ export function Login() {
         <div className={styles.switches}>
           {mode !== 'login' && (
             <button type="button" className={styles.linkBtn} onClick={() => { setMode('login'); reset(); }}>
-              ← Back to sign in
+              {t('← Back to sign in')}
             </button>
           )}
           {mode === 'login' && canForgot && (
             <button type="button" className={styles.linkBtn} onClick={() => { setMode('forgot'); reset(); }}>
-              Forgot password?
+              {t('Forgot password?')}
             </button>
           )}
           {mode === 'login' && canRegister && (
             <button type="button" className={styles.linkBtn} onClick={() => { setMode('register'); reset(); }}>
-              Create an account
+              {t('Create an account')}
             </button>
           )}
         </div>

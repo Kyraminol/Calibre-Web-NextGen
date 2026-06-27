@@ -8,6 +8,7 @@ import { Button } from '../components/Button';
 import { SpinnerCentered } from '../components/Spinner';
 import { EmptyState } from '../components/EmptyState';
 import { ApiError } from '../lib/api';
+import { useT } from '../lib/i18n';
 import styles from './Account.module.css';
 
 const ROLE_LABELS: Record<string, string> = {
@@ -17,6 +18,7 @@ const ROLE_LABELS: Record<string, string> = {
 };
 
 export function Account() {
+  const t = useT();
   const { data: account, isLoading, error } = useAccount();
   const updateProfile = useUpdateProfile();
   const changePassword = useChangePassword();
@@ -119,7 +121,7 @@ export function Account() {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>Account</h1>
+      <h1 className={styles.title}>{t('Account')}</h1>
 
       {/* Identity */}
       <section className={styles.card}>
@@ -129,7 +131,7 @@ export function Account() {
             <p className={styles.name}>{account.name}</p>
             <div className={styles.roles}>
               {activeRoles.map(([key]) => (
-                <span key={key} className={styles.roleBadge}>{ROLE_LABELS[key] ?? key}</span>
+                <span key={key} className={styles.roleBadge}>{t(ROLE_LABELS[key] ?? key)}</span>
               ))}
             </div>
           </div>
@@ -138,23 +140,23 @@ export function Account() {
 
       {/* Profile */}
       <form className={styles.card} onSubmit={onSaveProfile}>
-        <h2 className={styles.cardTitle}><Mail size={16} /> Profile</h2>
+        <h2 className={styles.cardTitle}><Mail size={16} /> {t('Profile')}</h2>
 
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="acc-email">Email</label>
+          <label className={styles.label} htmlFor="acc-email">{t('Email')}</label>
           <input id="acc-email" type="email" className={styles.input}
             value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
 
         <div className={styles.row}>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="acc-kindle">Send-to-eReader email</label>
+            <label className={styles.label} htmlFor="acc-kindle">{t('Send-to-eReader email')}</label>
             <input id="acc-kindle" type="text" className={styles.input}
               value={kindleMail} onChange={(e) => setKindleMail(e.target.value)}
               placeholder="kindle@kindle.com" />
           </div>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="acc-ksubj">eReader email subject</label>
+            <label className={styles.label} htmlFor="acc-ksubj">{t('eReader email subject')}</label>
             <input id="acc-ksubj" type="text" className={styles.input}
               value={kindleSubject} onChange={(e) => setKindleSubject(e.target.value)}
               placeholder="(default)" />
@@ -164,24 +166,24 @@ export function Account() {
         <div className={styles.field}>
           <label className={styles.toggle}>
             <input type="checkbox" checked={koboSync} onChange={(e) => setKoboSync(e.target.checked)} />
-            Sync only selected shelves to Kobo
+            {t('Sync only selected shelves to Kobo')}
           </label>
           <label className={styles.toggle}>
             <input type="checkbox" checked={opdsSync} onChange={(e) => setOpdsSync(e.target.checked)} />
-            Expose only selected shelves over OPDS
+            {t('Expose only selected shelves over OPDS')}
           </label>
         </div>
 
         <div className={styles.row}>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="acc-locale"><Globe size={13} /> Interface language</label>
+            <label className={styles.label} htmlFor="acc-locale"><Globe size={13} /> {t('Interface language')}</label>
             <select id="acc-locale" className={styles.input}
               value={locale} onChange={(e) => setLocale(e.target.value)}>
               {account.locales.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
             </select>
           </div>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="acc-lang">Show books in language</label>
+            <label className={styles.label} htmlFor="acc-lang">{t('Show books in language')}</label>
             <select id="acc-lang" className={styles.input}
               value={defaultLanguage} onChange={(e) => setDefaultLanguage(e.target.value)}>
               {account.languages.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
@@ -191,7 +193,7 @@ export function Account() {
 
         <div className={styles.actions}>
           <Button type="submit" disabled={updateProfile.isPending}>
-            <Check size={16} /> Save profile
+            <Check size={16} /> {t('Save profile')}
           </Button>
           {profileMsg && (
             <span className={profileMsg.ok ? styles.msgOk : styles.msgErr}>{profileMsg.text}</span>
@@ -202,21 +204,21 @@ export function Account() {
       {/* Password */}
       {account.can_change_password && (
         <form className={styles.card} onSubmit={onChangePassword}>
-          <h2 className={styles.cardTitle}><KeyRound size={16} /> Change password</h2>
+          <h2 className={styles.cardTitle}><KeyRound size={16} /> {t('Change password')}</h2>
 
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="acc-cur">Current password</label>
+            <label className={styles.label} htmlFor="acc-cur">{t('Current password')}</label>
             <input id="acc-cur" type="password" autoComplete="current-password" className={styles.input}
               value={currentPw} onChange={(e) => setCurrentPw(e.target.value)} />
           </div>
           <div className={styles.row}>
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="acc-new">New password</label>
+              <label className={styles.label} htmlFor="acc-new">{t('New password')}</label>
               <input id="acc-new" type="password" autoComplete="new-password" className={styles.input}
                 value={newPw} onChange={(e) => setNewPw(e.target.value)} />
             </div>
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="acc-confirm">Confirm new password</label>
+              <label className={styles.label} htmlFor="acc-confirm">{t('Confirm new password')}</label>
               <input id="acc-confirm" type="password" autoComplete="new-password" className={styles.input}
                 value={confirmPw} onChange={(e) => setConfirmPw(e.target.value)} />
             </div>
@@ -225,7 +227,7 @@ export function Account() {
           <div className={styles.actions}>
             <Button type="submit" variant="ghost"
               disabled={changePassword.isPending || !currentPw || !newPw}>
-              <KeyRound size={15} /> Update password
+              <KeyRound size={15} /> {t('Update password')}
             </Button>
             {pwMsg && (
               <span className={pwMsg.ok ? styles.msgOk : styles.msgErr}>{pwMsg.text}</span>
@@ -236,9 +238,9 @@ export function Account() {
 
       {/* App passwords (for OPDS readers / KOReader sync over HTTP Basic) */}
       <section className={styles.card}>
-        <h2 className={styles.cardTitle}><Smartphone size={16} /> App passwords</h2>
+        <h2 className={styles.cardTitle}><Smartphone size={16} /> {t('App passwords')}</h2>
         <p className={styles.hint}>
-          Use these to connect OPDS readers or KOReader sync without your main password.
+          {t('Use these to connect OPDS readers or KOReader sync without your main password.')}
         </p>
 
         {newToken && (
@@ -248,7 +250,7 @@ export function Account() {
               <code className={styles.token}>{newToken.token}</code>
               <button type="button" className={styles.copyBtn}
                 onClick={() => navigator.clipboard?.writeText(newToken.token)}>
-                <Copy size={14} /> Copy
+                <Copy size={14} /> {t('Copy')}
               </button>
             </div>
           </div>
@@ -275,7 +277,7 @@ export function Account() {
             onChange={(e) => setAppPwLabel(e.target.value)}
             placeholder="Label (e.g. KOReader on phone)" maxLength={64} />
           <Button type="submit" variant="ghost" disabled={createAppPw.isPending || !appPwLabel.trim()}>
-            <KeyRound size={15} /> Generate
+            <KeyRound size={15} /> {t('Generate')}
           </Button>
         </form>
         {appPwMsg && <span className={appPwMsg.ok ? styles.msgOk : styles.msgErr}>{appPwMsg.text}</span>}
