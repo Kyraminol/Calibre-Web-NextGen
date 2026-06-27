@@ -23,9 +23,10 @@ def _ctx(path, method="POST", body=None):
 
 def _user(**kw):
     defaults = dict(
-        is_authenticated=True, is_anonymous=False,
+        is_authenticated=True, is_anonymous=False, id=1,
         name="maggie", email="m@example.com", kindle_mail="",
         locale="en", default_language="all", password="HASH",
+        kindle_mail_subject="", kobo_only_shelves_sync=0, opds_only_shelves_sync=0,
         role_admin=lambda: False, role_passwd=lambda: True,
         role_upload=lambda: False, role_edit=lambda: False,
         role_download=lambda: True, role_delete_books=lambda: False,
@@ -118,9 +119,10 @@ def test_profile_update_locale_and_language():
     from cps.api import account as mod
     user = _user()
     mock_session = MagicMock()
+    mock_session.query.return_value.filter.return_value.order_by.return_value.all.return_value = []
     with _ctx("/api/v1/account/profile", body={"locale": "de", "default_language": "eng"}):
         with patch.object(mod, "current_user", user), \
-             patch.object(mod, "ub", SimpleNamespace(session=mock_session)), \
+             patch.object(mod, "ub", SimpleNamespace(session=mock_session, UserAppPassword=MagicMock())), \
              patch.object(mod, "calibre_db", SimpleNamespace(speaking_language=lambda: [])), \
              patch.object(mod, "get_available_locale", return_value=[]), \
              patch.object(mod, "_", lambda s: s):  # flask_babel not initialized on the bare test app
@@ -129,3 +131,81 @@ def test_profile_update_locale_and_language():
     assert user.locale == "de"
     assert user.default_language == "eng"
     assert mock_session.commit.called
+
+
+# ── app passwords ─────────────────────────────────────────────────────────────
+
+@pytest.mark.unit
+def test_create_app_password_anonymous_401():
+    from cps.api import account as mod
+    with _ctx("/api/v1/account/app-passwords", body={"label": "x"}):
+        with patch.object(mod, "current_user", _user(is_anonymous=True)):
+            resp = inspect.unwrap(mod.create_app_password)()
+    assert resp[1] == 401
+
+
+@pytest.mark.unit
+def test_create_app_password_empty_label_400():
+    from cps.api import account as mod
+    with _ctx("/api/v1/account/app-passwords", body={"label": "   "}):
+        with patch.object(mod, "current_user", _user()):
+            resp = inspect.unwrap(mod.create_app_password)()
+    assert resp[1] == 400
+
+
+@pytest.mark.unit
+def test_create_app_password_returns_token_once():
+    from cps.api import account as mod
+    mock_ub = MagicMock()
+    created = {}
+
+    class _Row:
+        def __init__(self, **kw):
+            self.id = 9
+            self.created_at = None
+            self.__dict__.update(kw)
+            created.update(kw)
+    mock_ub.UserAppPassword = _Row
+    with _ctx("/api/v1/account/app-passwords", body={"label": "KOReader"}):
+        with patch.object(mod, "current_user", _user(id=1)), \
+             patch.object(mod, "ub", mock_ub), \
+             patch.object(mod, "generate_password_hash", side_effect=lambda p: "H:" + p):
+            resp = inspect.unwrap(mod.create_app_password)()
+    body = json.loads(resp[0].get_data())
+    assert resp[1] == 201
+    assert body["label"] == "KOReader"
+    assert len(body["token"]) > 20            # cleartext returned once
+    assert created["password_hash"].startswith("H:")  # only the hash is stored
+    mock_ub.session.add.assert_called_once()
+
+
+@pytest.mark.unit
+def test_revoke_app_password_not_found_404():
+    from cps.api import account as mod
+    mock_ub = MagicMock()
+    mock_ub.session.query.return_value.filter.return_value.first.return_value = None
+    with _ctx("/api/v1/account/app-passwords/5/delete"):
+        with patch.object(mod, "current_user", _user(id=1)), patch.object(mod, "ub", mock_ub):
+            resp = inspect.unwrap(mod.revoke_app_password)(5)
+    assert resp[1] == 404
+
+
+@pytest.mark.unit
+def test_revoke_app_password_sets_revoked():
+    from cps.api import account as mod
+    row = SimpleNamespace(revoked=False)
+    mock_ub = MagicMock()
+    mock_ub.session.query.return_value.filter.return_value.first.return_value = row
+    with _ctx("/api/v1/account/app-passwords/5/delete"):
+        with patch.object(mod, "current_user", _user(id=1)), patch.object(mod, "ub", mock_ub):
+            resp = inspect.unwrap(mod.revoke_app_password)(5)
+    assert resp[1] == 204
+    assert row.revoked is True
+
+
+@pytest.mark.unit
+def test_profile_update_accepts_new_fields():
+    """Source-pin: update_profile handles the extended sync/subject fields."""
+    src = inspect.getsource(__import__("cps.api.account", fromlist=["update_profile"]).update_profile)
+    for field in ("kindle_mail_subject", "kobo_only_shelves_sync", "opds_only_shelves_sync"):
+        assert field in src

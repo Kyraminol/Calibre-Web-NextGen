@@ -385,6 +385,24 @@ export function useChangePassword() {
   });
 }
 
+/** Create an app password (for OPDS/KOSync). Returns the cleartext token once. */
+export function useCreateAppPassword() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (label: string) =>
+      apiPost<{ id: number; label: string; token: string }>('/api/v1/account/app-passwords', { label }),
+    onSuccess: () => void qc.invalidateQueries({ queryKey: ['account'] }),
+  });
+}
+
+export function useRevokeAppPassword() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: number) => apiPost(`/api/v1/account/app-passwords/${id}/delete`),
+    onSuccess: () => void qc.invalidateQueries({ queryKey: ['account'] }),
+  });
+}
+
 // ── Advanced search ──────────────────────────────────────────────────────────
 
 export function useSearchOptions() {

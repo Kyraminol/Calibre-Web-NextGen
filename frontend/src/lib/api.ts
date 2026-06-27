@@ -131,21 +131,35 @@ export interface AdvSearchResult {
   criteria: string;
 }
 
+export interface AppPassword {
+  id: number;
+  label: string;
+  created_at: string | null;
+  last_used_at: string | null;
+}
+
 export interface Account {
   name: string;
   email: string;
   kindle_mail: string;
+  kindle_mail_subject: string;
+  kobo_only_shelves_sync: boolean;
+  opds_only_shelves_sync: boolean;
   locale: string;
   default_language: string;
   role: Record<string, boolean>;
   can_change_password: boolean;
   locales: { id: string; name: string }[];
   languages: { id: string; name: string }[];
+  app_passwords: AppPassword[];
 }
 
 export interface ProfileUpdate {
   email?: string;
   kindle_mail?: string;
+  kindle_mail_subject?: string;
+  kobo_only_shelves_sync?: boolean;
+  opds_only_shelves_sync?: boolean;
   locale?: string;
   default_language?: string;
 }

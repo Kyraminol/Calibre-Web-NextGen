@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
-import { UserCircle, Mail, Globe, KeyRound, Check } from 'lucide-react';
-import { useAccount, useUpdateProfile, useChangePassword } from '../lib/queries';
+import { UserCircle, Mail, Globe, KeyRound, Check, Smartphone, Trash2, Copy } from 'lucide-react';
+import {
+  useAccount, useUpdateProfile, useChangePassword,
+  useCreateAppPassword, useRevokeAppPassword,
+} from '../lib/queries';
 import { Button } from '../components/Button';
 import { SpinnerCentered } from '../components/Spinner';
 import { EmptyState } from '../components/EmptyState';
@@ -17,13 +20,23 @@ export function Account() {
   const { data: account, isLoading, error } = useAccount();
   const updateProfile = useUpdateProfile();
   const changePassword = useChangePassword();
+  const createAppPw = useCreateAppPassword();
+  const revokeAppPw = useRevokeAppPassword();
 
   // Profile form
   const [email, setEmail] = useState('');
   const [kindleMail, setKindleMail] = useState('');
+  const [kindleSubject, setKindleSubject] = useState('');
+  const [koboSync, setKoboSync] = useState(false);
+  const [opdsSync, setOpdsSync] = useState(false);
   const [locale, setLocale] = useState('');
   const [defaultLanguage, setDefaultLanguage] = useState('');
   const [profileMsg, setProfileMsg] = useState<{ ok: boolean; text: string } | null>(null);
+
+  // App passwords
+  const [appPwLabel, setAppPwLabel] = useState('');
+  const [newToken, setNewToken] = useState<{ label: string; token: string } | null>(null);
+  const [appPwMsg, setAppPwMsg] = useState<{ ok: boolean; text: string } | null>(null);
 
   // Password form
   const [currentPw, setCurrentPw] = useState('');
@@ -36,6 +49,9 @@ export function Account() {
     if (!account) return;
     setEmail(account.email);
     setKindleMail(account.kindle_mail);
+    setKindleSubject(account.kindle_mail_subject);
+    setKoboSync(account.kobo_only_shelves_sync);
+    setOpdsSync(account.opds_only_shelves_sync);
     setLocale(account.locale);
     setDefaultLanguage(account.default_language);
   }, [account]);
@@ -53,13 +69,28 @@ export function Account() {
     e.preventDefault();
     setProfileMsg(null);
     updateProfile.mutate(
-      { email, kindle_mail: kindleMail, locale, default_language: defaultLanguage },
+      {
+        email, kindle_mail: kindleMail, kindle_mail_subject: kindleSubject,
+        kobo_only_shelves_sync: koboSync, opds_only_shelves_sync: opdsSync,
+        locale, default_language: defaultLanguage,
+      },
       {
         onSuccess: () => setProfileMsg({ ok: true, text: 'Profile saved.' }),
         onError: (err) =>
           setProfileMsg({ ok: false, text: err instanceof ApiError ? err.message : 'Could not save.' }),
       },
     );
+  };
+
+  const onCreateAppPw = (e: React.FormEvent) => {
+    e.preventDefault();
+    setAppPwMsg(null);
+    setNewToken(null);
+    createAppPw.mutate(appPwLabel.trim(), {
+      onSuccess: (r) => { setNewToken({ label: r.label, token: r.token }); setAppPwLabel(''); },
+      onError: (err) =>
+        setAppPwMsg({ ok: false, text: err instanceof ApiError ? err.message : 'Could not create.' }),
+    });
   };
 
   const onChangePassword = (e: React.FormEvent) => {
@@ -115,11 +146,30 @@ export function Account() {
             value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
 
+        <div className={styles.row}>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="acc-kindle">Send-to-eReader email</label>
+            <input id="acc-kindle" type="text" className={styles.input}
+              value={kindleMail} onChange={(e) => setKindleMail(e.target.value)}
+              placeholder="kindle@kindle.com" />
+          </div>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="acc-ksubj">eReader email subject</label>
+            <input id="acc-ksubj" type="text" className={styles.input}
+              value={kindleSubject} onChange={(e) => setKindleSubject(e.target.value)}
+              placeholder="(default)" />
+          </div>
+        </div>
+
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="acc-kindle">Send-to-eReader email</label>
-          <input id="acc-kindle" type="text" className={styles.input}
-            value={kindleMail} onChange={(e) => setKindleMail(e.target.value)}
-            placeholder="kindle@kindle.com" />
+          <label className={styles.toggle}>
+            <input type="checkbox" checked={koboSync} onChange={(e) => setKoboSync(e.target.checked)} />
+            Sync only selected shelves to Kobo
+          </label>
+          <label className={styles.toggle}>
+            <input type="checkbox" checked={opdsSync} onChange={(e) => setOpdsSync(e.target.checked)} />
+            Expose only selected shelves over OPDS
+          </label>
         </div>
 
         <div className={styles.row}>
@@ -183,6 +233,53 @@ export function Account() {
           </div>
         </form>
       )}
+
+      {/* App passwords (for OPDS readers / KOReader sync over HTTP Basic) */}
+      <section className={styles.card}>
+        <h2 className={styles.cardTitle}><Smartphone size={16} /> App passwords</h2>
+        <p className={styles.hint}>
+          Use these to connect OPDS readers or KOReader sync without your main password.
+        </p>
+
+        {newToken && (
+          <div className={styles.tokenBox}>
+            <p className={styles.tokenLabel}>New password for “{newToken.label}” — copy it now, it won’t be shown again:</p>
+            <div className={styles.tokenRow}>
+              <code className={styles.token}>{newToken.token}</code>
+              <button type="button" className={styles.copyBtn}
+                onClick={() => navigator.clipboard?.writeText(newToken.token)}>
+                <Copy size={14} /> Copy
+              </button>
+            </div>
+          </div>
+        )}
+
+        {account.app_passwords.length > 0 && (
+          <ul className={styles.appPwList}>
+            {account.app_passwords.map((ap) => (
+              <li key={ap.id} className={styles.appPwItem}>
+                <span className={styles.appPwName}>{ap.label}</span>
+                <button type="button" className={styles.revokeBtn}
+                  disabled={revokeAppPw.isPending}
+                  onClick={() => revokeAppPw.mutate(ap.id)}
+                  aria-label={`Revoke ${ap.label}`}>
+                  <Trash2 size={14} />
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <form className={styles.appPwForm} onSubmit={onCreateAppPw}>
+          <input type="text" className={styles.input} value={appPwLabel}
+            onChange={(e) => setAppPwLabel(e.target.value)}
+            placeholder="Label (e.g. KOReader on phone)" maxLength={64} />
+          <Button type="submit" variant="ghost" disabled={createAppPw.isPending || !appPwLabel.trim()}>
+            <KeyRound size={15} /> Generate
+          </Button>
+        </form>
+        {appPwMsg && <span className={appPwMsg.ok ? styles.msgOk : styles.msgErr}>{appPwMsg.text}</span>}
+      </section>
     </main>
   );
 }

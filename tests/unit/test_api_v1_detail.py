@@ -147,6 +147,7 @@ def test_detail_endpoint_found():
             return_value=(fake_book, STATUS_FINISHED, False),
         ), \
         patch.object(books_mod.config, "config_read_column", 0, create=True), \
+        patch.object(books_mod, "current_user", SimpleNamespace(is_authenticated=False, is_anonymous=True)), \
         patch("cps.api.books.get_locale", return_value="en"), \
         patch("cps.api.books.isoLanguages.get_language_name", return_value="English"):
             view = inspect.unwrap(books_mod.book_detail)
@@ -197,6 +198,7 @@ def test_detail_endpoint_archived_book():
             return_value=(fake_book, None, True),
         ), \
         patch.object(books_mod.config, "config_read_column", 0, create=True), \
+        patch.object(books_mod, "current_user", SimpleNamespace(is_authenticated=False, is_anonymous=True)), \
         patch("cps.api.books.get_locale", return_value="en"), \
         patch("cps.api.books.isoLanguages.get_language_name", return_value="English"):
             view = inspect.unwrap(books_mod.book_detail)
