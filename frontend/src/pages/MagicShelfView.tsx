@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'wouter';
-import { ChevronLeft, Copy, Trash2 } from 'lucide-react';
+import { ChevronLeft, Copy, Trash2, Pencil } from 'lucide-react';
 import { useMagicShelfBooks, useDeleteMagicShelf, useDuplicateMagicShelf } from '../lib/queries';
 import { BookCard } from '../components/BookCard';
 import { Button } from '../components/Button';
@@ -55,11 +55,13 @@ export function MagicShelfView({ id }: { id: string }) {
           <span className={styles.count}>{total} {t('books')}</span>
           {data.is_owner && (
             <div className={styles.manage}>
+              <Link href={`/magic/${id}/edit`} className={styles.manageBtn}>
+                <Pencil size={14} /> {t('Edit')}
+              </Link>
               <button className={styles.manageBtn} disabled={dup.isPending}
                 onClick={() => dup.mutate(Number(id))}>
                 <Copy size={14} /> {t('Duplicate')}
               </button>
-              <Link href="/magic" className={styles.manageBtn}>{t('New smart shelf')}</Link>
               <button className={styles.manageBtnDanger} disabled={del.isPending}
                 onClick={() => {
                   if (window.confirm(t('Delete this smart shelf? Your books are not affected.')))

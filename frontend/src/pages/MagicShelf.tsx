@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'wouter';
 import { Wand2, Plus, Trash2 } from 'lucide-react';
-import { useMagicShelfPreview, useCreateMagicShelf } from '../lib/queries';
+import { useMagicShelfPreview, useCreateMagicShelf, useEditMagicShelf, useMagicShelfBooks } from '../lib/queries';
 import type { MagicRule } from '../lib/queries';
 import { Button } from '../components/Button';
 import { useT } from '../lib/i18n';
@@ -40,16 +40,31 @@ const newRule = (): MagicRule & { _k: number } => ({ _k: ++_rid, id: 'title', op
 /** Native smart-collection (magic shelf) rule builder: name + icon, AND/OR
  *  match, a list of field/operator/value rules, live preview, save. Consumes the
  *  legacy /magicshelf/preview + /magicshelf endpoints (rule engine stays server-side). */
-export function MagicShelf() {
+export function MagicShelf({ editId }: { editId?: string }) {
   const t = useT();
   const [, navigate] = useLocation();
   const preview = useMagicShelfPreview();
   const create = useCreateMagicShelf();
+  const edit = useEditMagicShelf(editId ?? '');
+  // In edit mode, load the existing shelf's name/icon/rules to seed the form.
+  const existing = useMagicShelfBooks(editId ?? '', 1);
 
   const [name, setName] = useState('');
   const [icon, setIcon] = useState('🪄');
   const [condition, setCondition] = useState<'AND' | 'OR'>('AND');
   const [rules, setRules] = useState<(MagicRule & { _k: number })[]>([newRule()]);
+  const [seeded, setSeeded] = useState(false);
+
+  useEffect(() => {
+    if (!editId || seeded || !existing.data) return;
+    const d = existing.data as unknown as { name: string; icon: string; rules?: { condition?: 'AND' | 'OR'; rules?: MagicRule[] } };
+    setName(d.name || '');
+    setIcon(d.icon || '🪄');
+    setCondition(d.rules?.condition === 'OR' ? 'OR' : 'AND');
+    const loaded = (d.rules?.rules || []).map((r) => ({ _k: ++_rid, id: r.id, operator: r.operator, value: String(r.value ?? '') }));
+    setRules(loaded.length ? loaded : [newRule()]);
+    setSeeded(true);
+  }, [editId, seeded, existing.data]);
   const [previewData, setPreviewData] = useState<{ count: number; sample: string[] } | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const debounce = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -78,20 +93,26 @@ export function MagicShelf() {
   const onSave = () => {
     setErr(null);
     if (!name.trim()) { setErr(t('Give your smart shelf a name.')); return; }
-    create.mutate({ name: name.trim(), icon: icon || '🪄', rules: ruleSet() }, {
-      onSuccess: (d) => {
-        if (d.success && d.shelf_id) navigate(`/`); // shelf created; appears in nav
-        else setErr(d.message || t('Could not create the shelf.'));
-      },
-      onError: (e) => setErr(e instanceof ApiError ? e.message : t('Could not create the shelf.')),
-    });
+    const payload = { name: name.trim(), icon: icon || '🪄', rules: ruleSet() };
+    if (editId) {
+      edit.mutate(payload, {
+        onSuccess: (d) => d.success ? navigate(`/magic/${editId}`) : setErr(d.message || t('Could not save the shelf.')),
+        onError: (e) => setErr(e instanceof ApiError ? e.message : t('Could not save the shelf.')),
+      });
+    } else {
+      create.mutate(payload, {
+        onSuccess: (d) => d.success ? navigate(d.shelf_id ? `/magic/${d.shelf_id}` : '/') : setErr(d.message || t('Could not create the shelf.')),
+        onError: (e) => setErr(e instanceof ApiError ? e.message : t('Could not create the shelf.')),
+      });
+    }
   };
+  const saving = create.isPending || edit.isPending;
 
   return (
     <main className={styles.container}>
       <div className={styles.header}>
         <Wand2 size={22} className={styles.headerIcon} />
-        <h1 className={styles.title}>{t('New smart shelf')}</h1>
+        <h1 className={styles.title}>{editId ? t('Edit smart shelf') : t('New smart shelf')}</h1>
       </div>
 
       <div className={styles.topRow}>
@@ -154,8 +175,8 @@ export function MagicShelf() {
       {err && <p className={styles.err}>{err}</p>}
 
       <div className={styles.actions}>
-        <Button onClick={onSave} disabled={create.isPending}>
-          <Wand2 size={16} /> {create.isPending ? t('Creating…') : t('Create smart shelf')}
+        <Button onClick={onSave} disabled={saving}>
+          <Wand2 size={16} /> {saving ? t('Saving…') : (editId ? t('Save changes') : t('Create smart shelf'))}
         </Button>
       </div>
     </main>

@@ -125,6 +125,7 @@ export function App() {
           <Route path="/tasks">{() => <Tasks />}</Route>
           <Route path="/table">{() => <Table />}</Route>
           <Route path="/duplicates">{() => <Duplicates />}</Route>
+          <Route path="/magic/:id/edit">{(p) => <MagicShelf editId={p.id} />}</Route>
           <Route path="/magic/:id">{(p) => <MagicShelfView id={p.id} />}</Route>
           <Route path="/magic">{() => <MagicShelf />}</Route>
 

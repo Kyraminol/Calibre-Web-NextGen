@@ -73,6 +73,8 @@ def magic_shelf_books(shelf_id):
     return jsonify({
         "id": shelf.id, "name": shelf.name, "icon": shelf.icon or "🪄",
         "is_owner": (shelf.user_id == uid),
+        # rules included so the builder can load this shelf for editing
+        "rules": shelf.rules or {"condition": "AND", "rules": []},
         "items": [_row_to_item(e) for e in entries],
         "page": pagination.page, "per_page": pagination.per_page, "total": pagination.total_count,
     })

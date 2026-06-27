@@ -605,6 +605,18 @@ export function useCreateMagicShelf() {
   });
 }
 
+export function useEditMagicShelf(id: string | number) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (v: { name: string; icon: string; rules: MagicRuleSet }) =>
+      apiPost<{ success: boolean; message?: string }>(`/magicshelf/${id}/edit`, v),
+    onSuccess: () => {
+      void qc.invalidateQueries({ queryKey: ['magicshelves'] });
+      void qc.invalidateQueries({ queryKey: ['magicshelf', String(id)] });
+    },
+  });
+}
+
 export interface MagicShelfItem { id: number; name: string; icon: string; is_public: boolean; is_owner: boolean }
 
 export function useMagicShelves() {
