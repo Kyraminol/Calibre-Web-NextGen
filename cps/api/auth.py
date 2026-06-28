@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Auth endpoints for /api/v1 — reuse the existing cw_login session + CSRF."""
-from flask import jsonify, request
+from datetime import datetime
+
+from flask import jsonify, request, url_for
 from sqlalchemy import func
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from . import api_v1
 from .serializers import serialize_user
-from .. import ub, config, limiter
+from .. import ub, config, constants, limiter
 from ..cw_login import current_user, login_user, logout_user
 from ..helper import (
     check_username, check_email, check_valid_domain, reset_password,
@@ -20,13 +22,29 @@ def _err(code, message, status):
 
 
 def _oauth_providers():
-    """Configured OAuth providers, as {id, name, url} for the SPA login buttons.
-    URLs match the legacy login template's oauth.* routes."""
-    urls = {1: "/link/github", 2: "/link/google", 3: "/link/generic"}
+    """OAuth/OIDC providers for the SPA login buttons, as {id, name, url}.
+
+    Matches the classic login page EXACTLY: providers are only offered when the
+    instance's login type is OAuth (config_login_type == LOGIN_OAUTH) AND the
+    provider is registered in oauth_check. Without the login-type gate the buttons
+    would appear on a standard- or LDAP-login instance and error on click (the
+    provider isn't configured). URLs are built with url_for so they're correct
+    behind a reverse-proxy subpath. Endpoints map to the same oauth.* routes the
+    classic template links to."""
+    if config.config_login_type != constants.LOGIN_OAUTH:
+        return []
+    endpoints = {1: "oauth.github_login", 2: "oauth.google_login", 3: "oauth.generic_login"}
     try:
         from ..oauth_bb import oauth_check
-        return [{"id": cid, "name": name, "url": urls.get(cid, "")}
-                for cid, name in oauth_check.items() if cid in urls]
+        out = []
+        for cid, name in oauth_check.items():
+            ep = endpoints.get(cid)
+            if ep:
+                try:
+                    out.append({"id": cid, "name": name, "url": url_for(ep)})
+                except Exception:
+                    pass
+        return out
     except Exception:
         return []
 
@@ -116,13 +134,108 @@ def auth_config():
         mail_ok = bool(config.get_mail_server_configured())
     except Exception:
         mail_ok = False
+    # Magic-link ("remote") login — admin toggle config_remote_login. Same gate as
+    # the classic login page; URL via url_for so it's reverse-proxy-subpath safe.
+    remote_login = bool(getattr(config, "config_remote_login", False))
+    try:
+        remote_login_url = url_for("remotelogin.remote_login") if remote_login else ""
+    except Exception:
+        remote_login_url = ""
     return jsonify({
         "public_registration": bool(getattr(config, "config_public_reg", False)),
         "register_email": bool(getattr(config, "config_register_email", False)),
         "mail_configured": mail_ok,
         "standard_login_disabled": bool(getattr(config, "config_disable_standard_login", False)),
         "oauth_providers": _oauth_providers(),
+        "remote_login": remote_login,
+        "remote_login_url": remote_login_url,
     })
+
+
+def _build_qr_data_url(verify_url):
+    """Return a data: URL for a QR encoding verify_url, or "" if qrcode/PIL isn't
+    available. Mirrors remotelogin.remote_login's QR build (single source of the
+    same dependency surface) so the SPA page matches the classic one."""
+    try:
+        import qrcode
+        from base64 import b64encode
+        from io import BytesIO
+        qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_H,
+                           box_size=5, border=4)
+        qr.add_data(verify_url)
+        qr.make(fit=True)
+        img = qr.make_image()
+        buf = BytesIO()
+        img.save(buf, format="jpeg")
+        return "data:image/jpeg;base64, %s" % b64encode(buf.getvalue()).decode()
+    except Exception:
+        return ""
+
+
+@api_v1.route("/auth/magic-link/start", methods=["POST"])
+@limiter.limit("40/day", key_func=lambda: get_remote_address())
+@limiter.limit("6/minute", key_func=lambda: get_remote_address())
+def auth_magic_link_start():
+    """Begin a magic-link (remote) login: mint a RemoteAuthToken and return the
+    verify URL + QR for the SPA to render. The waiting (logged-out) device then
+    polls /auth/magic-link/poll while an already-signed-in device authorises the
+    token by visiting verify_url (/verify/<token>, login-gated). Same mechanism
+    the classic /remote/login page uses; gated on the same config_remote_login."""
+    if not bool(getattr(config, "config_remote_login", False)):
+        return _err("magic_link_disabled", "Magic-link login is disabled", 403)
+    if current_user.is_authenticated:
+        return _err("already_authenticated", "You're already signed in", 400)
+    auth_token = ub.RemoteAuthToken()
+    ub.session.add(auth_token)
+    ub.session_commit()
+    try:
+        verify_url = url_for("remotelogin.verify_token", token=auth_token.auth_token, _external=True)
+    except Exception:
+        verify_url = ""
+    return jsonify({
+        "token": auth_token.auth_token,
+        "verify_url": verify_url,
+        "qrcode": _build_qr_data_url(verify_url),
+        "expires_in_minutes": 10,
+    })
+
+
+@api_v1.route("/auth/magic-link/poll", methods=["POST"])
+@limiter.limit("240/hour", key_func=lambda: get_remote_address())
+def auth_magic_link_poll():
+    """Poll a magic-link token. Returns one of: not_verified | success | expired |
+    not_found. On success the waiting device is logged in (session cookie set) and
+    the token is consumed. Mirrors remotelogin.token_verified, JSON-shaped for the
+    SPA (serialized user instead of a flash + redirect)."""
+    if not bool(getattr(config, "config_remote_login", False)):
+        return _err("magic_link_disabled", "Magic-link login is disabled", 403)
+    data = request.get_json(silent=True) or request.form
+    token = (data.get("token") or "").strip()
+    if not token:
+        return jsonify({"status": "not_found"})
+    auth_token = ub.session.query(ub.RemoteAuthToken).filter(
+        ub.RemoteAuthToken.auth_token == token,
+        ub.RemoteAuthToken.token_type == 0,
+    ).first()
+    if auth_token is None:
+        return jsonify({"status": "not_found"})
+    if datetime.now() > auth_token.expiration:
+        ub.session.delete(auth_token)
+        ub.session_commit()
+        return jsonify({"status": "expired"})
+    if not auth_token.verified:
+        return jsonify({"status": "not_verified"})
+    user = ub.session.query(ub.User).filter(ub.User.id == auth_token.user_id).first()
+    if user is None or user.role_anonymous():
+        ub.session.delete(auth_token)
+        ub.session_commit()
+        return jsonify({"status": "not_found"})
+    login_user(user)
+    ub.session.delete(auth_token)
+    ub.session_commit("User {} logged in via SPA magic-link, token deleted".format(user.name))
+    payload = serialize_user(user)
+    payload["features"] = _server_features()
+    return jsonify({"status": "success", "user": payload})
 
 
 @api_v1.route("/auth/register", methods=["POST"])

@@ -17,6 +17,21 @@ is for things you can see or feel when running the app.
 ## [Unreleased]
 
 ### Added
+- **A "Discover" shelf of random picks on your library home (new UI).** The
+  redesigned library now opens with a set-apart "Discover" box — a row of random
+  books from your collection to stumble onto something to read. Hit the shuffle
+  button for a fresh set, dismiss it with the × in its corner, and bring it back
+  any time from the new gear (View settings → "Show Discover section"). Your
+  choice is remembered on that device.
+- **"Remember me" and a show-password toggle are back on the new sign-in screen.**
+  The redesigned login page now has the "Remember me" checkbox (on by default, so
+  you stay signed in) and an eye button to reveal what you typed — matching the
+  classic login.
+- **Magic-link sign-in now has a polished page in the new UI.** Choosing "Log in
+  with a magic link" opens a redesigned screen with the QR code, a one-tap copy of
+  the verification link, a live "waiting…" indicator and an expiry countdown. Scan
+  or open it on a device you're already signed in on and the waiting device logs in
+  automatically. (Previously this dropped you onto the old-style page.)
 - **The version number on the Admin page links to its release notes.** The
   "Calibre-Web NextGen" version in the Version Information table (Admin page) is
   now a link to that release's notes on GitHub, so you can see what changed in
