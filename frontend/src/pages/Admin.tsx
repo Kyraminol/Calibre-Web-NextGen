@@ -30,6 +30,18 @@ const SERVER_SETTINGS: { href: string; label: string; icon: typeof Settings }[] 
   { href: '/duplicates', label: 'Duplicate books', icon: Files },
 ];
 
+// Default-role checkboxes auto-granted to new OAuth users. Keys MUST match
+// _OAUTH_DEFAULT_ROLE_BITS in cps/api/admin_security.py.
+const OAUTH_DEFAULT_ROLE_FIELDS: { key: string; label: string }[] = [
+  { key: 'download', label: 'Download' },
+  { key: 'viewer', label: 'View' },
+  { key: 'upload', label: 'Upload' },
+  { key: 'edit', label: 'Edit metadata' },
+  { key: 'delete', label: 'Delete books' },
+  { key: 'passwd', label: 'Change password' },
+  { key: 'edit_shelf', label: 'Edit public shelves' },
+];
+
 // Order + labels for the role toggles shown per user.
 const ROLE_FIELDS: { key: string; label: string }[] = [
   { key: 'admin', label: 'Admin' },
@@ -421,6 +433,7 @@ function SecurityConfigForm() {
   const [f, setF] = useState<SecurityConfig | null>(null);
   const [ldapPw, setLdapPw] = useState('');
   const [oauthSecret, setOauthSecret] = useState('');
+  const [providerSecrets, setProviderSecrets] = useState<Record<string, string>>({});
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [reboot, setReboot] = useState(false);
 
@@ -435,6 +448,12 @@ function SecurityConfigForm() {
     setF((s) => (s ? { ...s, oauth: { ...s.oauth, [k]: v } } : s));
   const setGen = (k: keyof SecurityConfig['oauth']['generic'], v: string | boolean) =>
     setF((s) => (s ? { ...s, oauth: { ...s.oauth, generic: { ...s.oauth.generic, [k]: v } } } : s));
+  const setGenRole = (roleKey: string, v: boolean) =>
+    setF((s) => (s ? { ...s, oauth: { ...s.oauth, generic: { ...s.oauth.generic,
+      default_roles: { ...s.oauth.generic.default_roles, [roleKey]: v } } } } : s));
+  const setProviderClientId = (name: string, v: string) =>
+    setF((s) => (s ? { ...s, oauth: { ...s.oauth,
+      providers: s.oauth.providers.map((p) => p.name === name ? { ...p, client_id: v } : p) } } : s));
   const setSsl = (k: keyof SecurityConfig['ssl'], v: string | boolean) =>
     setF((s) => (s ? { ...s, ssl: { ...s.ssl, [k]: v } } : s));
   const setRp = (k: keyof SecurityConfig['reverse_proxy'], v: string | boolean) =>
@@ -460,11 +479,15 @@ function SecurityConfigForm() {
     }
     if (f.login_type === 2) {
       body.oauth!.generic = { ...f.oauth.generic, ...(oauthSecret ? { client_secret: oauthSecret } : {}) };
+      body.oauth!.providers = f.oauth.providers.map((p) => ({
+        name: p.name, client_id: p.client_id,
+        ...(providerSecrets[p.name] ? { client_secret: providerSecrets[p.name] } : {}),
+      }));
     }
     update.mutate(body, {
       onSuccess: (data) => {
         setMsg({ ok: true, text: t('Security settings saved.') });
-        setLdapPw(''); setOauthSecret('');
+        setLdapPw(''); setOauthSecret(''); setProviderSecrets({});
         setReboot(Boolean(data.reboot_required));
       },
       onError: (err: unknown) => setMsg({ ok: false, text: err instanceof ApiError ? err.message : t('Could not save.') }),
@@ -594,11 +617,46 @@ function SecurityConfigForm() {
               <input value={f.oauth.generic.admin_group} onChange={(e) => setGen('admin_group', e.target.value)} /></label>
           </div>
           <div className={styles.newRow}>
+            <label className={styles.field}><span>{t('Group claim')}</span>
+              <input value={f.oauth.generic.group_claim} onChange={(e) => setGen('group_claim', e.target.value)} placeholder="groups" /></label>
+            <label className={styles.field}><span>{t('Allowed groups (comma-separated)')}</span>
+              <input value={f.oauth.generic.allowed_groups} onChange={(e) => setGen('allowed_groups', e.target.value)}
+                placeholder="calibre-user, calibre-admin" /></label>
+            <label className={styles.checkField}><input type="checkbox" checked={f.oauth.generic.require_group}
+              onChange={(e) => setGen('require_group', e.target.checked)} /><span>{t('Require group membership')}</span></label>
+          </div>
+          <div className={styles.newRow}>
+            <span className={styles.settingsHint} style={{ margin: 0, alignSelf: 'center' }}>{t('Default roles for new OAuth users:')}</span>
+            {OAUTH_DEFAULT_ROLE_FIELDS.map(({ key, label }) => (
+              <label key={key} className={styles.checkField}>
+                <input type="checkbox" checked={Boolean(f.oauth.generic.default_roles?.[key])}
+                  onChange={(e) => setGenRole(key, e.target.checked)} /><span>{t(label)}</span>
+              </label>
+            ))}
+          </div>
+          <div className={styles.newRow}>
             <label className={styles.checkField}><input type="checkbox" checked={f.oauth.disable_standard_login}
               onChange={(e) => setOauth('disable_standard_login', e.target.checked)} /><span>{t('Disable standard password login')}</span></label>
             <label className={styles.checkField}><input type="checkbox" checked={f.oauth.enable_group_admin_management}
               onChange={(e) => setOauth('enable_group_admin_management', e.target.checked)} /><span>{t('Manage admin role from OAuth group')}</span></label>
           </div>
+          {f.oauth.providers.length > 0 && (
+            <>
+              <p className={styles.settingsHint} style={{ margin: '4px 0 0' }}>
+                {t('Built-in providers (leave blank to disable):')}
+              </p>
+              {f.oauth.providers.map((p) => (
+                <div className={styles.newRow} key={p.name}>
+                  <label className={styles.field}><span>{p.name[0].toUpperCase() + p.name.slice(1)} {t('Client ID')}</span>
+                    <input value={p.client_id} onChange={(e) => setProviderClientId(p.name, e.target.value)} /></label>
+                  <label className={styles.field}>
+                    <span>{p.has_secret ? t('Client secret (leave blank to keep)') : t('Client secret')}</span>
+                    <input type="password" autoComplete="new-password" value={providerSecrets[p.name] || ''}
+                      onChange={(e) => setProviderSecrets((s) => ({ ...s, [p.name]: e.target.value }))} /></label>
+                </div>
+              ))}
+            </>
+          )}
         </fieldset>
       )}
 

@@ -372,6 +372,9 @@ export interface SecurityOauthGeneric {
   token_url: string; userinfo_url: string; admin_group: string; metadata_url: string;
   scope: string; username_mapper: string; email_mapper: string; login_button: string;
   active: boolean;
+  // Group-based access control (#494/#495).
+  group_claim: string; require_group: boolean; allowed_groups: string;
+  default_roles: Record<string, boolean>;
 }
 export interface SecurityConfig {
   login_type: number;
@@ -382,6 +385,7 @@ export interface SecurityConfig {
   oauth: {
     redirect_host: string; disable_standard_login: boolean;
     enable_group_admin_management: boolean; generic: SecurityOauthGeneric;
+    providers: { name: string; client_id: string; has_secret: boolean; active: boolean }[];
   };
   ssl: { use_https: boolean; certfile: string; keyfile: string };
   remote_login: boolean;
@@ -396,6 +400,7 @@ export interface SecurityUpdate {
   oauth?: {
     redirect_host?: string; disable_standard_login?: boolean; enable_group_admin_management?: boolean;
     generic?: Partial<Omit<SecurityOauthGeneric, 'has_secret' | 'active'>> & { client_secret?: string };
+    providers?: { name: string; client_id?: string; client_secret?: string }[];
   };
   ssl?: { use_https?: boolean; certfile?: string; keyfile?: string };
   reverse_proxy?: { enabled?: boolean; header_name?: string; auto_create_users?: boolean };

@@ -71,6 +71,22 @@ _LDAP_ENCRYPTION_LEVELS = [
     {"id": 2, "name": "SSL"},
 ]
 
+# Generic-OAuth default-role bits (the roles auto-granted to a new OAuth-created
+# user). The legacy form posts one checkbox per role (config_generic_oauth_default_
+# <key>_role); the helper ORs them into the oauth_default_role bitmask. We expose
+# the bitmask as a {key: bool} dict and rebuild the checkbox keys on POST. Keys
+# match the legacy form-field stems so _selected_generic_oauth_default_role reads
+# them unchanged.
+_OAUTH_DEFAULT_ROLE_BITS = {
+    "download": constants.ROLE_DOWNLOAD,
+    "viewer": constants.ROLE_VIEWER,
+    "upload": constants.ROLE_UPLOAD,
+    "edit": constants.ROLE_EDIT,
+    "delete": constants.ROLE_DELETE_BOOKS,
+    "passwd": constants.ROLE_PASSWD,
+    "edit_shelf": constants.ROLE_EDIT_SHELFS,
+}
+
 
 def _generic_oauth_row():
     """The generic OIDC provider row (the SPA-configurable one). Reading the DB
@@ -79,6 +95,19 @@ def _generic_oauth_row():
     return (ub.session.query(ub.OAuthProvider)
             .filter(ub.OAuthProvider.provider_name == "generic")
             .first())
+
+
+def _builtin_oauth_rows():
+    """The built-in GitHub + Google provider rows (client-id/secret only). The
+    legacy oauth helper iterates ALL providers and direct-indexes
+    config_<id>_oauth_client_id/secret for these, so the POST must always supply
+    them (current values, write-only secret) or the helper KeyErrors. Returned in
+    a stable github-then-google order."""
+    rows = (ub.session.query(ub.OAuthProvider)
+            .filter(ub.OAuthProvider.provider_name.in_(["github", "google"]))
+            .all())
+    order = {"github": 0, "google": 1}
+    return sorted(rows, key=lambda r: order.get(r.provider_name, 99))
 
 
 def _security_payload():
@@ -98,6 +127,12 @@ def _security_payload():
         "email_mapper": (g.email_mapper if g else "") or "",
         "login_button": (g.login_button if g else "") or "",
         "active": bool(g and g.active),
+        # Group-based access control (#494/#495).
+        "group_claim": (g.oauth_group_claim if g else "") or "groups",
+        "require_group": bool(g and g.oauth_require_group),
+        "allowed_groups": (g.oauth_allowed_groups if g else "") or "",
+        "default_roles": {key: bool((int(g.oauth_default_role) if (g and g.oauth_default_role) else 0) & bit)
+                          for key, bit in _OAUTH_DEFAULT_ROLE_BITS.items()},
     }
     return {
         "login_type": config.config_login_type,
@@ -128,6 +163,12 @@ def _security_payload():
             "disable_standard_login": bool(config.config_disable_standard_login),
             "enable_group_admin_management": bool(config.config_enable_oauth_group_admin_management),
             "generic": oauth_generic,
+            # Built-in GitHub/Google providers (client id + write-only secret).
+            "providers": [{"name": p.provider_name,
+                           "client_id": p.oauth_client_id or "",
+                           "has_secret": bool(p.oauth_client_secret),
+                           "active": bool(p.active)}
+                          for p in _builtin_oauth_rows()],
         },
         "ssl": {
             "use_https": bool(config.config_use_https),
@@ -282,6 +323,29 @@ def admin_update_security():
         to_save["config_generic_oauth_username_mapper"] = str(gen.get("username_mapper") or "")
         to_save["config_generic_oauth_email_mapper"] = str(gen.get("email_mapper") or "")
         to_save["config_generic_oauth_login_button"] = str(gen.get("login_button") or "")
+        # Group-based access control (#494/#495). The helper resets these to
+        # defaults when absent, so we MUST always send the current/edited values
+        # to avoid silently wiping an admin's group restrictions (require_group is
+        # a security control). group_claim/allowed_groups are plain strings;
+        # require_group + each default-role are checkbox-presence ("on" = true).
+        to_save["config_generic_oauth_group_claim"] = str(gen.get("group_claim") or "groups")
+        to_save["config_generic_oauth_allowed_groups"] = str(gen.get("allowed_groups") or "")
+        put_bool("config_generic_oauth_require_group", gen.get("require_group"))
+        default_roles = gen.get("default_roles") or {}
+        for key in _OAUTH_DEFAULT_ROLE_BITS:
+            put_bool("config_generic_oauth_default_%s_role" % key, default_roles.get(key))
+
+        # Built-in GitHub/Google providers: the helper iterates these too and
+        # direct-indexes config_<id>_oauth_client_id/secret, so always supply them.
+        # Write-only secret: keep the current one unless a new value is sent.
+        providers_in = {p.get("name"): p for p in (oauth.get("providers") or []) if isinstance(p, dict)}
+        for row in _builtin_oauth_rows():
+            pin = providers_in.get(row.provider_name, {})
+            cid = pin.get("client_id")
+            to_save["config_%d_oauth_client_id" % row.id] = str(cid if cid is not None else (row.oauth_client_id or ""))
+            new_sec = pin.get("client_secret")
+            to_save["config_%d_oauth_client_secret" % row.id] = (
+                str(new_sec) if new_sec else (row.oauth_client_secret or ""))
 
         reboot, message = _configuration_oauth_helper(to_save)
         if message:

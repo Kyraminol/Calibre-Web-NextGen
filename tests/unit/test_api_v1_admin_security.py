@@ -16,6 +16,8 @@ import pytest
 from types import SimpleNamespace
 from unittest.mock import patch
 
+from cps import constants
+
 
 def _ctx(path="/api/v1/admin/security", method="GET", body=None):
     app = flask.Flask(__name__)
@@ -54,7 +56,18 @@ def _fake_config(**over):
         config_reverse_proxy_login_header_name="", config_reverse_proxy_auto_create_users=False,
     )
     base.update(over)
-    return SimpleNamespace(**base)
+    ns = SimpleNamespace(**base)
+    ns.save = lambda: None  # no-op persist for POST-path tests
+    return ns
+
+
+def _fake_builtin_rows():
+    return [
+        SimpleNamespace(provider_name="github", id=1, oauth_client_id="gh-id",
+                        oauth_client_secret="GITHUB-SECRET", active=True),
+        SimpleNamespace(provider_name="google", id=2, oauth_client_id="",
+                        oauth_client_secret="", active=False),
+    ]
 
 
 def _fake_generic_row():
@@ -66,6 +79,9 @@ def _fake_generic_row():
         oauth_admin_group="admins", metadata_url="https://idp/.well-known/openid-configuration",
         scope="openid profile email", username_mapper="preferred_username",
         email_mapper="email", login_button="OpenID Connect", active=True,
+        oauth_group_claim="groups", oauth_require_group=True,
+        oauth_allowed_groups="calibre-user, calibre-admin",
+        oauth_default_role=constants.ROLE_DOWNLOAD | constants.ROLE_VIEWER,
     )
 
 
@@ -102,12 +118,14 @@ def test_get_security_never_leaks_secrets():
         from cps.api import admin as admin_mod
         with patch.object(admin_mod, "current_user", _admin()), \
              patch.object(mod, "config", _fake_config()), \
-             patch.object(mod, "_generic_oauth_row", _fake_generic_row):
+             patch.object(mod, "_generic_oauth_row", _fake_generic_row), \
+             patch.object(mod, "_builtin_oauth_rows", _fake_builtin_rows):
             resp = inspect.unwrap(mod.admin_get_security)()
     payload = resp.get_json()
     blob = json.dumps(payload)
     assert "SUPER-SECRET-LDAP-PW" not in blob
     assert "SUPER-SECRET-OAUTH-SECRET" not in blob
+    assert "GITHUB-SECRET" not in blob
     # The booleans that replace them are present and true.
     assert payload["ldap"]["has_password"] is True
     assert payload["oauth"]["generic"]["has_secret"] is True
@@ -125,7 +143,8 @@ def test_get_security_no_oauth_row_has_secret_false():
         from cps.api import admin as admin_mod
         with patch.object(admin_mod, "current_user", _admin()), \
              patch.object(mod, "config", _fake_config(config_ldap_serv_password_e=None)), \
-             patch.object(mod, "_generic_oauth_row", lambda: None):
+             patch.object(mod, "_generic_oauth_row", lambda: None), \
+             patch.object(mod, "_builtin_oauth_rows", lambda: []):
             resp = inspect.unwrap(mod.admin_get_security)()
     payload = resp.get_json()
     assert payload["ldap"]["has_password"] is False
@@ -210,3 +229,64 @@ def test_reverse_proxy_auto_without_enabled_rejected_before_mutation():
     assert resp[1] == 400
     # validation fired before we applied any reverse-proxy checkbox to config.
     checkbox_spy.assert_not_called()
+
+
+# ── OAuth group-based access control parity (#494/#495) ───────────────────────
+
+@pytest.mark.unit
+def test_get_exposes_oauth_group_access_fields():
+    from cps.api import admin_security as mod
+    from cps.api import admin as admin_mod
+    with _ctx():
+        with patch.object(admin_mod, "current_user", _admin()), \
+             patch.object(mod, "config", _fake_config()), \
+             patch.object(mod, "_generic_oauth_row", _fake_generic_row), \
+             patch.object(mod, "_builtin_oauth_rows", _fake_builtin_rows):
+            resp = inspect.unwrap(mod.admin_get_security)()
+    g = resp.get_json()["oauth"]["generic"]
+    assert g["group_claim"] == "groups"
+    assert g["require_group"] is True
+    assert g["allowed_groups"] == "calibre-user, calibre-admin"
+    assert g["default_roles"]["download"] is True
+    assert g["default_roles"]["viewer"] is True
+    assert g["default_roles"]["upload"] is False
+
+
+@pytest.mark.unit
+def test_post_oauth_preserves_group_access_fields(monkeypatch):
+    """REGRESSION (#494/#495 merge): the SPA OAuth save must forward the group-
+    access fields into to_save, otherwise the legacy helper resets them — silently
+    disabling require_group (a security control) and clearing allowed groups."""
+    from cps.api import admin_security as mod
+    from cps.api import admin as admin_mod
+    captured = {}
+
+    def fake_oauth_helper(to_save):
+        captured.update(to_save)
+        return (False, None)
+
+    body = {"login_type": 2, "oauth": {"generic": {
+        "client_id": "cid", "require_group": True, "allowed_groups": "g1, g2",
+        "group_claim": "roles", "default_roles": {"download": True, "edit": True}}}}
+    with _ctx(method="POST", body=body):
+        with patch.object(admin_mod, "current_user", _admin()), \
+             patch.object(mod, "config", _fake_config(config_login_type=2)), \
+             patch.object(mod, "_generic_oauth_row", _fake_generic_row), \
+             patch.object(mod, "_builtin_oauth_rows", _fake_builtin_rows), \
+             patch.object(mod, "_configuration_oauth_helper", fake_oauth_helper), \
+             patch.object(mod, "_config_int", lambda *a, **k: False), \
+             patch.object(mod, "_config_string", lambda *a, **k: False), \
+             patch.object(mod, "_config_checkbox", lambda *a, **k: False), \
+             patch.object(mod, "_security_payload", lambda: {}):
+            inspect.unwrap(mod.admin_update_security)()
+    assert captured.get("config_generic_oauth_group_claim") == "roles"
+    assert captured.get("config_generic_oauth_allowed_groups") == "g1, g2"
+    assert captured.get("config_generic_oauth_require_group") == "on"          # checkbox present = true
+    assert captured.get("config_generic_oauth_default_download_role") == "on"
+    assert captured.get("config_generic_oauth_default_edit_role") == "on"
+    assert "config_generic_oauth_default_upload_role" not in captured          # unchecked = absent
+    # built-in github/google keys supplied (preserved current values) so the
+    # legacy helper doesn't KeyError on config_<id>_oauth_client_id.
+    assert captured.get("config_1_oauth_client_id") == "gh-id"
+    assert captured.get("config_1_oauth_client_secret") == "GITHUB-SECRET"      # write-only preserve
+    assert captured.get("config_2_oauth_client_id") == ""
