@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-02 04:09+0000\n"
+"POT-Creation-Date: 2026-07-02 14:34+0000\n"
 "PO-Revision-Date: 2023-01-06 11:00+0000\n"
 "Last-Translator: Vegard Fladby <vegard.fladby@gmail.com>\n"
 "Language-Team: \n"
@@ -2452,7 +2452,7 @@ msgstr ""
 msgid "Manual (drag below)"
 msgstr ""
 
-#: cps/spa_strings.py:29
+#: cps/spa_strings.py:29 cps/templates/detail.html:634
 #, fuzzy
 msgid "Read now"
 msgstr "Lese bøker"
@@ -6603,12 +6603,6 @@ msgid ""
 "help us reproduce issues."
 msgstr ""
 
-#: cps/templates/detail.html:634 cps/templates/image.html:26
-#: cps/templates/listenmp3.html:159
-#, fuzzy
-msgid "Read"
-msgstr "redusere"
-
 #: cps/templates/detail.html:692 cps/templates/detail.html:693
 #: cps/templates/detail.html:1069 cps/templates/listenmp3.html:158
 msgid "Mark As Unread"
@@ -7326,6 +7320,11 @@ msgstr "Rediger brukere"
 #: cps/templates/image.html:25
 msgid "Favorite"
 msgstr ""
+
+#: cps/templates/image.html:26 cps/templates/listenmp3.html:159
+#, fuzzy
+msgid "Read"
+msgstr "redusere"
 
 #: cps/templates/image.html:27
 #, fuzzy

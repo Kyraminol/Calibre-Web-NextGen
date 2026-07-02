@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-02 04:09+0000\n"
+"POT-Creation-Date: 2026-07-02 14:34+0000\n"
 "PO-Revision-Date: 2020-01-12 13:56+0100\n"
 "Last-Translator: Samuli Valavuo <svalavuo@gmail.com>\n"
 "Language-Team: \n"
@@ -2416,7 +2416,7 @@ msgstr ""
 msgid "Manual (drag below)"
 msgstr ""
 
-#: cps/spa_strings.py:29
+#: cps/spa_strings.py:29 cps/templates/detail.html:634
 #, fuzzy
 msgid "Read now"
 msgstr "Lue selaimessa"
@@ -6557,11 +6557,6 @@ msgid ""
 "help us reproduce issues."
 msgstr ""
 
-#: cps/templates/detail.html:634 cps/templates/image.html:26
-#: cps/templates/listenmp3.html:159
-msgid "Read"
-msgstr "Luettu"
-
 #: cps/templates/detail.html:692 cps/templates/detail.html:693
 #: cps/templates/detail.html:1069 cps/templates/listenmp3.html:158
 msgid "Mark As Unread"
@@ -7276,6 +7271,10 @@ msgstr "Kirjaudu ulos"
 #: cps/templates/image.html:25
 msgid "Favorite"
 msgstr ""
+
+#: cps/templates/image.html:26 cps/templates/listenmp3.html:159
+msgid "Read"
+msgstr "Luettu"
 
 #: cps/templates/image.html:27
 #, fuzzy

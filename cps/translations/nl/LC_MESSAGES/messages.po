@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web (GPLV3)\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-02 04:09+0000\n"
+"POT-Creation-Date: 2026-07-02 14:34+0000\n"
 "PO-Revision-Date: 2026-04-26 13:31+0200\n"
 "Last-Translator: Michiel Cornelissen <michiel.cornelissen+gitbhun at proton."
 "me>\n"
@@ -2458,7 +2458,7 @@ msgstr ""
 msgid "Manual (drag below)"
 msgstr ""
 
-#: cps/spa_strings.py:29
+#: cps/spa_strings.py:29 cps/templates/detail.html:634
 msgid "Read now"
 msgstr "Nu lezen"
 
@@ -6599,11 +6599,6 @@ msgid ""
 "help us reproduce issues."
 msgstr ""
 
-#: cps/templates/detail.html:634 cps/templates/image.html:26
-#: cps/templates/listenmp3.html:159
-msgid "Read"
-msgstr "Gelezen"
-
 #: cps/templates/detail.html:692 cps/templates/detail.html:693
 #: cps/templates/detail.html:1069 cps/templates/listenmp3.html:158
 msgid "Mark As Unread"
@@ -7320,6 +7315,10 @@ msgstr "Gebruiker uitloggen"
 #: cps/templates/image.html:25
 msgid "Favorite"
 msgstr ""
+
+#: cps/templates/image.html:26 cps/templates/listenmp3.html:159
+msgid "Read"
+msgstr "Gelezen"
 
 #: cps/templates/image.html:27
 #, fuzzy
