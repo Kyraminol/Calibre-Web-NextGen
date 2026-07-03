@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-02 16:46+0000\n"
+"POT-Creation-Date: 2026-07-03 04:16+0000\n"
 "PO-Revision-Date: 2020-09-27 22:18+0800\n"
 "Last-Translator: xlivevil <xlivevil@aliyun.com>\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
@@ -1666,56 +1666,56 @@ msgstr ""
 msgid "Only jpg/jpeg files are supported as coverfile"
 msgstr "僅將jpg、jpeg文件作為封面文件"
 
-#: cps/helper.py:1685 cps/helper.py:1937
+#: cps/helper.py:1695 cps/helper.py:1947
 #, fuzzy
 msgid "Cover"
 msgstr "發現"
 
-#: cps/helper.py:1702
+#: cps/helper.py:1712
 msgid "UnRar binary file not found"
 msgstr "找不到UnRar執行文件"
 
-#: cps/helper.py:1713
+#: cps/helper.py:1723
 #, fuzzy
 msgid "Error executing UnRar"
 msgstr "執行UnRar時出錯"
 
-#: cps/helper.py:1719
+#: cps/helper.py:1729
 #, python-format
 msgid ""
 "Unsupported architecture detected: %(arch)s. Calibre-Web NextGen is "
 "optimized for x86_64 and aarch64."
 msgstr ""
 
-#: cps/helper.py:1728
+#: cps/helper.py:1738
 msgid "Could not find the specified directory"
 msgstr ""
 
-#: cps/helper.py:1731
+#: cps/helper.py:1741
 msgid "Please specify a directory, not a file"
 msgstr ""
 
-#: cps/helper.py:1745
+#: cps/helper.py:1755
 #, fuzzy
 msgid "Calibre binaries not viable"
 msgstr "數據庫不可寫入"
 
-#: cps/helper.py:1754
+#: cps/helper.py:1764
 #, python-format
 msgid "Missing calibre binaries: %(missing)s"
 msgstr ""
 
-#: cps/helper.py:1756
+#: cps/helper.py:1766
 #, fuzzy, python-format
 msgid "Missing executable permissions: %(missing)s"
 msgstr "缺少執行權限"
 
-#: cps/helper.py:1761
+#: cps/helper.py:1771
 #, fuzzy
 msgid "Error executing Calibre"
 msgstr "執行UnRar時出錯"
 
-#: cps/helper.py:1939 cps/templates/admin.html:242
+#: cps/helper.py:1949 cps/templates/admin.html:242
 msgid "Queue all books for metadata backup"
 msgstr ""
 
@@ -2932,27 +2932,27 @@ msgstr "硬碟上找不到 %(format)s 格式"
 msgid "Ebook converter failed with unknown error"
 msgstr "發生未知錯誤，書籍轉換失敗"
 
-#: cps/tasks/convert.py:219
+#: cps/tasks/convert.py:225
 #, python-format
 msgid "Kepubify-converter failed: %(error)s"
 msgstr "Kepubify 轉換失敗：%(error)s"
 
-#: cps/tasks/convert.py:244
+#: cps/tasks/convert.py:250
 #, python-format
 msgid "Converted file not found or more than one file in folder %(folder)s"
 msgstr "找不到轉換後的文件或文件夾%(folder)s中有多個文件"
 
-#: cps/tasks/convert.py:285 cps/tasks/convert.py:336
+#: cps/tasks/convert.py:291 cps/tasks/convert.py:342
 #, python-format
 msgid "Calibre failed with error: %(error)s"
 msgstr "Calibre 運行失敗，錯誤信息：%(error)s"
 
-#: cps/tasks/convert.py:313
+#: cps/tasks/convert.py:319
 #, python-format
 msgid "Ebook-converter failed: %(error)s"
 msgstr "電子書轉換器失敗： %(error)s"
 
-#: cps/tasks/convert.py:341
+#: cps/tasks/convert.py:347
 #, fuzzy
 msgid "Convert"
 msgstr "轉換到："
@@ -3028,7 +3028,7 @@ msgstr ""
 msgid "Hardcover Sync"
 msgstr "啟用Kobo同步"
 
-#: cps/tasks/mail.py:286
+#: cps/tasks/mail.py:289
 #, fuzzy
 msgid "E-mail"
 msgstr "郵箱地址"

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web (GPLV3)\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-02 16:46+0000\n"
+"POT-Creation-Date: 2026-07-03 04:16+0000\n"
 "PO-Revision-Date: 2026-04-26 13:31+0200\n"
 "Last-Translator: Michiel Cornelissen <michiel.cornelissen+gitbhun at proton."
 "me>\n"
@@ -1716,55 +1716,55 @@ msgstr "Ongeldig omslagbestand"
 msgid "Only jpg/jpeg files are supported as coverfile"
 msgstr "Alleen jpg/jpeg bestanden zijn toegestaan als omslag"
 
-#: cps/helper.py:1685 cps/helper.py:1937
+#: cps/helper.py:1695 cps/helper.py:1947
 #, fuzzy
 msgid "Cover"
 msgstr "Willekeurige boeken"
 
-#: cps/helper.py:1702
+#: cps/helper.py:1712
 msgid "UnRar binary file not found"
 msgstr "UnRar executable niet gevonden"
 
-#: cps/helper.py:1713
+#: cps/helper.py:1723
 #, fuzzy
 msgid "Error executing UnRar"
 msgstr "Fout bij het uitvoeren van UnRar"
 
-#: cps/helper.py:1719
+#: cps/helper.py:1729
 #, python-format
 msgid ""
 "Unsupported architecture detected: %(arch)s. Calibre-Web NextGen is "
 "optimized for x86_64 and aarch64."
 msgstr ""
 
-#: cps/helper.py:1728
+#: cps/helper.py:1738
 msgid "Could not find the specified directory"
 msgstr "Kon de opgegeven map niet vinden"
 
-#: cps/helper.py:1731
+#: cps/helper.py:1741
 msgid "Please specify a directory, not a file"
 msgstr "Geef een map op, geen bestand"
 
-#: cps/helper.py:1745
+#: cps/helper.py:1755
 #, fuzzy
 msgid "Calibre binaries not viable"
 msgstr "Kan niet schrijven naar database"
 
-#: cps/helper.py:1754
+#: cps/helper.py:1764
 #, python-format
 msgid "Missing calibre binaries: %(missing)s"
 msgstr "Ontbrekende calibre programmabestanden: %(missing)s"
 
-#: cps/helper.py:1756
+#: cps/helper.py:1766
 #, fuzzy, python-format
 msgid "Missing executable permissions: %(missing)s"
 msgstr "Ontbrekende uitvoerende rechten: %(missing)s"
 
-#: cps/helper.py:1761
+#: cps/helper.py:1771
 msgid "Error executing Calibre"
 msgstr "Fout bij het uitvoeren van Calibre"
 
-#: cps/helper.py:1939 cps/templates/admin.html:242
+#: cps/helper.py:1949 cps/templates/admin.html:242
 msgid "Queue all books for metadata backup"
 msgstr ""
 "Voeg alle boeken toe aan de wachtrij voor het maken van een metagegevens "
@@ -2989,28 +2989,28 @@ msgstr "%(format)s formaat is niet gevonden op de schijf"
 msgid "Ebook converter failed with unknown error"
 msgstr "E-Book converter mislukt met een onbekende foutmelding"
 
-#: cps/tasks/convert.py:219
+#: cps/tasks/convert.py:225
 #, python-format
 msgid "Kepubify-converter failed: %(error)s"
 msgstr "Kepubify-converteerder mislukt: %(error)s"
 
-#: cps/tasks/convert.py:244
+#: cps/tasks/convert.py:250
 #, python-format
 msgid "Converted file not found or more than one file in folder %(folder)s"
 msgstr ""
 "Omgezette bestand is niet gevonden of meer dan een bestand in map %(folder)s"
 
-#: cps/tasks/convert.py:285 cps/tasks/convert.py:336
+#: cps/tasks/convert.py:291 cps/tasks/convert.py:342
 #, python-format
 msgid "Calibre failed with error: %(error)s"
 msgstr "Calibre mislukt met foutmelding: %(error)s"
 
-#: cps/tasks/convert.py:313
+#: cps/tasks/convert.py:319
 #, python-format
 msgid "Ebook-converter failed: %(error)s"
 msgstr "E-boek-conversie mislukt: %(error)s"
 
-#: cps/tasks/convert.py:341
+#: cps/tasks/convert.py:347
 msgid "Convert"
 msgstr "Overzetten"
 
@@ -3083,7 +3083,7 @@ msgstr ""
 msgid "Hardcover Sync"
 msgstr "Zet Hardcover-sync aan"
 
-#: cps/tasks/mail.py:286
+#: cps/tasks/mail.py:289
 msgid "E-mail"
 msgstr "E-mail"
 

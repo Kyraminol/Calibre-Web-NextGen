@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-02 16:46+0000\n"
+"POT-Creation-Date: 2026-07-03 04:16+0000\n"
 "PO-Revision-Date: 2025-09-03 14:59+0200\n"
 "Last-Translator: Depountis Georgios\n"
 "Language-Team: \n"
@@ -1718,56 +1718,56 @@ msgstr ""
 msgid "Only jpg/jpeg files are supported as coverfile"
 msgstr "Μόνο jpg/jpeg αρχεία υποστηρίζονται ως αρχεία φόντου"
 
-#: cps/helper.py:1685 cps/helper.py:1937
+#: cps/helper.py:1695 cps/helper.py:1947
 #, fuzzy
 msgid "Cover"
 msgstr "Ανακάλυψε"
 
-#: cps/helper.py:1702
+#: cps/helper.py:1712
 msgid "UnRar binary file not found"
 msgstr "Δεν βρέθηκε δυαδικό αρχείο UnRar"
 
-#: cps/helper.py:1713
+#: cps/helper.py:1723
 #, fuzzy
 msgid "Error executing UnRar"
 msgstr "Σφάλμα εκτέλεσης UnRar"
 
-#: cps/helper.py:1719
+#: cps/helper.py:1729
 #, python-format
 msgid ""
 "Unsupported architecture detected: %(arch)s. Calibre-Web NextGen is "
 "optimized for x86_64 and aarch64."
 msgstr ""
 
-#: cps/helper.py:1728
+#: cps/helper.py:1738
 msgid "Could not find the specified directory"
 msgstr ""
 
-#: cps/helper.py:1731
+#: cps/helper.py:1741
 msgid "Please specify a directory, not a file"
 msgstr ""
 
-#: cps/helper.py:1745
+#: cps/helper.py:1755
 #, fuzzy
 msgid "Calibre binaries not viable"
 msgstr "Η DB δεν μπορεί να Γραφτεί"
 
-#: cps/helper.py:1754
+#: cps/helper.py:1764
 #, python-format
 msgid "Missing calibre binaries: %(missing)s"
 msgstr ""
 
-#: cps/helper.py:1756
+#: cps/helper.py:1766
 #, fuzzy, python-format
 msgid "Missing executable permissions: %(missing)s"
 msgstr "Λείπουν άδειες εκτέλεσης"
 
-#: cps/helper.py:1761
+#: cps/helper.py:1771
 #, fuzzy
 msgid "Error executing Calibre"
 msgstr "Σφάλμα εκτέλεσης UnRar"
 
-#: cps/helper.py:1939 cps/templates/admin.html:242
+#: cps/helper.py:1949 cps/templates/admin.html:242
 msgid "Queue all books for metadata backup"
 msgstr ""
 
@@ -3015,29 +3015,29 @@ msgstr "%(format)s μορφή δεν βρέθηκε σε δίσκο"
 msgid "Ebook converter failed with unknown error"
 msgstr "Ο μετατροπέας Ebook απέτυχε με άγνωστο σφάλμα"
 
-#: cps/tasks/convert.py:219
+#: cps/tasks/convert.py:225
 #, python-format
 msgid "Kepubify-converter failed: %(error)s"
 msgstr "Ο μετατροπέας Kepubify απέτυχε: %(error)s"
 
-#: cps/tasks/convert.py:244
+#: cps/tasks/convert.py:250
 #, python-format
 msgid "Converted file not found or more than one file in folder %(folder)s"
 msgstr ""
 "Το τροποποιημένο αρχείο δεν βρέθηκε ή υπάρχουν περισσότερα από ένα αρχεία "
 "στο φάκελο %(folder)s"
 
-#: cps/tasks/convert.py:285 cps/tasks/convert.py:336
+#: cps/tasks/convert.py:291 cps/tasks/convert.py:342
 #, python-format
 msgid "Calibre failed with error: %(error)s"
 msgstr "Το Calibre απέτυχε με σφάλμα: %(error)s"
 
-#: cps/tasks/convert.py:313
+#: cps/tasks/convert.py:319
 #, python-format
 msgid "Ebook-converter failed: %(error)s"
 msgstr "Ο μετατροπέας Ebook απέτυχε: %(error)s"
 
-#: cps/tasks/convert.py:341
+#: cps/tasks/convert.py:347
 #, fuzzy
 msgid "Convert"
 msgstr "Μετατροπή σε:"
@@ -3113,7 +3113,7 @@ msgstr ""
 msgid "Hardcover Sync"
 msgstr "Ενεργοποίηση συγχρονισμού Kobo"
 
-#: cps/tasks/mail.py:286
+#: cps/tasks/mail.py:289
 #, fuzzy
 msgid "E-mail"
 msgstr "Διεύθυνση E-mail"

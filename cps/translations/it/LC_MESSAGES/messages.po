@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-02 16:46+0000\n"
+"POT-Creation-Date: 2026-07-03 04:16+0000\n"
 "PO-Revision-Date: 2025-11-24 17:12+0100\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -1724,52 +1724,52 @@ msgstr "Contenuto del file di copertina non valido"
 msgid "Only jpg/jpeg files are supported as coverfile"
 msgstr "Solo i file jpg/jpeg sono supportati come file di copertina"
 
-#: cps/helper.py:1685 cps/helper.py:1937
+#: cps/helper.py:1695 cps/helper.py:1947
 msgid "Cover"
 msgstr "Copertina"
 
-#: cps/helper.py:1702
+#: cps/helper.py:1712
 msgid "UnRar binary file not found"
 msgstr "File binario UnRar non trovato"
 
-#: cps/helper.py:1713
+#: cps/helper.py:1723
 msgid "Error executing UnRar"
 msgstr "Errore nell'eseguire UnRar"
 
-#: cps/helper.py:1719
+#: cps/helper.py:1729
 #, python-format
 msgid ""
 "Unsupported architecture detected: %(arch)s. Calibre-Web NextGen is "
 "optimized for x86_64 and aarch64."
 msgstr ""
 
-#: cps/helper.py:1728
+#: cps/helper.py:1738
 msgid "Could not find the specified directory"
 msgstr "Impossibile trovare la cartella specificata"
 
-#: cps/helper.py:1731
+#: cps/helper.py:1741
 msgid "Please specify a directory, not a file"
 msgstr "Specifica una cartella, non un file"
 
-#: cps/helper.py:1745
+#: cps/helper.py:1755
 msgid "Calibre binaries not viable"
 msgstr "Eseguibili di Calibre non validi"
 
-#: cps/helper.py:1754
+#: cps/helper.py:1764
 #, python-format
 msgid "Missing calibre binaries: %(missing)s"
 msgstr "File eseguibili di Calibre mancanti: %(missing)s"
 
-#: cps/helper.py:1756
+#: cps/helper.py:1766
 #, python-format
 msgid "Missing executable permissions: %(missing)s"
 msgstr "Permessi di esecuzione mancanti: %(missing)s"
 
-#: cps/helper.py:1761
+#: cps/helper.py:1771
 msgid "Error executing Calibre"
 msgstr "Errore durante l'esecuzione di Calibre"
 
-#: cps/helper.py:1939 cps/templates/admin.html:242
+#: cps/helper.py:1949 cps/templates/admin.html:242
 msgid "Queue all books for metadata backup"
 msgstr "Metti in coda tutti i libri per il backup dei metadati"
 
@@ -2990,27 +2990,27 @@ msgstr "Formato %(format)s non trovato sul disco"
 msgid "Ebook converter failed with unknown error"
 msgstr "La conversione del libro è terminata con un errore sconosciuto"
 
-#: cps/tasks/convert.py:219
+#: cps/tasks/convert.py:225
 #, python-format
 msgid "Kepubify-converter failed: %(error)s"
 msgstr "Errore con il convertitore Kepubify: %(error)s"
 
-#: cps/tasks/convert.py:244
+#: cps/tasks/convert.py:250
 #, python-format
 msgid "Converted file not found or more than one file in folder %(folder)s"
 msgstr "File convertito non trovato o più di un file nella cartella %(folder)s"
 
-#: cps/tasks/convert.py:285 cps/tasks/convert.py:336
+#: cps/tasks/convert.py:291 cps/tasks/convert.py:342
 #, python-format
 msgid "Calibre failed with error: %(error)s"
 msgstr "Si è verificato un errore con Calibre: %(error)s"
 
-#: cps/tasks/convert.py:313
+#: cps/tasks/convert.py:319
 #, python-format
 msgid "Ebook-converter failed: %(error)s"
 msgstr "Errore nel convertitore: %(error)s"
 
-#: cps/tasks/convert.py:341
+#: cps/tasks/convert.py:347
 msgid "Convert"
 msgstr "Converti"
 
@@ -3084,7 +3084,7 @@ msgstr ""
 msgid "Hardcover Sync"
 msgstr "Abilita Hardcover Sync"
 
-#: cps/tasks/mail.py:286
+#: cps/tasks/mail.py:289
 msgid "E-mail"
 msgstr "E-mail"
 

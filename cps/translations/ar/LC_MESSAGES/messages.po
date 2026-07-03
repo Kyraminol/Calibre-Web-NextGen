@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-02 16:46+0000\n"
+"POT-Creation-Date: 2026-07-03 04:16+0000\n"
 "PO-Revision-Date: 2025-06-07 14:44+0300\n"
 "Last-Translator: UsamaFoad <usamafoad@gmail.com>\n"
 "Language-Team: \n"
@@ -1690,52 +1690,52 @@ msgstr "محتوى ملف الغلاف غير صالح"
 msgid "Only jpg/jpeg files are supported as coverfile"
 msgstr "ملفات jpg/jpeg فقط مدعومة كملفات غلاف"
 
-#: cps/helper.py:1685 cps/helper.py:1937
+#: cps/helper.py:1695 cps/helper.py:1947
 msgid "Cover"
 msgstr "الغلاف"
 
-#: cps/helper.py:1702
+#: cps/helper.py:1712
 msgid "UnRar binary file not found"
 msgstr "ملف UnRar الثنائي غير موجود"
 
-#: cps/helper.py:1713
+#: cps/helper.py:1723
 msgid "Error executing UnRar"
 msgstr "خطأ في تنفيذ UnRar"
 
-#: cps/helper.py:1719
+#: cps/helper.py:1729
 #, python-format
 msgid ""
 "Unsupported architecture detected: %(arch)s. Calibre-Web NextGen is "
 "optimized for x86_64 and aarch64."
 msgstr ""
 
-#: cps/helper.py:1728
+#: cps/helper.py:1738
 msgid "Could not find the specified directory"
 msgstr "تعذر العثور على الدليل المحدد"
 
-#: cps/helper.py:1731
+#: cps/helper.py:1741
 msgid "Please specify a directory, not a file"
 msgstr "الرجاء تحديد دليل، وليس ملف"
 
-#: cps/helper.py:1745
+#: cps/helper.py:1755
 msgid "Calibre binaries not viable"
 msgstr "ملفات Calibre الثنائية غير قابلة للاستخدام"
 
-#: cps/helper.py:1754
+#: cps/helper.py:1764
 #, python-format
 msgid "Missing calibre binaries: %(missing)s"
 msgstr "ملفات Calibre الثنائية مفقودة: %(missing)s"
 
-#: cps/helper.py:1756
+#: cps/helper.py:1766
 #, python-format
 msgid "Missing executable permissions: %(missing)s"
 msgstr "أذونات التنفيذ مفقودة: %(missing)s"
 
-#: cps/helper.py:1761
+#: cps/helper.py:1771
 msgid "Error executing Calibre"
 msgstr "خطأ في تنفيذ Calibre"
 
-#: cps/helper.py:1939 cps/templates/admin.html:242
+#: cps/helper.py:1949 cps/templates/admin.html:242
 msgid "Queue all books for metadata backup"
 msgstr "وضع جميع الكتب في قائمة الانتظار لنسخ البيانات الوصفية احتياطيًا"
 
@@ -2935,28 +2935,28 @@ msgstr "لم يتم العثور على تنسيق %(format)s على القرص"
 msgid "Ebook converter failed with unknown error"
 msgstr "فشل محول الكتب الإلكترونية بخطأ غير معروف"
 
-#: cps/tasks/convert.py:219
+#: cps/tasks/convert.py:225
 #, python-format
 msgid "Kepubify-converter failed: %(error)s"
 msgstr "فشل محول Kepubify: %(error)s"
 
-#: cps/tasks/convert.py:244
+#: cps/tasks/convert.py:250
 #, python-format
 msgid "Converted file not found or more than one file in folder %(folder)s"
 msgstr ""
 "لم يتم العثور على الملف المحول أو أكثر من ملف واحد في المجلد %(folder)s"
 
-#: cps/tasks/convert.py:285 cps/tasks/convert.py:336
+#: cps/tasks/convert.py:291 cps/tasks/convert.py:342
 #, python-format
 msgid "Calibre failed with error: %(error)s"
 msgstr "فشل Calibre مع الخطأ: %(error)s"
 
-#: cps/tasks/convert.py:313
+#: cps/tasks/convert.py:319
 #, python-format
 msgid "Ebook-converter failed: %(error)s"
 msgstr "فشل محول الكتب الإلكترونية: %(error)s"
 
-#: cps/tasks/convert.py:341
+#: cps/tasks/convert.py:347
 msgid "Convert"
 msgstr "تحويل"
 
@@ -3030,7 +3030,7 @@ msgstr ""
 msgid "Hardcover Sync"
 msgstr "تمكين مزامنة Kobo"
 
-#: cps/tasks/mail.py:286
+#: cps/tasks/mail.py:289
 msgid "E-mail"
 msgstr "بريد إلكتروني"
 

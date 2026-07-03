@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-02 16:46+0000\n"
+"POT-Creation-Date: 2026-07-03 04:16+0000\n"
 "PO-Revision-Date: 2025-09-08 00:53+0900\n"
 "Last-Translator: limeade23 <admin@limeade.me>\n"
 "Language-Team: Korean <>\n"
@@ -1658,52 +1658,52 @@ msgstr "올바르지 않은 표지 파일입니다."
 msgid "Only jpg/jpeg files are supported as coverfile"
 msgstr "표지 파일은 jpg/jpeg 형식만 지원합니다."
 
-#: cps/helper.py:1685 cps/helper.py:1937
+#: cps/helper.py:1695 cps/helper.py:1947
 msgid "Cover"
 msgstr "표지"
 
-#: cps/helper.py:1702
+#: cps/helper.py:1712
 msgid "UnRar binary file not found"
 msgstr "UnRar 바이너리 파일을 찾을 수 없습니다."
 
-#: cps/helper.py:1713
+#: cps/helper.py:1723
 msgid "Error executing UnRar"
 msgstr "UnRar 실행 중 오류가 발생했습니다."
 
-#: cps/helper.py:1719
+#: cps/helper.py:1729
 #, python-format
 msgid ""
 "Unsupported architecture detected: %(arch)s. Calibre-Web NextGen is "
 "optimized for x86_64 and aarch64."
 msgstr ""
 
-#: cps/helper.py:1728
+#: cps/helper.py:1738
 msgid "Could not find the specified directory"
 msgstr "지정된 디렉토리를 찾을 수 없습니다."
 
-#: cps/helper.py:1731
+#: cps/helper.py:1741
 msgid "Please specify a directory, not a file"
 msgstr "파일이 아닌 폴더를 지정하세요."
 
-#: cps/helper.py:1745
+#: cps/helper.py:1755
 msgid "Calibre binaries not viable"
 msgstr "Calibre 바이너리 파일을 사용할 수 없습니다."
 
-#: cps/helper.py:1754
+#: cps/helper.py:1764
 #, python-format
 msgid "Missing calibre binaries: %(missing)s"
 msgstr "Calibre 바이너리 파일이 누락되었습니다: %(missing)s"
 
-#: cps/helper.py:1756
+#: cps/helper.py:1766
 #, python-format
 msgid "Missing executable permissions: %(missing)s"
 msgstr "실행 권한이 없습니다: %(missing)s"
 
-#: cps/helper.py:1761
+#: cps/helper.py:1771
 msgid "Error executing Calibre"
 msgstr "Calibre 실행 오류"
 
-#: cps/helper.py:1939 cps/templates/admin.html:242
+#: cps/helper.py:1949 cps/templates/admin.html:242
 msgid "Queue all books for metadata backup"
 msgstr "메타데이터 백업이 작업에 추가되었습니다."
 
@@ -2913,28 +2913,28 @@ msgstr "%(format)s 형식을 찾을 수 없습니다."
 msgid "Ebook converter failed with unknown error"
 msgstr "알 수 없는 오류로 변환에 실패했습니다."
 
-#: cps/tasks/convert.py:219
+#: cps/tasks/convert.py:225
 #, python-format
 msgid "Kepubify-converter failed: %(error)s"
 msgstr "Kepubify 변환에 실패했습니다: %(error)s"
 
-#: cps/tasks/convert.py:244
+#: cps/tasks/convert.py:250
 #, python-format
 msgid "Converted file not found or more than one file in folder %(folder)s"
 msgstr ""
 "변환된 파일을 찾을 수 없거나 %(folder)s 폴더에 하나 이상의 파일이 존재합니다."
 
-#: cps/tasks/convert.py:285 cps/tasks/convert.py:336
+#: cps/tasks/convert.py:291 cps/tasks/convert.py:342
 #, python-format
 msgid "Calibre failed with error: %(error)s"
 msgstr "Calibre가 다음 오류로 실패했습니다: %(error)s"
 
-#: cps/tasks/convert.py:313
+#: cps/tasks/convert.py:319
 #, python-format
 msgid "Ebook-converter failed: %(error)s"
 msgstr "변환에 실패했습니다: %(error)s"
 
-#: cps/tasks/convert.py:341
+#: cps/tasks/convert.py:347
 msgid "Convert"
 msgstr "변환"
 
@@ -3008,7 +3008,7 @@ msgstr ""
 msgid "Hardcover Sync"
 msgstr "Kobo sync 활성화"
 
-#: cps/tasks/mail.py:286
+#: cps/tasks/mail.py:289
 msgid "E-mail"
 msgstr "이메일"
 

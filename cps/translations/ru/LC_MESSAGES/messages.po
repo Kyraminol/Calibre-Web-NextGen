@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-02 16:46+0000\n"
+"POT-Creation-Date: 2026-07-03 04:16+0000\n"
 "PO-Revision-Date: 2020-04-29 01:20+0400\n"
 "Last-Translator: ZIZA\n"
 "Language-Team: \n"
@@ -1780,53 +1780,53 @@ msgstr "Неверное содержимое файла обложки"
 msgid "Only jpg/jpeg files are supported as coverfile"
 msgstr "Только файлы jpg/jpeg поддерживаются в качестве обложки"
 
-#: cps/helper.py:1685 cps/helper.py:1937
+#: cps/helper.py:1695 cps/helper.py:1947
 #, fuzzy
 msgid "Cover"
 msgstr "Обложка"
 
-#: cps/helper.py:1702
+#: cps/helper.py:1712
 msgid "UnRar binary file not found"
 msgstr "Бинарный файл UnRar не найден"
 
-#: cps/helper.py:1713
+#: cps/helper.py:1723
 msgid "Error executing UnRar"
 msgstr "Ошибка выполнения UnRar"
 
-#: cps/helper.py:1719
+#: cps/helper.py:1729
 #, python-format
 msgid ""
 "Unsupported architecture detected: %(arch)s. Calibre-Web NextGen is "
 "optimized for x86_64 and aarch64."
 msgstr ""
 
-#: cps/helper.py:1728
+#: cps/helper.py:1738
 msgid "Could not find the specified directory"
 msgstr "Не удалось найти указанную директорию"
 
-#: cps/helper.py:1731
+#: cps/helper.py:1741
 msgid "Please specify a directory, not a file"
 msgstr "Пожалуйста, укажите директорию, а не файл"
 
-#: cps/helper.py:1745
+#: cps/helper.py:1755
 msgid "Calibre binaries not viable"
 msgstr "Бинарные файлы Calibre неработоспособны"
 
-#: cps/helper.py:1754
+#: cps/helper.py:1764
 #, python-format
 msgid "Missing calibre binaries: %(missing)s"
 msgstr "Отсутствуют бинарные файлы calibre: %(missing)s"
 
-#: cps/helper.py:1756
+#: cps/helper.py:1766
 #, python-format
 msgid "Missing executable permissions: %(missing)s"
 msgstr "Отсутствуют права на выполнение: %(missing)s"
 
-#: cps/helper.py:1761
+#: cps/helper.py:1771
 msgid "Error executing Calibre"
 msgstr "Ошибка выполнения Calibre"
 
-#: cps/helper.py:1939 cps/templates/admin.html:242
+#: cps/helper.py:1949 cps/templates/admin.html:242
 msgid "Queue all books for metadata backup"
 msgstr "Поставить все книги в очередь резервного копирования метаданных"
 
@@ -3089,28 +3089,28 @@ msgstr "Формат %(format)s не найден на диске"
 msgid "Ebook converter failed with unknown error"
 msgstr "Конвертер электронных книг завершился с неизвестной ошибкой"
 
-#: cps/tasks/convert.py:219
+#: cps/tasks/convert.py:225
 #, fuzzy, python-format
 msgid "Kepubify-converter failed: %(error)s"
 msgstr "Ошибка конвертера Kepubify: %(error)s"
 
-#: cps/tasks/convert.py:244
+#: cps/tasks/convert.py:250
 #, python-format
 msgid "Converted file not found or more than one file in folder %(folder)s"
 msgstr ""
 "Сконвертированный файл не найден или в папке %(folder)s несколько файлов"
 
-#: cps/tasks/convert.py:285 cps/tasks/convert.py:336
+#: cps/tasks/convert.py:291 cps/tasks/convert.py:342
 #, python-format
 msgid "Calibre failed with error: %(error)s"
 msgstr "Calibre завершился с ошибкой: %(error)s"
 
-#: cps/tasks/convert.py:313
+#: cps/tasks/convert.py:319
 #, python-format
 msgid "Ebook-converter failed: %(error)s"
 msgstr "Ошибка конвертера электронных книг: %(error)s"
 
-#: cps/tasks/convert.py:341
+#: cps/tasks/convert.py:347
 #, fuzzy
 msgid "Convert"
 msgstr "Конвертировать"
@@ -3188,7 +3188,7 @@ msgstr ""
 msgid "Hardcover Sync"
 msgstr "Включить синхронизацию с Hardcover"
 
-#: cps/tasks/mail.py:286
+#: cps/tasks/mail.py:289
 #, fuzzy
 msgid "E-mail"
 msgstr "Электронная почта"
