@@ -30,6 +30,11 @@ is for things you can see or feel when running the app.
   now refuses to swap in artwork whose volume number disagrees with the
   book's title, and Kobo search results keep their ISBN so the exact-edition
   cover sources can be used in the first place. Reported by @boegill (#638).
+- **Your shelves are listed under the SHELVES heading in the sidebar again.** In
+  the new UI the sidebar showed a SHELVES heading with Tasks and About directly
+  beneath it, while your actual shelves were pushed to the very bottom of the
+  menu, off the end of the drawer. Shelves now appear right under the SHELVES
+  heading, with Tasks and About moved to the bottom where they belong.
 
 ## [v4.1.5] - 2026-07-03
 
