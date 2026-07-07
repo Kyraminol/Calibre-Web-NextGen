@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-07 01:43+0000\n"
+"POT-Creation-Date: 2026-07-07 02:09+0000\n"
 "PO-Revision-Date: 2026-05-12 00:06+0200\n"
 "Last-Translator: Gabor L. <nom@il.thx>\n"
 "Language-Team: \n"
@@ -3232,132 +3232,137 @@ msgstr "Rendszergazda"
 
 #: cps/spa_strings.py:213
 #, fuzzy
+msgid "Open account settings"
+msgstr "CWA beállítások megnyitása"
+
+#: cps/spa_strings.py:214
+#, fuzzy
 msgid "Browse Discover"
 msgstr "Felfedezés"
 
-#: cps/spa_strings.py:214
+#: cps/spa_strings.py:215
 #, fuzzy
 msgid "Explore your library"
 msgstr "Keresés könyvtárban"
 
-#: cps/spa_strings.py:215
+#: cps/spa_strings.py:216
 #, fuzzy
 msgid "Go to Upload"
 msgstr "Feltöltés"
 
-#: cps/spa_strings.py:217
+#: cps/spa_strings.py:218
 #, fuzzy
 msgid "Editions"
 msgstr "Műveletek"
 
-#: cps/spa_strings.py:218
+#: cps/spa_strings.py:219
 #, fuzzy
 msgid "Back to results"
 msgstr "Keresőkifejezés"
 
-#: cps/spa_strings.py:219
+#: cps/spa_strings.py:220
 msgid "No editions found for this book."
 msgstr ""
 
-#: cps/spa_strings.py:221
+#: cps/spa_strings.py:222
 #, fuzzy
 msgid "View all details"
 msgstr "Könyv részletei"
 
-#: cps/spa_strings.py:222
+#: cps/spa_strings.py:223
 msgid "Result details"
 msgstr ""
 
-#: cps/spa_strings.py:223 cps/templates/detail.html:1012
+#: cps/spa_strings.py:224 cps/templates/detail.html:1012
 #: cps/templates/listenmp3.html:111
 msgid "Published"
 msgstr "Kiadva"
 
-#: cps/spa_strings.py:224 cps/templates/cwa_settings.html:1145
+#: cps/spa_strings.py:225 cps/templates/cwa_settings.html:1145
 msgid "Format"
 msgstr "Fájlformátum"
 
-#: cps/spa_strings.py:225 cps/templates/book_edit.html:462
+#: cps/spa_strings.py:226 cps/templates/book_edit.html:462
 msgid "Source"
 msgstr "Forrás"
 
-#: cps/spa_strings.py:228
+#: cps/spa_strings.py:229
 #, fuzzy
 msgid "Customize"
 msgstr "Egyedi szűrő"
 
-#: cps/spa_strings.py:229
+#: cps/spa_strings.py:230
 #, fuzzy
 msgid "Customize sidebar"
 msgstr "Egyedi szűrő"
 
-#: cps/spa_strings.py:230 cps/templates/_book_organizer.html:164
+#: cps/spa_strings.py:231 cps/templates/_book_organizer.html:164
 msgid "Done"
 msgstr ""
 
-#: cps/spa_strings.py:231
+#: cps/spa_strings.py:232
 #, fuzzy
 msgid "Reset to default"
 msgstr "Az elejére ugrás"
 
-#: cps/spa_strings.py:232
+#: cps/spa_strings.py:233
 msgid "Always shown"
 msgstr ""
 
-#: cps/spa_strings.py:233
+#: cps/spa_strings.py:234
 msgid "Editing sidebar. Reorder or hide sections, then tap Done."
 msgstr ""
 
-#: cps/spa_strings.py:234
+#: cps/spa_strings.py:235
 msgid "Editing cancelled."
 msgstr ""
 
-#: cps/spa_strings.py:235
+#: cps/spa_strings.py:236
 msgid ""
 "Drag to reorder. Tap ✕ to hide a section. Arrow keys move the focused handle."
 msgstr ""
 
-#: cps/spa_strings.py:236
+#: cps/spa_strings.py:237
 #, fuzzy
 msgid "Sidebar saved."
 msgstr "Rendezési mód"
 
-#: cps/spa_strings.py:237
+#: cps/spa_strings.py:238
 #, fuzzy
 msgid "Sidebar reset to default."
 msgstr "Szolgáltatói sorrend (alapértelmezett)"
 
-#: cps/spa_strings.py:238
+#: cps/spa_strings.py:239
 #, python-brace-format
 msgid "{label} moved to position {pos} of {total}"
 msgstr ""
 
-#: cps/spa_strings.py:239
+#: cps/spa_strings.py:240
 #, python-brace-format
 msgid "Reorder {label} (position {pos} of {total}). Use arrow keys to move."
 msgstr ""
 
-#: cps/spa_strings.py:240
+#: cps/spa_strings.py:241
 #, fuzzy, python-brace-format
 msgid "Delete {label}"
 msgstr "Visszavonás"
 
-#: cps/spa_strings.py:241
+#: cps/spa_strings.py:242
 #, fuzzy, python-brace-format
 msgid "Restore {label}"
 msgstr "Visszavonás"
 
-#: cps/spa_strings.py:242
+#: cps/spa_strings.py:243
 #, fuzzy, python-brace-format
 msgid "{label} hidden"
 msgstr "Visszavonás"
 
-#: cps/spa_strings.py:243
+#: cps/spa_strings.py:244
 #, fuzzy, python-brace-format
 msgid "{label} restored"
 msgstr "Ismétlődő könyvcsoport visszaállítva"
 
-#: cps/spa_strings.py:244
+#: cps/spa_strings.py:245
 #, fuzzy
 msgid "Could not save sidebar. Please try again."
 msgstr "Nem sikerült összekapcsolni az OAuth fiókot. Próbálja újra."
@@ -10210,9 +10215,6 @@ msgstr "Olvasott/olvasatlan mutatása"
 #~ msgstr ""
 #~ "Engedélyezd a CWA beállításokban, hogy aktiváld a /kosync végpontokat és "
 #~ "az ellenőrzőösszeg (checksum) generálást."
-
-#~ msgid "Open CWA Settings"
-#~ msgstr "CWA beállítások megnyitása"
 
 #~ msgid "Download is available after enabling KOReader Sync in CWA Settings."
 #~ msgstr ""

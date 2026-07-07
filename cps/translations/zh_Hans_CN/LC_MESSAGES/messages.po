@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-07 01:43+0000\n"
+"POT-Creation-Date: 2026-07-07 02:09+0000\n"
 "PO-Revision-Date: 2020-09-27 22:18+0800\n"
 "Last-Translator: xlivevil <xlivevil@aliyun.com>\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
@@ -3157,132 +3157,137 @@ msgstr "管理权限"
 
 #: cps/spa_strings.py:213
 #, fuzzy
+msgid "Open account settings"
+msgstr "设置"
+
+#: cps/spa_strings.py:214
+#, fuzzy
 msgid "Browse Discover"
 msgstr "发现"
 
-#: cps/spa_strings.py:214
+#: cps/spa_strings.py:215
 #, fuzzy
 msgid "Explore your library"
 msgstr "搜索书库"
 
-#: cps/spa_strings.py:215
+#: cps/spa_strings.py:216
 #, fuzzy
 msgid "Go to Upload"
 msgstr "上传书籍"
 
-#: cps/spa_strings.py:217
+#: cps/spa_strings.py:218
 #, fuzzy
 msgid "Editions"
 msgstr "活动"
 
-#: cps/spa_strings.py:218
+#: cps/spa_strings.py:219
 #, fuzzy
 msgid "Back to results"
 msgstr "搜索项："
 
-#: cps/spa_strings.py:219
+#: cps/spa_strings.py:220
 msgid "No editions found for this book."
 msgstr ""
 
-#: cps/spa_strings.py:221
+#: cps/spa_strings.py:222
 #, fuzzy
 msgid "View all details"
 msgstr "书籍详情"
 
-#: cps/spa_strings.py:222
+#: cps/spa_strings.py:223
 msgid "Result details"
 msgstr ""
 
-#: cps/spa_strings.py:223 cps/templates/detail.html:1012
+#: cps/spa_strings.py:224 cps/templates/detail.html:1012
 #: cps/templates/listenmp3.html:111
 msgid "Published"
 msgstr "出版日期"
 
-#: cps/spa_strings.py:224 cps/templates/cwa_settings.html:1145
+#: cps/spa_strings.py:225 cps/templates/cwa_settings.html:1145
 #, fuzzy
 msgid "Format"
 msgstr "上传格式"
 
-#: cps/spa_strings.py:225 cps/templates/book_edit.html:462
+#: cps/spa_strings.py:226 cps/templates/book_edit.html:462
 msgid "Source"
 msgstr "源"
 
-#: cps/spa_strings.py:228
+#: cps/spa_strings.py:229
 #, fuzzy
 msgid "Customize"
 msgstr "自定义过滤器"
 
-#: cps/spa_strings.py:229
+#: cps/spa_strings.py:230
 #, fuzzy
 msgid "Customize sidebar"
 msgstr "自定义过滤器"
 
-#: cps/spa_strings.py:230 cps/templates/_book_organizer.html:164
+#: cps/spa_strings.py:231 cps/templates/_book_organizer.html:164
 msgid "Done"
 msgstr ""
 
-#: cps/spa_strings.py:231
+#: cps/spa_strings.py:232
 #, fuzzy
 msgid "Reset to default"
 msgstr "回到首页"
 
-#: cps/spa_strings.py:232
+#: cps/spa_strings.py:233
 msgid "Always shown"
 msgstr ""
 
-#: cps/spa_strings.py:233
+#: cps/spa_strings.py:234
 msgid "Editing sidebar. Reorder or hide sections, then tap Done."
 msgstr ""
 
-#: cps/spa_strings.py:234
+#: cps/spa_strings.py:235
 msgid "Editing cancelled."
 msgstr ""
 
-#: cps/spa_strings.py:235
+#: cps/spa_strings.py:236
 msgid ""
 "Drag to reorder. Tap ✕ to hide a section. Arrow keys move the focused handle."
 msgstr ""
 
-#: cps/spa_strings.py:236
+#: cps/spa_strings.py:237
 #, fuzzy
 msgid "Sidebar saved."
 msgstr "文件 %(file)s 已上传"
 
-#: cps/spa_strings.py:237
-msgid "Sidebar reset to default."
-msgstr ""
-
 #: cps/spa_strings.py:238
-#, python-brace-format
-msgid "{label} moved to position {pos} of {total}"
+msgid "Sidebar reset to default."
 msgstr ""
 
 #: cps/spa_strings.py:239
 #, python-brace-format
-msgid "Reorder {label} (position {pos} of {total}). Use arrow keys to move."
+msgid "{label} moved to position {pos} of {total}"
 msgstr ""
 
 #: cps/spa_strings.py:240
+#, python-brace-format
+msgid "Reorder {label} (position {pos} of {total}). Use arrow keys to move."
+msgstr ""
+
+#: cps/spa_strings.py:241
 #, fuzzy, python-brace-format
 msgid "Delete {label}"
 msgstr "撤回"
 
-#: cps/spa_strings.py:241
+#: cps/spa_strings.py:242
 #, fuzzy, python-brace-format
 msgid "Restore {label}"
 msgstr "撤回"
 
-#: cps/spa_strings.py:242
+#: cps/spa_strings.py:243
 #, fuzzy, python-brace-format
 msgid "{label} hidden"
 msgstr "撤回"
 
-#: cps/spa_strings.py:243
+#: cps/spa_strings.py:244
 #, fuzzy, python-brace-format
 msgid "{label} restored"
 msgstr "删除书籍"
 
-#: cps/spa_strings.py:244
+#: cps/spa_strings.py:245
 #, fuzzy
 msgid "Could not save sidebar. Please try again."
 msgstr "链接 OAuth 帐户失败。请重试。"
@@ -9882,10 +9887,6 @@ msgstr "显示已读、未读栏目"
 
 #~ msgid "CWA Duplicates Manager"
 #~ msgstr "CWA 重复书籍管理器"
-
-#, fuzzy
-#~ msgid "Open CWA Settings"
-#~ msgstr "设置"
 
 #~ msgid "Sort title in alphabetical order"
 #~ msgstr "按标题按字母顺序排序"

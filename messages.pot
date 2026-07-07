@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web Automated v4.0.6\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-07 01:43+0000\n"
+"POT-Creation-Date: 2026-07-07 02:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3002,123 +3002,127 @@ msgid "Open Admin"
 msgstr ""
 
 #: cps/spa_strings.py:213
-msgid "Browse Discover"
+msgid "Open account settings"
 msgstr ""
 
 #: cps/spa_strings.py:214
-msgid "Explore your library"
+msgid "Browse Discover"
 msgstr ""
 
 #: cps/spa_strings.py:215
+msgid "Explore your library"
+msgstr ""
+
+#: cps/spa_strings.py:216
 msgid "Go to Upload"
 msgstr ""
 
-#: cps/spa_strings.py:217
+#: cps/spa_strings.py:218
 msgid "Editions"
 msgstr ""
 
-#: cps/spa_strings.py:218
+#: cps/spa_strings.py:219
 msgid "Back to results"
 msgstr ""
 
-#: cps/spa_strings.py:219
+#: cps/spa_strings.py:220
 msgid "No editions found for this book."
 msgstr ""
 
-#: cps/spa_strings.py:221
+#: cps/spa_strings.py:222
 msgid "View all details"
 msgstr ""
 
-#: cps/spa_strings.py:222
+#: cps/spa_strings.py:223
 msgid "Result details"
 msgstr ""
 
-#: cps/spa_strings.py:223 cps/templates/detail.html:1012
+#: cps/spa_strings.py:224 cps/templates/detail.html:1012
 #: cps/templates/listenmp3.html:111
 msgid "Published"
 msgstr ""
 
-#: cps/spa_strings.py:224 cps/templates/cwa_settings.html:1145
+#: cps/spa_strings.py:225 cps/templates/cwa_settings.html:1145
 msgid "Format"
 msgstr ""
 
-#: cps/spa_strings.py:225 cps/templates/book_edit.html:462
+#: cps/spa_strings.py:226 cps/templates/book_edit.html:462
 msgid "Source"
 msgstr ""
 
-#: cps/spa_strings.py:228
+#: cps/spa_strings.py:229
 msgid "Customize"
 msgstr ""
 
-#: cps/spa_strings.py:229
+#: cps/spa_strings.py:230
 msgid "Customize sidebar"
 msgstr ""
 
-#: cps/spa_strings.py:230 cps/templates/_book_organizer.html:164
+#: cps/spa_strings.py:231 cps/templates/_book_organizer.html:164
 msgid "Done"
 msgstr ""
 
-#: cps/spa_strings.py:231
+#: cps/spa_strings.py:232
 msgid "Reset to default"
 msgstr ""
 
-#: cps/spa_strings.py:232
+#: cps/spa_strings.py:233
 msgid "Always shown"
 msgstr ""
 
-#: cps/spa_strings.py:233
+#: cps/spa_strings.py:234
 msgid "Editing sidebar. Reorder or hide sections, then tap Done."
 msgstr ""
 
-#: cps/spa_strings.py:234
+#: cps/spa_strings.py:235
 msgid "Editing cancelled."
 msgstr ""
 
-#: cps/spa_strings.py:235
+#: cps/spa_strings.py:236
 msgid ""
 "Drag to reorder. Tap ✕ to hide a section. Arrow keys move the focused "
 "handle."
 msgstr ""
 
-#: cps/spa_strings.py:236
+#: cps/spa_strings.py:237
 msgid "Sidebar saved."
 msgstr ""
 
-#: cps/spa_strings.py:237
-msgid "Sidebar reset to default."
-msgstr ""
-
 #: cps/spa_strings.py:238
-#, python-brace-format
-msgid "{label} moved to position {pos} of {total}"
+msgid "Sidebar reset to default."
 msgstr ""
 
 #: cps/spa_strings.py:239
 #, python-brace-format
-msgid "Reorder {label} (position {pos} of {total}). Use arrow keys to move."
+msgid "{label} moved to position {pos} of {total}"
 msgstr ""
 
 #: cps/spa_strings.py:240
 #, python-brace-format
-msgid "Delete {label}"
+msgid "Reorder {label} (position {pos} of {total}). Use arrow keys to move."
 msgstr ""
 
 #: cps/spa_strings.py:241
 #, python-brace-format
-msgid "Restore {label}"
+msgid "Delete {label}"
 msgstr ""
 
 #: cps/spa_strings.py:242
 #, python-brace-format
-msgid "{label} hidden"
+msgid "Restore {label}"
 msgstr ""
 
 #: cps/spa_strings.py:243
 #, python-brace-format
-msgid "{label} restored"
+msgid "{label} hidden"
 msgstr ""
 
 #: cps/spa_strings.py:244
+#, python-brace-format
+msgid "{label} restored"
+msgstr ""
+
+#: cps/spa_strings.py:245
 msgid "Could not save sidebar. Please try again."
 msgstr ""
 

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-07 01:43+0000\n"
+"POT-Creation-Date: 2026-07-07 02:09+0000\n"
 "PO-Revision-Date: 2025-09-08 00:53+0900\n"
 "Last-Translator: limeade23 <admin@limeade.me>\n"
 "Language-Team: Korean <>\n"
@@ -3140,132 +3140,137 @@ msgstr "관리자"
 
 #: cps/spa_strings.py:213
 #, fuzzy
+msgid "Open account settings"
+msgstr "CWA 설정"
+
+#: cps/spa_strings.py:214
+#, fuzzy
 msgid "Browse Discover"
 msgstr "둘러보기"
 
-#: cps/spa_strings.py:214
+#: cps/spa_strings.py:215
 #, fuzzy
 msgid "Explore your library"
 msgstr "검색"
 
-#: cps/spa_strings.py:215
+#: cps/spa_strings.py:216
 #, fuzzy
 msgid "Go to Upload"
 msgstr "업로드"
 
-#: cps/spa_strings.py:217
+#: cps/spa_strings.py:218
 #, fuzzy
 msgid "Editions"
 msgstr "작업"
 
-#: cps/spa_strings.py:218
+#: cps/spa_strings.py:219
 #, fuzzy
 msgid "Back to results"
 msgstr "검색어:"
 
-#: cps/spa_strings.py:219
+#: cps/spa_strings.py:220
 msgid "No editions found for this book."
 msgstr ""
 
-#: cps/spa_strings.py:221
+#: cps/spa_strings.py:222
 #, fuzzy
 msgid "View all details"
 msgstr "책 상세정보"
 
-#: cps/spa_strings.py:222
+#: cps/spa_strings.py:223
 msgid "Result details"
 msgstr ""
 
-#: cps/spa_strings.py:223 cps/templates/detail.html:1012
+#: cps/spa_strings.py:224 cps/templates/detail.html:1012
 #: cps/templates/listenmp3.html:111
 msgid "Published"
 msgstr "발행일"
 
-#: cps/spa_strings.py:224 cps/templates/cwa_settings.html:1145
+#: cps/spa_strings.py:225 cps/templates/cwa_settings.html:1145
 #, fuzzy
 msgid "Format"
 msgstr "결과 형식"
 
-#: cps/spa_strings.py:225 cps/templates/book_edit.html:462
+#: cps/spa_strings.py:226 cps/templates/book_edit.html:462
 msgid "Source"
 msgstr "출처"
 
-#: cps/spa_strings.py:228
+#: cps/spa_strings.py:229
 #, fuzzy
 msgid "Customize"
 msgstr "사용자 지정 필터"
 
-#: cps/spa_strings.py:229
+#: cps/spa_strings.py:230
 #, fuzzy
 msgid "Customize sidebar"
 msgstr "사용자 지정 필터"
 
-#: cps/spa_strings.py:230 cps/templates/_book_organizer.html:164
+#: cps/spa_strings.py:231 cps/templates/_book_organizer.html:164
 msgid "Done"
 msgstr ""
 
-#: cps/spa_strings.py:231
+#: cps/spa_strings.py:232
 #, fuzzy
 msgid "Reset to default"
 msgstr "맨 위로 이동"
 
-#: cps/spa_strings.py:232
+#: cps/spa_strings.py:233
 msgid "Always shown"
 msgstr ""
 
-#: cps/spa_strings.py:233
+#: cps/spa_strings.py:234
 msgid "Editing sidebar. Reorder or hide sections, then tap Done."
 msgstr ""
 
-#: cps/spa_strings.py:234
+#: cps/spa_strings.py:235
 msgid "Editing cancelled."
 msgstr ""
 
-#: cps/spa_strings.py:235
+#: cps/spa_strings.py:236
 msgid ""
 "Drag to reorder. Tap ✕ to hide a section. Arrow keys move the focused handle."
 msgstr ""
 
-#: cps/spa_strings.py:236
+#: cps/spa_strings.py:237
 #, fuzzy
 msgid "Sidebar saved."
 msgstr "파일 %(file)s이(가) 업로드되었습니다."
 
-#: cps/spa_strings.py:237
-msgid "Sidebar reset to default."
-msgstr ""
-
 #: cps/spa_strings.py:238
-#, python-brace-format
-msgid "{label} moved to position {pos} of {total}"
+msgid "Sidebar reset to default."
 msgstr ""
 
 #: cps/spa_strings.py:239
 #, python-brace-format
-msgid "Reorder {label} (position {pos} of {total}). Use arrow keys to move."
+msgid "{label} moved to position {pos} of {total}"
 msgstr ""
 
 #: cps/spa_strings.py:240
+#, python-brace-format
+msgid "Reorder {label} (position {pos} of {total}). Use arrow keys to move."
+msgstr ""
+
+#: cps/spa_strings.py:241
 #, fuzzy, python-brace-format
 msgid "Delete {label}"
 msgstr "취소"
 
-#: cps/spa_strings.py:241
+#: cps/spa_strings.py:242
 #, fuzzy, python-brace-format
 msgid "Restore {label}"
 msgstr "취소"
 
-#: cps/spa_strings.py:242
+#: cps/spa_strings.py:243
 #, fuzzy, python-brace-format
 msgid "{label} hidden"
 msgstr "취소"
 
-#: cps/spa_strings.py:243
+#: cps/spa_strings.py:244
 #, fuzzy, python-brace-format
 msgid "{label} restored"
 msgstr "책 복제"
 
-#: cps/spa_strings.py:244
+#: cps/spa_strings.py:245
 #, fuzzy
 msgid "Could not save sidebar. Please try again."
 msgstr "알 수 없는 오류가 발생했습니다. 나중에 다시 시도해 주세요."
@@ -9845,10 +9850,6 @@ msgstr "읽음/읽지 않음 표시"
 
 #~ msgid "CWA Duplicates Manager"
 #~ msgstr "CWA 중복 관리자"
-
-#, fuzzy
-#~ msgid "Open CWA Settings"
-#~ msgstr "CWA 설정"
 
 #~ msgid "Sort title in alphabetical order"
 #~ msgstr "이름순"
