@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-08 02:18+0000\n"
+"POT-Creation-Date: 2026-07-08 20:26+0000\n"
 "PO-Revision-Date: 2023-01-06 11:00+0000\n"
 "Last-Translator: Vegard Fladby <vegard.fladby@gmail.com>\n"
 "Language-Team: \n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.13.1\n"
 
-#: cps/about.py:65
+#: cps/about.py:65 cps/spa_strings.py:588
 msgid "Statistics"
 msgstr "Statistikk"
 
@@ -991,7 +991,7 @@ msgstr "ikke installert"
 msgid "Execution permissions missing"
 msgstr "Utførelsestillatelser mangler"
 
-#: cps/cover_picker.py:113
+#: cps/cover_picker.py:113 cps/spa_strings.py:301
 #, fuzzy
 msgid "Back to edit metadata"
 msgstr "redigere metadata"
@@ -1039,7 +1039,7 @@ msgstr ""
 msgid "Could not load a source image to preview."
 msgstr ""
 
-#: cps/cover_picker.py:564 cps/cover_picker.py:578
+#: cps/cover_picker.py:564 cps/cover_picker.py:578 cps/spa_strings.py:347
 msgid "Cover save failed."
 msgstr ""
 
@@ -1197,7 +1197,7 @@ msgstr ""
 msgid "Invalid book selection."
 msgstr "Ugyldig rolle"
 
-#: cps/cwa_functions.py:2229
+#: cps/cwa_functions.py:2229 cps/spa_strings.py:305
 #, fuzzy
 msgid "Book not found."
 msgstr "Token ikke funnet"
@@ -1262,7 +1262,7 @@ msgstr "{} brukere ble slettet"
 msgid "Calibre-Web NextGen Profile Picture Management (WIP)"
 msgstr ""
 
-#: cps/db.py:1733 cps/templates/config_edit.html:338
+#: cps/db.py:1733 cps/spa_strings.py:489 cps/templates/config_edit.html:338
 #: cps/templates/config_view_edit.html:79
 #: cps/templates/config_view_edit.html:90 cps/templates/email_edit.html:41
 #: cps/web.py:877 cps/web.py:911 cps/web.py:956 cps/web.py:996 cps/web.py:1025
@@ -1983,8 +1983,9 @@ msgstr "Lese bøker"
 msgid "Unread Books"
 msgstr "Uleste bøker"
 
-#: cps/opds.py:205 cps/render_template.py:110 cps/templates/book_table.html:109
-#: cps/templates/cwa_settings.html:334 cps/templates/cwa_settings.html:336
+#: cps/opds.py:205 cps/render_template.py:110 cps/spa_strings.py:298
+#: cps/templates/book_table.html:109 cps/templates/cwa_settings.html:334
+#: cps/templates/cwa_settings.html:336
 #: cps/templates/hardcover_review_matches.html:134
 msgid "Authors"
 msgstr "Forfattere"
@@ -1994,8 +1995,8 @@ msgstr "Forfattere"
 msgid "Books ordered by Author"
 msgstr "Bøker per side"
 
-#: cps/opds.py:211 cps/render_template.py:114 cps/templates/book_table.html:115
-#: cps/web.py:2081
+#: cps/opds.py:211 cps/render_template.py:114 cps/spa_strings.py:511
+#: cps/templates/book_table.html:115 cps/web.py:2081
 msgid "Publishers"
 msgstr "Forlag"
 
@@ -2004,8 +2005,8 @@ msgstr "Forlag"
 msgid "Books ordered by publisher"
 msgstr "Bøker per side"
 
-#: cps/opds.py:217 cps/render_template.py:104 cps/templates/book_table.html:110
-#: cps/web.py:2233
+#: cps/opds.py:217 cps/render_template.py:104 cps/spa_strings.py:315
+#: cps/templates/book_table.html:110 cps/web.py:2233
 msgid "Categories"
 msgstr "Kategorier"
 
@@ -2028,9 +2029,9 @@ msgstr "Serie"
 msgid "Books ordered by series"
 msgstr "Bøker per side"
 
-#: cps/opds.py:229 cps/render_template.py:117 cps/templates/book_table.html:113
-#: cps/templates/detail.html:931 cps/templates/search_form.html:108
-#: cps/web.py:2205
+#: cps/opds.py:229 cps/render_template.py:117 cps/spa_strings.py:434
+#: cps/templates/book_table.html:113 cps/templates/detail.html:931
+#: cps/templates/search_form.html:108 cps/web.py:2205
 msgid "Languages"
 msgstr "Språk"
 
@@ -2057,7 +2058,7 @@ msgstr "Filformater"
 msgid "Books ordered by file formats"
 msgstr "Bøker per side"
 
-#: cps/opds.py:247 cps/templates/layout.html:627
+#: cps/opds.py:247 cps/spa_strings.py:570 cps/templates/layout.html:627
 #: cps/templates/search_form.html:88
 msgid "Shelves"
 msgstr ""
@@ -2086,7 +2087,7 @@ msgstr "Beskrivelse"
 msgid "{} Stars"
 msgstr "{} Stjerner"
 
-#: cps/remotelogin.py:76 cps/templates/layout.html:342
+#: cps/remotelogin.py:76 cps/spa_strings.py:443 cps/templates/layout.html:342
 #: cps/templates/layout.html:383 cps/templates/login.html:11
 #: cps/templates/login.html:39 cps/web.py:2684
 msgid "Login"
@@ -2110,7 +2111,7 @@ msgid ""
 "can run after imports and metadata changes. "
 msgstr ""
 
-#: cps/render_template.py:74
+#: cps/render_template.py:74 cps/spa_strings.py:306
 msgid "Books"
 msgstr "Bøker"
 
@@ -2144,7 +2145,7 @@ msgstr "Vis lest og ulest"
 msgid "Show unread"
 msgstr "Vis ulest"
 
-#: cps/render_template.py:101
+#: cps/render_template.py:101 cps/spa_strings.py:367
 msgid "Discover"
 msgstr "Oppdage"
 
@@ -2208,7 +2209,7 @@ msgstr "Bøker Liste"
 msgid "Show Books List"
 msgstr "Vis bokliste"
 
-#: cps/render_template.py:142
+#: cps/render_template.py:142 cps/spa_strings.py:376
 msgid "Duplicates"
 msgstr ""
 
@@ -3365,10 +3366,1733 @@ msgstr "Slett bok"
 msgid "Could not save sidebar. Please try again."
 msgstr "En ukjent feil oppstod. Prøv igjen senere."
 
-#: cps/tasks_status.py:37 cps/templates/layout.html:369
+#: cps/spa_strings.py:270
+#, fuzzy
+msgid "(replace cover)"
+msgstr "Last opp format"
+
+#: cps/spa_strings.py:271
+#, fuzzy
+msgid "A few random picks from your library"
+msgstr "I biblioteket"
+
+#: cps/spa_strings.py:272
+msgid ""
+"A one-time full duplicate scan is needed. Run it from CWA settings, then "
+"return here."
+msgstr ""
+
+#: cps/spa_strings.py:273 cps/templates/cover_picker.html:81
+msgid "API keys"
+msgstr ""
+
+#: cps/spa_strings.py:274
+#, python-brace-format
+msgid "Account: {name}"
+msgstr ""
+
+#: cps/spa_strings.py:275
+#, fuzzy
+msgid "Add identifier"
+msgstr "Legg til identifikator"
+
+#: cps/spa_strings.py:276 cps/templates/detail.html:701
+#: cps/templates/detail.html:702 cps/templates/detail.html:704
+#, fuzzy
+msgid "Add to favorites"
+msgstr "Rediger en hylle"
+
+#: cps/spa_strings.py:277
+#, fuzzy
+msgid "Admin group"
+msgstr "Admin side"
+
+#: cps/spa_strings.py:278
+#, fuzzy
+msgid "Advanced"
+msgstr "Avansert søk"
+
+#: cps/spa_strings.py:279
+#, fuzzy
+msgid "Advanced search"
+msgstr "Avansert søk"
+
+#: cps/spa_strings.py:280
+#, fuzzy
+msgid "All shelves"
+msgstr "Skriv inn Språk"
+
+#: cps/spa_strings.py:281
+msgid "Allow remote (magic-link) login"
+msgstr ""
+
+#: cps/spa_strings.py:282
+#, fuzzy
+msgid "Allowed groups (comma-separated)"
+msgstr "Klarerte verter (kommaseparert)"
+
+#: cps/spa_strings.py:283 cps/templates/search_form.html:44
+#: cps/templates/search_form.html:165
+msgid "Any"
+msgstr ""
+
+#: cps/spa_strings.py:284
+#, fuzzy
+msgid "Any format"
+msgstr "Rediger en hylle"
+
+#: cps/spa_strings.py:285
+#, fuzzy
+msgid "Any language"
+msgstr "Språk"
+
+#: cps/spa_strings.py:286
+#, fuzzy
+msgid "Any series"
+msgstr "Gå inn i serien"
+
+#: cps/spa_strings.py:287
+msgid "Any tags"
+msgstr ""
+
+#: cps/spa_strings.py:288
+#, fuzzy
+msgid "Apply selected"
+msgstr "Slå sammen valgte bøker"
+
+#: cps/spa_strings.py:289
+msgid ""
+"Apply to all selected (only filled fields change; replaces existing values):"
+msgstr ""
+
+#: cps/spa_strings.py:290 cps/templates/cover_picker.html:224
+msgid "Applying…"
+msgstr ""
+
+#: cps/spa_strings.py:291 cps/templates/book_table.html:54
+#: cps/templates/book_table.html:214 cps/templates/duplicates.html:660
+#, fuzzy
+msgid "Archive"
+msgstr "Arkiverte bøker"
+
+#: cps/spa_strings.py:292 cps/templates/detail.html:713
+#: cps/templates/listenmp3.html:167
+#, fuzzy
+msgid "Archived"
+msgstr "Arkiverte bøker"
+
+#: cps/spa_strings.py:293
+msgid "Ask in Discord"
+msgstr ""
+
+#: cps/spa_strings.py:294
+#, fuzzy
+msgid "Authentication"
+msgstr "LDAP-autentisering"
+
+#: cps/spa_strings.py:295
+#, fuzzy
+msgid "Authentication & security"
+msgstr "LDAP-autentisering"
+
+#: cps/spa_strings.py:296
+msgid "Authorised — signing you in…"
+msgstr ""
+
+#: cps/spa_strings.py:297
+#, fuzzy
+msgid "Authorize URL"
+msgstr "Forfatter"
+
+#: cps/spa_strings.py:299
+msgid "Auto-create users"
+msgstr ""
+
+#: cps/spa_strings.py:300
+msgid "Auto-create users on first login"
+msgstr ""
+
+#: cps/spa_strings.py:302
+#, fuzzy
+msgid "Back to library"
+msgstr "I biblioteket"
+
+#: cps/spa_strings.py:303
+#, fuzzy
+msgid "Back to the classic view"
+msgstr "Søkefeil!"
+
+#: cps/spa_strings.py:304
+msgid "Base DN"
+msgstr ""
+
+#: cps/spa_strings.py:307
+#, fuzzy
+msgid "Books per page"
+msgstr "Bøker per side"
+
+#: cps/spa_strings.py:308 cps/templates/config_edit.html:244
+#: cps/templates/cover_picker.html:114
+msgid "Border fill style"
+msgstr ""
+
+#: cps/spa_strings.py:309
+msgid "Built-in providers (leave blank to disable):"
+msgstr ""
+
+#: cps/spa_strings.py:310
+#, fuzzy
+msgid "Bulk actions"
+msgstr "Vurderinger"
+
+#: cps/spa_strings.py:311
+msgid "CA certificate path"
+msgstr ""
+
+#: cps/spa_strings.py:312
+#, fuzzy
+msgid "Can upload books"
+msgstr "Kunne ikke logge på med Google."
+
+#: cps/spa_strings.py:313 cps/templates/admin.html:304
+#: cps/templates/admin.html:318 cps/templates/book_edit.html:312
+#: cps/templates/book_table.html:176 cps/templates/book_table.html:195
+#: cps/templates/book_table.html:215 cps/templates/book_table.html:235
+#: cps/templates/book_table.html:255 cps/templates/book_table.html:275
+#: cps/templates/book_table.html:333 cps/templates/book_table.html:369
+#: cps/templates/config_db.html:110 cps/templates/config_edit.html:712
+#: cps/templates/config_view_edit.html:236 cps/templates/cover_picker.html:189
+#: cps/templates/cwa_convert_library.html:23
+#: cps/templates/cwa_epub_fixer.html:40 cps/templates/detail.html:1184
+#: cps/templates/duplicates.html:696 cps/templates/duplicates.html:719
+#: cps/templates/duplicates.html:746 cps/templates/layout.html:826
+#: cps/templates/layout.html:981 cps/templates/modal_dialogs.html:64
+#: cps/templates/modal_dialogs.html:99 cps/templates/modal_dialogs.html:117
+#: cps/templates/modal_dialogs.html:135 cps/templates/read.html:178
+#: cps/templates/schedule_edit.html:46 cps/templates/shelf.html:125
+#: cps/templates/shelf_edit.html:34 cps/templates/tasks.html:94
+#: cps/templates/tasks.html:166 cps/templates/tasks.html:173
+#: cps/templates/user_edit.html:587
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: cps/spa_strings.py:314
+#, fuzzy
+msgid "Cancel rename"
+msgstr "Avbryt"
+
+#: cps/spa_strings.py:316
+msgid "Certificate file path"
+msgstr ""
+
+#: cps/spa_strings.py:317
+msgid "Certificate path"
+msgstr ""
+
+#: cps/spa_strings.py:318 cps/templates/book_edit.html:192
+#: cps/templates/cover_picker.html:12 cps/templates/detail.html:619
+#: cps/templates/detail.html:622 cps/templates/detail.html:745
+#, fuzzy
+msgid "Change cover"
+msgstr "Passord"
+
+#: cps/spa_strings.py:319
+#, fuzzy
+msgid "Checking…"
+msgstr "Søk"
+
+#: cps/spa_strings.py:320
+#, fuzzy
+msgid "Choose a cover"
+msgstr "Bruk e-post som brukernavn"
+
+#: cps/spa_strings.py:321
+#, fuzzy
+msgid "Choose a cover image to upload"
+msgstr "Konverter bokformat:"
+
+#: cps/spa_strings.py:322
+#, fuzzy
+msgid "Choose an image…"
+msgstr "Bruk e-post som brukernavn"
+
+#: cps/spa_strings.py:323
+#, fuzzy
+msgid "Choose fields"
+msgstr "Send til E-Reader E-postadresse"
+
+#: cps/spa_strings.py:324
+#, fuzzy
+msgid "Clear selection"
+msgstr "Fjern valg"
+
+#: cps/spa_strings.py:325
+msgid "Client ID"
+msgstr ""
+
+#: cps/spa_strings.py:326
+msgid "Client secret"
+msgstr ""
+
+#: cps/spa_strings.py:327
+msgid "Client secret (leave blank to keep)"
+msgstr ""
+
+#: cps/spa_strings.py:328
+#, fuzzy
+msgid "Close reader"
+msgstr "Lukk"
+
+#: cps/spa_strings.py:329
+#, fuzzy
+msgid "Columns"
+msgstr "Ugyldig lesekolonne"
+
+#: cps/spa_strings.py:330
+#, fuzzy
+msgid "Configured"
+msgstr "Konfigurasjon"
+
+#: cps/spa_strings.py:331
+#, fuzzy
+msgid "Confirm new password"
+msgstr "Passord"
+
+#: cps/spa_strings.py:332 cps/tasks/convert.py:358
+msgid "Convert"
+msgstr "Konvertere"
+
+#: cps/spa_strings.py:333
+msgid "Convert before sending"
+msgstr ""
+
+#: cps/spa_strings.py:334
+#, fuzzy
+msgid "Convert from"
+msgstr "Konverter fra:"
+
+#: cps/spa_strings.py:335
+#, fuzzy
+msgid "Copied to clipboard"
+msgstr "I biblioteket"
+
+#: cps/spa_strings.py:336
+msgid "Copy link"
+msgstr ""
+
+#: cps/spa_strings.py:337
+#, fuzzy
+msgid "Could not create the shelf."
+msgstr "redigere metadata"
+
+#: cps/spa_strings.py:338
+#, fuzzy
+msgid "Could not load candidates."
+msgstr "redigere metadata"
+
+#: cps/spa_strings.py:339
+#, fuzzy
+msgid "Could not load duplicates."
+msgstr "redigere metadata"
+
+#: cps/spa_strings.py:340
+#, fuzzy
+msgid "Could not load highlights."
+msgstr "redigere metadata"
+
+#: cps/spa_strings.py:341
+#, fuzzy
+msgid "Could not load this text file."
+msgstr "Kunne ikke legge til bøker i hyllen: %(sname)s"
+
+#: cps/spa_strings.py:342
+#, fuzzy
+msgid "Could not read this comic archive."
+msgstr "Kunne ikke hente oppdateringsinformasjon"
+
+#: cps/spa_strings.py:343
+#, fuzzy
+msgid "Could not save the shelf."
+msgstr "Kunne ikke logge på: %(message)s"
+
+#: cps/spa_strings.py:344
+#, fuzzy
+msgid "Couldn’t start a magic link. Please try again."
+msgstr "En ukjent feil oppstod. Prøv igjen senere."
+
+#: cps/spa_strings.py:345
+#, fuzzy
+msgid "Cover locked"
+msgstr "Dekke"
+
+#: cps/spa_strings.py:346
+#, fuzzy
+msgid "Cover not reachable"
+msgstr "redigere metadata"
+
+#: cps/spa_strings.py:348
+#, fuzzy
+msgid "Cover updated from the selected result."
+msgstr "Dekke"
+
+#: cps/spa_strings.py:349
+#, fuzzy
+msgid "Create"
+msgstr "Lag en hylle"
+
+#: cps/spa_strings.py:350
+#, fuzzy
+msgid "Create account"
+msgstr "Lag en hylle"
+
+#: cps/spa_strings.py:351
+#, fuzzy
+msgid "Create an account"
+msgstr "Passord"
+
+#: cps/spa_strings.py:352
+msgid "Create shelf and add book"
+msgstr ""
+
+#: cps/spa_strings.py:353
+#, fuzzy
+msgid "Create user"
+msgstr "Lag en hylle"
+
+#: cps/spa_strings.py:354
+#, fuzzy
+msgid "Creating…"
+msgstr "Søk"
+
+#: cps/spa_strings.py:355 cps/templates/cover_picker.html:178
+#, fuzzy
+msgid "Current"
+msgstr "Gjeldende versjon"
+
+#: cps/spa_strings.py:356 cps/templates/cover_picker.html:23
+#, fuzzy
+msgid "Current cover"
+msgstr "Gjeldende versjon"
+
+#: cps/spa_strings.py:357
+#, fuzzy
+msgid "Current password"
+msgstr "Passord"
+
+#: cps/spa_strings.py:358 cps/templates/detail.html:850
+#: cps/templates/image.html:27 cps/templates/index.html:45
+#, fuzzy
+msgid "Currently reading"
+msgstr "Gjeldende versjon"
+
+#: cps/spa_strings.py:359
+msgid "Custom border colour"
+msgstr ""
+
+#: cps/spa_strings.py:360
+#, fuzzy
+msgid "Default book language"
+msgstr "Språk"
+
+#: cps/spa_strings.py:361
+#, fuzzy
+msgid "Default interface language"
+msgstr "Skriv inn Språk"
+
+#: cps/spa_strings.py:362
+msgid "Default roles for new OAuth users:"
+msgstr ""
+
+#: cps/spa_strings.py:363
+msgid "Defaults live in Admin → Configuration → Kobo sync."
+msgstr ""
+
+#: cps/spa_strings.py:364
+msgid "Delete this smart shelf? Your books are not affected."
+msgstr ""
+
+#: cps/spa_strings.py:365 cps/templates/book_edit.html:171
+#: cps/templates/book_edit.html:461 cps/templates/cwa_settings.html:341
+#: cps/templates/cwa_settings.html:343 cps/templates/search_form.html:154
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: cps/spa_strings.py:366
+msgid "Disable standard password login"
+msgstr ""
+
+#: cps/spa_strings.py:368 cps/templates/cwng_feedback_popup.html:24
+#: cps/templates/duplicates.html:618 cps/templates/layout.html:404
+#: cps/templates/layout.html:574
+msgid "Dismiss"
+msgstr ""
+
+#: cps/spa_strings.py:369
+msgid "Dismiss this group"
+msgstr ""
+
+#: cps/spa_strings.py:370
+#, fuzzy
+msgid "Documentation"
+msgstr "LDAP-autentisering"
+
+#: cps/spa_strings.py:371
+msgid "Done reordering"
+msgstr ""
+
+#: cps/spa_strings.py:372 cps/templates/admin.html:24
+#: cps/templates/detail.html:647 cps/templates/shelf.html:9
+#: cps/templates/user_table.html:147
+msgid "Download"
+msgstr "nedlasting"
+
+#: cps/spa_strings.py:373
+msgid "Drop files here, or click to choose"
+msgstr ""
+
+#: cps/spa_strings.py:374
+#, fuzzy
+msgid "Duplicate"
+msgstr "Slett bok"
+
+#: cps/spa_strings.py:375
+#, fuzzy
+msgid "Duplicate books"
+msgstr "Slett bok"
+
+#: cps/spa_strings.py:377 cps/templates/cover_picker.html:94
+msgid "E-reader preview"
+msgstr ""
+
+#: cps/spa_strings.py:378
+msgid "Each type (isbn, amazon, google, doi…) may appear once."
+msgstr ""
+
+#: cps/spa_strings.py:379 cps/templates/admin.html:26
+#: cps/templates/book_table.html:51 cps/templates/book_table.html:332
+#: cps/templates/duplicates.html:657 cps/templates/index.html:131
+#: cps/templates/user_table.html:131 cps/templates/user_table.html:149
+msgid "Edit"
+msgstr "Redigere"
+
+#: cps/spa_strings.py:380
+#, fuzzy
+msgid "Edit smart shelf"
+msgstr "Rediger en hylle"
+
+#: cps/spa_strings.py:381 cps/templates/admin.html:15
+#: cps/templates/register.html:14 cps/templates/user_edit.html:200
+#: cps/templates/user_table.html:135
+#, fuzzy
+msgid "Email"
+msgstr "E-post"
+
+#: cps/spa_strings.py:382
+#, fuzzy
+msgid "Email (SMTP) server"
+msgstr "E-posttjeneste"
+
+#: cps/spa_strings.py:383
+msgid "Email (optional)"
+msgstr ""
+
+#: cps/spa_strings.py:384
+#, fuzzy
+msgid "Email claim"
+msgstr "E-posttjeneste"
+
+#: cps/spa_strings.py:385
+#, fuzzy
+msgid "Email me a reset"
+msgstr "E-posttjeneste"
+
+#: cps/spa_strings.py:386
+#, fuzzy
+msgid "Email settings saved."
+msgstr "E-postserverinnstillinger oppdatert"
+
+#: cps/spa_strings.py:387 cps/templates/config_edit.html:208
+msgid "Enable Kobo sync"
+msgstr "Aktiver Kobo-synkronisering"
+
+#: cps/spa_strings.py:388 cps/templates/admin.html:80
+#: cps/templates/email_edit.html:39
+msgid "Encryption"
+msgstr "Kryptering"
+
+#: cps/spa_strings.py:389
+msgid "Expires in"
+msgstr ""
+
+#: cps/spa_strings.py:390
+msgid "Expose only selected shelves over OPDS"
+msgstr ""
+
+#: cps/spa_strings.py:391
+#, fuzzy
+msgid "Failed to load."
+msgstr "Kunne ikke logge på med Google."
+
+#: cps/spa_strings.py:392 cps/templates/image.html:25
+msgid "Favorite"
+msgstr ""
+
+#: cps/spa_strings.py:393
+#, fuzzy
+msgid "Favorited"
+msgstr "Hot bøker"
+
+#: cps/spa_strings.py:394
+msgid "Fetch"
+msgstr ""
+
+#: cps/spa_strings.py:395
+#, fuzzy
+msgid "Fetch metadata from web"
+msgstr "Hent metadata"
+
+#: cps/spa_strings.py:396
+#, fuzzy
+msgid "Files"
+msgstr "Filformater"
+
+#: cps/spa_strings.py:397
+msgid ""
+"Files are queued for the library's ingest process and appear once imported."
+msgstr ""
+
+#: cps/spa_strings.py:398
+#, fuzzy
+msgid "Forgot password?"
+msgstr "Passord"
+
+#: cps/spa_strings.py:399
+msgid "Format queued — it will appear once processed."
+msgstr ""
+
+#: cps/spa_strings.py:400
+msgid "Formats — exclude"
+msgstr ""
+
+#: cps/spa_strings.py:401
+msgid "Formats — include"
+msgstr ""
+
+#: cps/spa_strings.py:402
+msgid "From address"
+msgstr ""
+
+#: cps/spa_strings.py:403
+msgid "Generate a new link"
+msgstr ""
+
+#: cps/spa_strings.py:404
+msgid "Give your smart shelf a name."
+msgstr ""
+
+#: cps/spa_strings.py:405
+#, fuzzy
+msgid "Go to your library"
+msgstr "I biblioteket"
+
+#: cps/spa_strings.py:406
+#, fuzzy
+msgid "Group claim"
+msgstr "LDAP-gruppenavn"
+
+#: cps/spa_strings.py:407
+#, fuzzy
+msgid "Group members field"
+msgstr "Felt for LDAP-gruppemedlemmer"
+
+#: cps/spa_strings.py:408
+#, fuzzy
+msgid "Group name"
+msgstr "LDAP-gruppenavn"
+
+#: cps/spa_strings.py:409
+#, fuzzy
+msgid "Group object filter"
+msgstr "LDAP gruppeobjektfilter"
+
+#: cps/spa_strings.py:410
+msgid "HTML is allowed and sanitized on display."
+msgstr ""
+
+#: cps/spa_strings.py:411
+#, fuzzy
+msgid "Header name"
+msgstr "Brukernavn"
+
+#: cps/spa_strings.py:412
+msgid "Help & support"
+msgstr ""
+
+#: cps/spa_strings.py:413
+#, fuzzy
+msgid "Help menu"
+msgstr "Lukk"
+
+#: cps/spa_strings.py:414 cps/templates/readcbr.html:173
+msgid "Hide"
+msgstr ""
+
+#: cps/spa_strings.py:415
+#, fuzzy
+msgid "Hide Discover section"
+msgstr "Beskrivelse"
+
+#: cps/spa_strings.py:416
+#, fuzzy
+msgid "Hide fields"
+msgstr "Offentlig hylle"
+
+#: cps/spa_strings.py:417
+#, fuzzy
+msgid "Hide password"
+msgstr "Passord"
+
+#: cps/spa_strings.py:418
+#, fuzzy
+msgid "Highlight"
+msgstr "Nattlig"
+
+#: cps/spa_strings.py:419
+#, fuzzy
+msgid "Highlights"
+msgstr "Nattlig"
+
+#: cps/spa_strings.py:420
+msgid "Icon"
+msgstr ""
+
+#: cps/spa_strings.py:421
+#, fuzzy
+msgid "Identifier type"
+msgstr "Identifikatortype"
+
+#: cps/spa_strings.py:422
+#, fuzzy
+msgid "Identifier value"
+msgstr "Identifikatorverdi"
+
+#: cps/spa_strings.py:423 cps/templates/book_edit.html:175
+msgid "Identifiers"
+msgstr "Identifikatorer"
+
+#: cps/spa_strings.py:424
+msgid "In your book"
+msgstr ""
+
+#: cps/spa_strings.py:425
+msgid ""
+"In-browser reading currently supports EPUB. Use download or the classic "
+"reader for other formats."
+msgstr ""
+
+#: cps/spa_strings.py:426
+msgid "Issuer / base URL"
+msgstr ""
+
+#: cps/spa_strings.py:427
+msgid "It may have moved, or it might still live in the classic interface."
+msgstr ""
+
+#: cps/spa_strings.py:428 cps/templates/detail.html:1018
+msgid "KOReader Progress"
+msgstr ""
+
+#: cps/spa_strings.py:429
+#, fuzzy
+msgid "Key file path"
+msgstr "Filformater"
+
+#: cps/spa_strings.py:430
+#, fuzzy
+msgid "Key path"
+msgstr "Filformater"
+
+#: cps/spa_strings.py:431
+#, fuzzy
+msgid "Kobo sync on"
+msgstr "Aktiver Kobo-synkronisering"
+
+#: cps/spa_strings.py:432
+msgid "LDAP"
+msgstr ""
+
+#: cps/spa_strings.py:433 cps/templates/book_edit.html:163
+#: cps/templates/cwa_settings.html:1127 cps/templates/listenmp3.html:69
+msgid "Language"
+msgstr "Språk"
+
+#: cps/spa_strings.py:435
+#, fuzzy
+msgid "Languages — include"
+msgstr "Admin side"
+
+#: cps/spa_strings.py:436
+msgid "Larger"
+msgstr ""
+
+#: cps/spa_strings.py:437
+msgid "Larger text"
+msgstr ""
+
+#: cps/spa_strings.py:438
+#, fuzzy
+msgid "Library settings"
+msgstr "Vis forfattervalg"
+
+#: cps/spa_strings.py:439
+msgid "Load more"
+msgstr ""
+
+#: cps/spa_strings.py:440 cps/templates/cover_picker.html:87
+#, fuzzy
+msgid "Loading…"
+msgstr "Laster inn..."
+
+#: cps/spa_strings.py:441 cps/templates/cover_picker.html:37
+msgid "Lock cover"
+msgstr ""
+
+#: cps/spa_strings.py:442
+msgid "Log in with a magic link"
+msgstr ""
+
+#: cps/spa_strings.py:444
+msgid "Login button text"
+msgstr ""
+
+#: cps/spa_strings.py:445
+#, fuzzy
+msgid "Login method"
+msgstr "Oppdatering mislyktes:"
+
+#: cps/spa_strings.py:446
+msgid "Looks good"
+msgstr ""
+
+#: cps/spa_strings.py:447
+msgid "Low-res"
+msgstr ""
+
+#: cps/spa_strings.py:448
+#, fuzzy
+msgid "Magic link QR code"
+msgstr "Magic Link ekstern pålogging"
+
+#: cps/spa_strings.py:449
+msgid "Make private"
+msgstr ""
+
+#: cps/spa_strings.py:450
+msgid "Make public"
+msgstr ""
+
+#: cps/spa_strings.py:451
+msgid "Manage admin role from OAuth group"
+msgstr ""
+
+#: cps/spa_strings.py:452
+#, fuzzy
+msgid "Manage shelves"
+msgstr "Offentlig hylle"
+
+#: cps/spa_strings.py:453 cps/templates/_book_organizer.html:139
+#: cps/templates/book_table.html:60 cps/templates/book_table.html:254
+msgid "Mark as read"
+msgstr ""
+
+#: cps/spa_strings.py:454 cps/templates/_book_organizer.html:145
+#: cps/templates/book_table.html:63 cps/templates/book_table.html:274
+msgid "Mark as unread"
+msgstr ""
+
+#: cps/spa_strings.py:455
+msgid "Match"
+msgstr ""
+
+#: cps/spa_strings.py:456
+msgid "Max"
+msgstr ""
+
+#: cps/spa_strings.py:457
+msgid "Max authors shown"
+msgstr ""
+
+#: cps/spa_strings.py:458
+#, fuzzy
+msgid "Maximum rating"
+msgstr "Maksimal oppgavevarighet"
+
+#: cps/spa_strings.py:459
+#, fuzzy
+msgid "Member user filter"
+msgstr "LDAP-medlemsbrukerfilterdeteksjon"
+
+#: cps/spa_strings.py:460
+msgid "Metadata URL (OIDC auto-discovery)"
+msgstr ""
+
+#: cps/spa_strings.py:461
+msgid "Min"
+msgstr ""
+
+#: cps/spa_strings.py:462
+#, fuzzy
+msgid "Minimum rating"
+msgstr "Maksimal oppgavevarighet"
+
+#: cps/spa_strings.py:463
+msgid "More cover options (search providers, e-reader preview)"
+msgstr ""
+
+#: cps/spa_strings.py:464
+#, fuzzy
+msgid "More server configuration"
+msgstr "Serverkonfigurasjon"
+
+#: cps/spa_strings.py:465
+msgid "Move down"
+msgstr ""
+
+#: cps/spa_strings.py:466
+#, fuzzy
+msgid "Move up"
+msgstr "Oppheve"
+
+#: cps/spa_strings.py:467
+msgid "My account"
+msgstr ""
+
+#: cps/spa_strings.py:468
+msgid "Name"
+msgstr ""
+
+#: cps/spa_strings.py:469
+msgid "Need to report an issue? Try the new"
+msgstr ""
+
+#: cps/spa_strings.py:470 cps/templates/cover_picker.html:182
+msgid "New"
+msgstr ""
+
+#: cps/spa_strings.py:471
+#, fuzzy
+msgid "New password"
+msgstr "Passord"
+
+#: cps/spa_strings.py:472
+msgid "New shelf name"
+msgstr ""
+
+#: cps/spa_strings.py:473
+msgid "New shelf name…"
+msgstr ""
+
+#: cps/spa_strings.py:474
+msgid "New shelf…"
+msgstr ""
+
+#: cps/spa_strings.py:475
+#, fuzzy
+msgid "New smart shelf"
+msgstr "Lag en hylle"
+
+#: cps/spa_strings.py:476
+#, fuzzy
+msgid "New user"
+msgstr "Legg til ny bruker"
+
+#: cps/spa_strings.py:477
+#, fuzzy
+msgid "Next page"
+msgstr "Admin side"
+
+#: cps/spa_strings.py:478
+msgid "No books match this smart shelf right now."
+msgstr ""
+
+#: cps/spa_strings.py:479
+#, fuzzy
+msgid "No books match those criteria."
+msgstr "Token ikke funnet"
+
+#: cps/spa_strings.py:480 cps/templates/cover_picker.html:223
+msgid "No candidates found yet. Try a different search or refresh."
+msgstr ""
+
+#: cps/spa_strings.py:481
+#, fuzzy
+msgid "No contents found."
+msgstr "Token ikke funnet"
+
+#: cps/spa_strings.py:482
+#, fuzzy
+msgid "No duplicate groups found."
+msgstr "Merket ble ikke funnet"
+
+#: cps/spa_strings.py:483
+#, fuzzy
+msgid "No excluded tags"
+msgstr "Skriv inn Språk"
+
+#: cps/spa_strings.py:484
+msgid ""
+"No highlights yet. Highlight while reading, or import from a Kobo device."
+msgstr ""
+
+#: cps/spa_strings.py:485
+msgid "No pages found in this comic."
+msgstr ""
+
+#: cps/spa_strings.py:486
+msgid "No shelves yet — create one below."
+msgstr ""
+
+#: cps/spa_strings.py:487
+msgid "No sources need a key."
+msgstr ""
+
+#: cps/spa_strings.py:488
+msgid "No tasks running."
+msgstr ""
+
+#: cps/spa_strings.py:490
+msgid "Not configured"
+msgstr ""
+
+#: cps/spa_strings.py:491
+msgid "OAuth / OpenID Connect"
+msgstr ""
+
+#: cps/spa_strings.py:492
+msgid ""
+"On another device where you’re already signed in, scan this code or open the "
+"link below to authorise this device."
+msgstr ""
+
+#: cps/spa_strings.py:493
+msgid "Open classic reader"
+msgstr ""
+
+#: cps/spa_strings.py:494
+#, fuzzy
+msgid "Open navigation"
+msgstr "Loggfilkonfigurasjon"
+
+#: cps/spa_strings.py:495
+#, fuzzy
+msgid "Open reader"
+msgstr "Send til E-Reader"
+
+#: cps/spa_strings.py:496
+msgid "Open the classic interface"
+msgstr ""
+
+#: cps/spa_strings.py:497
+msgid "Open the link below on your signed-in device."
+msgstr ""
+
+#: cps/spa_strings.py:498
+#, fuzzy
+msgid "OpenLDAP server"
+msgstr "LDAP-serverport"
+
+#: cps/spa_strings.py:499
+#, fuzzy
+msgid "PDF reader"
+msgstr "Send til E-Reader"
+
+#: cps/spa_strings.py:500 cps/templates/admin.html:20
+#: cps/templates/login.html:22 cps/templates/login.html:23
+#: cps/templates/user_edit.html:211
+msgid "Password"
+msgstr "Passord"
+
+#: cps/spa_strings.py:501
+msgid "Password (leave blank to keep)"
+msgstr ""
+
+#: cps/spa_strings.py:502 cps/templates/cover_picker.html:14
+msgid ""
+"Pick a cover from any source we support, paste a URL, upload a file, or use "
+"the cover embedded in the book itself."
+msgstr ""
+
+#: cps/spa_strings.py:503
+#, python-brace-format
+msgid "Picked up {label}. Drag to reorder, release to drop."
+msgstr ""
+
+#: cps/spa_strings.py:504 cps/templates/admin.html:123
+msgid "Port"
+msgstr "Havn"
+
+#: cps/spa_strings.py:505
+msgid "Preparing your magic link…"
+msgstr ""
+
+#: cps/spa_strings.py:506
+msgid "Previous page"
+msgstr ""
+
+#: cps/spa_strings.py:507 cps/templates/duplicates.html:545
+#: cps/templates/tasks.html:17
+msgid "Progress"
+msgstr ""
+
+#: cps/spa_strings.py:508
+#, fuzzy
+msgid "Public"
+msgstr "Offentlig hylle"
+
+#: cps/spa_strings.py:509
+#, fuzzy
+msgid "Published after"
+msgstr "Publisert etter "
+
+#: cps/spa_strings.py:510
+#, fuzzy
+msgid "Published before"
+msgstr "Publisert før "
+
+#: cps/spa_strings.py:512
+#, fuzzy
+msgid "Random books shown"
+msgstr "Vis tilfeldige bøker"
+
+#: cps/spa_strings.py:513 cps/templates/book_edit.html:167
+#: cps/templates/cwa_settings.html:369 cps/templates/cwa_settings.html:371
+msgid "Rating"
+msgstr "Vurdering"
+
+#: cps/spa_strings.py:514
+#, fuzzy
+msgid "Rating (stars)"
+msgstr "Rangeringsliste"
+
+#: cps/spa_strings.py:515
+#, fuzzy
+msgid "Read status"
+msgstr "Les status"
+
+#: cps/spa_strings.py:516
+#, fuzzy
+msgid "Read status filter"
+msgstr "Les status"
+
+#: cps/spa_strings.py:517
+msgid "Recipient(s) — blank = your e-reader email"
+msgstr ""
+
+#: cps/spa_strings.py:518
+msgid "Redirect host (full URL)"
+msgstr ""
+
+#: cps/spa_strings.py:519 cps/templates/cover_picker.html:152
+#: cps/templates/index.html:120
+#, fuzzy
+msgid "Refresh"
+msgstr "I biblioteket"
+
+#: cps/spa_strings.py:520
+#, fuzzy
+msgid "Registering…"
+msgstr "Registrere"
+
+#: cps/spa_strings.py:521
+msgid "Remember me"
+msgstr ""
+
+#: cps/spa_strings.py:522 cps/templates/detail.html:701
+#: cps/templates/detail.html:702 cps/templates/detail.html:703
+#, fuzzy
+msgid "Remove from favorites"
+msgstr "Rediger en hylle"
+
+#: cps/spa_strings.py:523 cps/templates/detail.html:810
+#: cps/templates/detail.html:992
+#, fuzzy
+msgid "Remove from shelf"
+msgstr "Rediger en hylle"
+
+#: cps/spa_strings.py:524
+#, fuzzy
+msgid "Remove identifier"
+msgstr "Legg til identifikator"
+
+#: cps/spa_strings.py:525
+#, fuzzy
+msgid "Remove rule"
+msgstr "Ta bort"
+
+#: cps/spa_strings.py:526
+#, fuzzy
+msgid "Rename"
+msgstr "Brukernavn"
+
+#: cps/spa_strings.py:527
+#, fuzzy
+msgid "Reorder"
+msgstr "Bruker ikke funnet"
+
+#: cps/spa_strings.py:528
+msgid "Replace cover with this one?"
+msgstr ""
+
+#: cps/spa_strings.py:529
+#, fuzzy
+msgid "Replace cover?"
+msgstr "Last opp format"
+
+#: cps/spa_strings.py:530
+msgid "Report Issue on Discord"
+msgstr ""
+
+#: cps/spa_strings.py:531
+msgid "Report Issue on GitHub"
+msgstr ""
+
+#: cps/spa_strings.py:532
+msgid "Require group membership"
+msgstr ""
+
+#: cps/spa_strings.py:533
+#, fuzzy
+msgid "Reverse-proxy header login"
+msgstr "Omvendt proxy-pålogging"
+
+#: cps/spa_strings.py:534
+#, fuzzy
+msgid "Run time"
+msgstr "Arkiverte bøker"
+
+#: cps/spa_strings.py:535
+#, fuzzy
+msgid "SMTP server"
+msgstr "Stopper server"
+
+#: cps/spa_strings.py:536 cps/templates/email_edit.html:43
+msgid "SSL/TLS"
+msgstr ""
+
+#: cps/spa_strings.py:537 cps/templates/email_edit.html:42
+#, fuzzy
+msgid "STARTTLS"
+msgstr "Omstart"
+
+#: cps/spa_strings.py:538 cps/templates/book_edit.html:313
+#: cps/templates/config_db.html:111 cps/templates/config_edit.html:713
+#: cps/templates/config_view_edit.html:237 cps/templates/email_edit.html:71
+#: cps/templates/read.html:177 cps/templates/schedule_edit.html:47
+#: cps/templates/shelf_edit.html:36 cps/templates/shelf_reorder.html:38
+#: cps/templates/user_edit.html:585
+msgid "Save"
+msgstr "Lagre"
+
+#: cps/spa_strings.py:539
+#, fuzzy
+msgid "Save email settings"
+msgstr "Vis forfattervalg"
+
+#: cps/spa_strings.py:540
+#, fuzzy
+msgid "Save name"
+msgstr "Oppdatering mislyktes:"
+
+#: cps/spa_strings.py:541
+#, fuzzy
+msgid "Save security settings"
+msgstr "Vis forfattervalg"
+
+#: cps/spa_strings.py:542
+#, fuzzy
+msgid "Save settings"
+msgstr "Vurderinger"
+
+#: cps/spa_strings.py:543
+msgid "Saved. Restart the server for the login changes to take effect."
+msgstr ""
+
+#: cps/spa_strings.py:544
+#, fuzzy
+msgid "Scopes"
+msgstr "Vis forfattervalg"
+
+#: cps/spa_strings.py:545
+#, fuzzy
+msgid "Search books"
+msgstr "Søk"
+
+#: cps/spa_strings.py:546
+msgid "Search title, author…"
+msgstr ""
+
+#: cps/spa_strings.py:547
+#, fuzzy
+msgid "Searching every source…"
+msgstr "Søk"
+
+#: cps/spa_strings.py:548 cps/templates/cover_picker.html:147
+#: cps/templates/cover_picker.html:222
+#, fuzzy
+msgid "Searching…"
+msgstr "Søk"
+
+#: cps/spa_strings.py:549
+#, fuzzy
+msgid "Security settings saved."
+msgstr "Vis forfattervalg"
+
+#: cps/spa_strings.py:550
+msgid "See how each cover looks padded for your device"
+msgstr ""
+
+#: cps/spa_strings.py:551 cps/templates/modal_dialogs.html:98
+#, fuzzy
+msgid "Select"
+msgstr "Slett"
+
+#: cps/spa_strings.py:552
+#, fuzzy
+msgid "Select multiple"
+msgstr "Lag en hylle"
+
+#: cps/spa_strings.py:553 cps/templates/detail.html:1183
+msgid "Send"
+msgstr ""
+
+#: cps/spa_strings.py:554
+#, fuzzy
+msgid "Send to e-reader"
+msgstr "Send til E-Reader"
+
+#: cps/spa_strings.py:555
+#, fuzzy
+msgid "Send-to-eReader email"
+msgstr "Send til E-Reader E-postadresse"
+
+#: cps/spa_strings.py:556
+#, fuzzy
+msgid "Sending…"
+msgstr "Søk"
+
+#: cps/spa_strings.py:557
+#, fuzzy
+msgid "Series index"
+msgstr "Serieindeks"
+
+#: cps/spa_strings.py:558
+#, fuzzy
+msgid "Series — include"
+msgstr "Serieindeks"
+
+#: cps/spa_strings.py:559
+msgid "Serve over HTTPS"
+msgstr ""
+
+#: cps/spa_strings.py:560
+msgid "Server SSL / HTTPS"
+msgstr ""
+
+#: cps/spa_strings.py:561
+msgid "Server announcement (shown to all users)"
+msgstr ""
+
+#: cps/spa_strings.py:562
+#, fuzzy
+msgid "Server host"
+msgstr "Serverport"
+
+#: cps/spa_strings.py:563
+msgid "Service account (DN)"
+msgstr ""
+
+#: cps/spa_strings.py:564
+#, fuzzy
+msgid "Service password"
+msgstr "Passord"
+
+#: cps/spa_strings.py:565
+msgid "Service password (leave blank to keep)"
+msgstr ""
+
+#: cps/spa_strings.py:566
+msgid ""
+"Set a metadata URL to auto-fill the endpoints below, or enter them manually."
+msgstr ""
+
+#: cps/spa_strings.py:567
+#, fuzzy
+msgid "Settings saved."
+msgstr "Vurderinger"
+
+#: cps/spa_strings.py:568
+#, fuzzy
+msgid "Shelf name"
+msgstr "Hylle: '%(name)s'"
+
+#: cps/spa_strings.py:569
+#, fuzzy
+msgid "Shelf not found."
+msgstr "Bruker ikke funnet"
+
+#: cps/spa_strings.py:571
+#, fuzzy
+msgid "Show Discover section"
+msgstr "Vis utgivervalg"
+
+#: cps/spa_strings.py:572
+msgid "Show books in language"
+msgstr ""
+
+#: cps/spa_strings.py:573
+msgid "Show e-reader previews on each candidate"
+msgstr ""
+
+#: cps/spa_strings.py:574
+#, fuzzy
+msgid "Show password"
+msgstr "Passord"
+
+#: cps/spa_strings.py:575
+msgid "Shuffle picks"
+msgstr ""
+
+#: cps/spa_strings.py:576
+msgid "Sign in with a magic link"
+msgstr ""
+
+#: cps/spa_strings.py:577
+msgid "Sign out"
+msgstr ""
+
+#: cps/spa_strings.py:578
+msgid "Signing in…"
+msgstr ""
+
+#: cps/spa_strings.py:579
+#, fuzzy
+msgid "Site title"
+msgstr "Skriv inn tittel"
+
+#: cps/spa_strings.py:580
+msgid "Smaller"
+msgstr ""
+
+#: cps/spa_strings.py:581
+msgid "Smaller text"
+msgstr ""
+
+#: cps/spa_strings.py:582
+#, fuzzy
+msgid "Smart shelf not found."
+msgstr "Bruker ikke funnet"
+
+#: cps/spa_strings.py:583
+#, fuzzy
+msgid "Smart shelves"
+msgstr "Offentlig hylle"
+
+#: cps/spa_strings.py:584
+msgid "Some sources need a key for better covers"
+msgstr ""
+
+#: cps/spa_strings.py:585 cps/templates/cover_picker.html:226
+msgid "Something went wrong. Try again."
+msgstr ""
+
+#: cps/spa_strings.py:586
+#, fuzzy
+msgid "Sort order"
+msgstr "Serieindeks"
+
+#: cps/spa_strings.py:587
+#, fuzzy
+msgid "Source details"
+msgstr "Detaljer"
+
+#: cps/spa_strings.py:589 cps/templates/tasks.html:16
+#, fuzzy
+msgid "Status"
+msgstr "Omstart"
+
+#: cps/spa_strings.py:590
+msgid "Sync only selected shelves to Kobo"
+msgstr ""
+
+#: cps/spa_strings.py:591
+#, fuzzy
+msgid "Table view"
+msgstr "Ugyldig visning"
+
+#: cps/spa_strings.py:592 cps/templates/book_edit.html:139
+#: cps/templates/search_form.html:52
+msgid "Tags"
+msgstr "Tagger"
+
+#: cps/spa_strings.py:593
+msgid "Tags — exclude"
+msgstr ""
+
+#: cps/spa_strings.py:594
+msgid "Tags — include"
+msgstr ""
+
+#: cps/spa_strings.py:595 cps/templates/config_edit.html:235
+#: cps/templates/cover_picker.html:104
+msgid "Target aspect ratio"
+msgstr ""
+
+#: cps/spa_strings.py:596 cps/templates/tasks.html:15
+#, fuzzy
+msgid "Task"
+msgstr "Oppgaver"
+
+#: cps/spa_strings.py:597 cps/tasks_status.py:37 cps/templates/layout.html:369
 #: cps/templates/tasks.html:7
 msgid "Tasks"
 msgstr "Oppgaver"
+
+#: cps/spa_strings.py:598
+msgid "That URL is not a usable image."
+msgstr ""
+
+#: cps/spa_strings.py:599 cps/templates/read.html:106
+#: cps/templates/readcbr.html:102 cps/templates/user_edit.html:279
+msgid "Theme"
+msgstr ""
+
+#: cps/spa_strings.py:600
+msgid ""
+"These open the full configuration pages. Changes there apply to the whole "
+"server."
+msgstr ""
+
+#: cps/spa_strings.py:601
+msgid "This format opens in the full-screen reader."
+msgstr ""
+
+#: cps/spa_strings.py:602
+msgid "This magic link expired. Generate a new one to try again."
+msgstr ""
+
+#: cps/spa_strings.py:603
+msgid "This page doesn't exist here."
+msgstr ""
+
+#: cps/spa_strings.py:604
+msgid "Title, author, or ISBN"
+msgstr ""
+
+#: cps/spa_strings.py:605
+msgid "Token URL"
+msgstr ""
+
+#: cps/spa_strings.py:606
+#, fuzzy
+msgid "Trust authentication header"
+msgstr "Uautentisert"
+
+#: cps/spa_strings.py:607 cps/templates/book_table.html:57
+#: cps/templates/book_table.html:234
+#, fuzzy
+msgid "Unarchive"
+msgstr "Arkiverte bøker"
+
+#: cps/spa_strings.py:608
+msgid "Unhide"
+msgstr ""
+
+#: cps/spa_strings.py:609
+msgid "Unlock the cover above to apply a new one."
+msgstr ""
+
+#: cps/spa_strings.py:610
+msgid "Unlock the cover to change it"
+msgstr ""
+
+#: cps/spa_strings.py:611
+#, fuzzy
+msgid "Untitled"
+msgstr "Tittel"
+
+#: cps/spa_strings.py:612 cps/templates/cover_picker.html:74
+#, fuzzy
+msgid "Upload as cover"
+msgstr "Last opp format"
+
+#: cps/spa_strings.py:613
+#, fuzzy
+msgid "Upload books"
+msgstr "Opplastinger"
+
+#: cps/spa_strings.py:614
+msgid ""
+"Use these to connect OPDS readers or KOReader sync without your main "
+"password."
+msgstr ""
+
+#: cps/spa_strings.py:615 cps/templates/cover_picker.html:62
+#: cps/templates/cover_picker.html:191
+#, fuzzy
+msgid "Use this cover"
+msgstr "Oppdage"
+
+#: cps/spa_strings.py:616 cps/templates/tasks.html:13
+#: cps/templates/tasks.html:42 cps/templates/tasks.html:65
+#, fuzzy
+msgid "User"
+msgstr "Brukere"
+
+#: cps/spa_strings.py:617
+msgid "User administration"
+msgstr ""
+
+#: cps/spa_strings.py:618
+#, fuzzy
+msgid "User object filter"
+msgstr "LDAP-brukerobjektfilter"
+
+#: cps/spa_strings.py:619
+msgid "Userinfo URL"
+msgstr ""
+
+#: cps/spa_strings.py:620 cps/templates/admin.html:14
+#: cps/templates/login.html:17 cps/templates/login.html:19
+#: cps/templates/register.html:9 cps/templates/user_edit.html:192
+#: cps/templates/user_table.html:134
+msgid "Username"
+msgstr "Brukernavn"
+
+#: cps/spa_strings.py:621
+#, fuzzy
+msgid "Username claim"
+msgstr "Brukernavn"
+
+#: cps/spa_strings.py:622
+#, fuzzy
+msgid "Versions"
+msgstr "Versjon"
+
+#: cps/spa_strings.py:623
+#, fuzzy
+msgid "View settings"
+msgstr "Vurderinger"
+
+#: cps/spa_strings.py:624
+msgid "Waiting for you to authorise…"
+msgstr ""
+
+#: cps/spa_strings.py:625 cps/templates/cover_picker.html:40
+msgid "When locked, fetching metadata will not overwrite this cover."
+msgstr ""
+
+#: cps/spa_strings.py:626
+#, fuzzy
+msgid "Your Library"
+msgstr "I biblioteket"
+
+#: cps/spa_strings.py:627
+msgid "Your browser cannot play this audio format."
+msgstr ""
+
+#: cps/spa_strings.py:628
+msgid "Your personal digital library"
+msgstr ""
+
+#: cps/spa_strings.py:629
+msgid "all rules"
+msgstr ""
+
+#: cps/spa_strings.py:630
+#, fuzzy
+msgid "any rule"
+msgstr "Legg til ny bruker"
+
+#: cps/spa_strings.py:631
+#, fuzzy
+msgid "books"
+msgstr "Bøker"
+
+#: cps/spa_strings.py:632
+#, fuzzy
+msgid "books match"
+msgstr "Rediger en hylle"
+
+#: cps/spa_strings.py:633
+msgid "copies"
+msgstr ""
+
+#: cps/spa_strings.py:634
+#, fuzzy
+msgid "e-reader"
+msgstr "Send til E-Reader"
+
+#: cps/spa_strings.py:635
+msgid "e.g. Unread sci-fi"
+msgstr ""
+
+#: cps/spa_strings.py:636
+#, fuzzy
+msgid "eReader email subject"
+msgstr "Send til E-Reader E-postadresse"
+
+#: cps/spa_strings.py:637
+msgid "or continue with"
+msgstr ""
+
+#: cps/spa_strings.py:638
+msgid "shared"
+msgstr ""
+
+#: cps/spa_strings.py:639
+msgid "to"
+msgstr ""
+
+#: cps/spa_strings.py:640
+msgid "type (isbn, amazon, doi…)"
+msgstr ""
+
+#: cps/spa_strings.py:641
+msgid "value"
+msgstr ""
+
+#: cps/spa_strings.py:642
+msgid "you"
+msgstr ""
+
+#: cps/spa_strings.py:643
+#, fuzzy, python-brace-format
+msgid "{n} found"
+msgstr "Merket ble ikke funnet"
+
+#: cps/spa_strings.py:644
+#, python-brace-format
+msgid "{ok} of {total} sources answered"
+msgstr ""
+
+#: cps/spa_strings.py:645
+#, fuzzy
+msgid "…or paste an image URL"
+msgstr "Dekke"
+
+#: cps/spa_strings.py:646
+msgid "← Back to book"
+msgstr ""
+
+#: cps/spa_strings.py:647
+#, fuzzy
+msgid "← Back to sign in"
+msgstr "Søkefeil!"
+
+#: cps/spa_strings.py:648
+#, fuzzy
+msgid "← Library"
+msgstr "I biblioteket"
 
 #: cps/tasks_status.py:54
 msgid "Waiting"
@@ -3893,10 +5617,6 @@ msgstr "Caliber mislyktes med feil: %(error)s"
 msgid "Ebook-converter failed: %(error)s"
 msgstr "Ebook-konvertering mislyktes: %(error)s"
 
-#: cps/tasks/convert.py:358
-msgid "Convert"
-msgstr "Konvertere"
-
 #: cps/tasks/database.py:15
 msgid "Reconnecting Calibre database"
 msgstr "Kobler til Caliber-databasen på nytt"
@@ -4064,16 +5784,6 @@ msgstr "Offentlig hylle"
 msgid "Mark"
 msgstr ""
 
-#: cps/templates/_book_organizer.html:139 cps/templates/book_table.html:60
-#: cps/templates/book_table.html:254
-msgid "Mark as read"
-msgstr ""
-
-#: cps/templates/_book_organizer.html:145 cps/templates/book_table.html:63
-#: cps/templates/book_table.html:274
-msgid "Mark as unread"
-msgstr ""
-
 #: cps/templates/_book_organizer.html:180
 #, fuzzy
 msgid "Downloads, fewest first"
@@ -4166,18 +5876,6 @@ msgstr "Sorter etter bokdato, eldste først"
 msgid "Users&nbsp;&nbsp;👤"
 msgstr ""
 
-#: cps/templates/admin.html:14 cps/templates/login.html:17
-#: cps/templates/login.html:19 cps/templates/register.html:9
-#: cps/templates/user_edit.html:192 cps/templates/user_table.html:134
-msgid "Username"
-msgstr "Brukernavn"
-
-#: cps/templates/admin.html:15 cps/templates/register.html:14
-#: cps/templates/user_edit.html:200 cps/templates/user_table.html:135
-#, fuzzy
-msgid "Email"
-msgstr "E-post"
-
 #: cps/templates/admin.html:16
 #, fuzzy
 msgid "Send to eReader Email"
@@ -4188,26 +5886,9 @@ msgstr "Send til E-Reader E-postadresse"
 msgid "Send to eReader Subject"
 msgstr "Send til E-Reader"
 
-#: cps/templates/admin.html:20 cps/templates/login.html:22
-#: cps/templates/login.html:23 cps/templates/user_edit.html:211
-msgid "Password"
-msgstr "Passord"
-
-#: cps/templates/admin.html:24 cps/templates/detail.html:647
-#: cps/templates/shelf.html:9 cps/templates/user_table.html:147
-msgid "Download"
-msgstr "nedlasting"
-
 #: cps/templates/admin.html:25
 msgid "View Books"
 msgstr "Se bøker"
-
-#: cps/templates/admin.html:26 cps/templates/book_table.html:51
-#: cps/templates/book_table.html:332 cps/templates/duplicates.html:657
-#: cps/templates/index.html:131 cps/templates/user_table.html:131
-#: cps/templates/user_table.html:149
-msgid "Edit"
-msgstr "Redigere"
 
 #: cps/templates/admin.html:28
 msgid "Public Shelf"
@@ -4233,10 +5914,6 @@ msgstr "SMTP vertsnavn"
 #: cps/templates/admin.html:76 cps/templates/email_edit.html:35
 msgid "SMTP Port"
 msgstr "SMTP-port"
-
-#: cps/templates/admin.html:80 cps/templates/email_edit.html:39
-msgid "Encryption"
-msgstr "Kryptering"
 
 #: cps/templates/admin.html:84 cps/templates/email_edit.html:47
 msgid "SMTP Login"
@@ -4268,10 +5945,6 @@ msgstr "Caliber Database Directory"
 #: cps/templates/admin.html:119 cps/templates/config_edit.html:140
 msgid "Log Level"
 msgstr "Loggnivå"
-
-#: cps/templates/admin.html:123
-msgid "Port"
-msgstr "Havn"
 
 #: cps/templates/admin.html:128
 msgid "External Port"
@@ -4488,28 +6161,6 @@ msgstr "Laster inn..."
 msgid "OK"
 msgstr "OK"
 
-#: cps/templates/admin.html:304 cps/templates/admin.html:318
-#: cps/templates/book_edit.html:312 cps/templates/book_table.html:176
-#: cps/templates/book_table.html:195 cps/templates/book_table.html:215
-#: cps/templates/book_table.html:235 cps/templates/book_table.html:255
-#: cps/templates/book_table.html:275 cps/templates/book_table.html:333
-#: cps/templates/book_table.html:369 cps/templates/config_db.html:110
-#: cps/templates/config_edit.html:712 cps/templates/config_view_edit.html:236
-#: cps/templates/cover_picker.html:189
-#: cps/templates/cwa_convert_library.html:23
-#: cps/templates/cwa_epub_fixer.html:40 cps/templates/detail.html:1184
-#: cps/templates/duplicates.html:696 cps/templates/duplicates.html:719
-#: cps/templates/duplicates.html:746 cps/templates/layout.html:826
-#: cps/templates/layout.html:981 cps/templates/modal_dialogs.html:64
-#: cps/templates/modal_dialogs.html:99 cps/templates/modal_dialogs.html:117
-#: cps/templates/modal_dialogs.html:135 cps/templates/read.html:178
-#: cps/templates/schedule_edit.html:46 cps/templates/shelf.html:125
-#: cps/templates/shelf_edit.html:34 cps/templates/tasks.html:94
-#: cps/templates/tasks.html:166 cps/templates/tasks.html:173
-#: cps/templates/user_edit.html:587
-msgid "Cancel"
-msgstr "Avbryt"
-
 #: cps/templates/admin.html:316
 msgid "Are you sure you want to shutdown?"
 msgstr "Er du sikker på at du vil slå av?"
@@ -4692,10 +6343,6 @@ msgstr "Last opp format"
 msgid "Imported as"
 msgstr "Oppdatering mislyktes:"
 
-#: cps/templates/book_edit.html:139 cps/templates/search_form.html:52
-msgid "Tags"
-msgstr "Tagger"
-
 #: cps/templates/book_edit.html:147 cps/templates/book_table.html:112
 msgid "Series ID"
 msgstr "Serie-ID"
@@ -4703,26 +6350,6 @@ msgstr "Serie-ID"
 #: cps/templates/book_edit.html:150
 msgid "Published Date"
 msgstr "Publiseringsdato"
-
-#: cps/templates/book_edit.html:163 cps/templates/cwa_settings.html:1127
-#: cps/templates/listenmp3.html:69
-msgid "Language"
-msgstr "Språk"
-
-#: cps/templates/book_edit.html:167 cps/templates/cwa_settings.html:369
-#: cps/templates/cwa_settings.html:371
-msgid "Rating"
-msgstr "Vurdering"
-
-#: cps/templates/book_edit.html:171 cps/templates/book_edit.html:461
-#: cps/templates/cwa_settings.html:341 cps/templates/cwa_settings.html:343
-#: cps/templates/search_form.html:154
-msgid "Description"
-msgstr "Beskrivelse"
-
-#: cps/templates/book_edit.html:175
-msgid "Identifiers"
-msgstr "Identifikatorer"
 
 #: cps/templates/book_edit.html:179 cps/templates/book_edit.html:470
 msgid "Identifier Type"
@@ -4740,13 +6367,6 @@ msgstr "Ta bort"
 #: cps/templates/book_edit.html:186
 msgid "Add Identifier"
 msgstr "Legg til identifikator"
-
-#: cps/templates/book_edit.html:192 cps/templates/cover_picker.html:12
-#: cps/templates/detail.html:619 cps/templates/detail.html:622
-#: cps/templates/detail.html:745
-#, fuzzy
-msgid "Change cover"
-msgstr "Passord"
 
 #: cps/templates/book_edit.html:195
 msgid ""
@@ -4794,14 +6414,6 @@ msgstr "Se bok på Lagre"
 #: cps/templates/book_edit.html:310 cps/templates/book_edit.html:332
 msgid "Fetch Metadata"
 msgstr "Hent metadata"
-
-#: cps/templates/book_edit.html:313 cps/templates/config_db.html:111
-#: cps/templates/config_edit.html:713 cps/templates/config_view_edit.html:237
-#: cps/templates/email_edit.html:71 cps/templates/read.html:177
-#: cps/templates/schedule_edit.html:47 cps/templates/shelf_edit.html:36
-#: cps/templates/shelf_reorder.html:38 cps/templates/user_edit.html:585
-msgid "Save"
-msgstr "Lagre"
 
 #: cps/templates/book_edit.html:335
 msgid "Keyword"
@@ -4864,17 +6476,6 @@ msgstr "Ingen resultater! Prøv et annet søkeord."
 #: cps/templates/user_table.html:100
 msgid "This Field is Required"
 msgstr "Dette feltet er obligatorisk"
-
-#: cps/templates/book_table.html:54 cps/templates/book_table.html:214
-#: cps/templates/duplicates.html:660
-#, fuzzy
-msgid "Archive"
-msgstr "Arkiverte bøker"
-
-#: cps/templates/book_table.html:57 cps/templates/book_table.html:234
-#, fuzzy
-msgid "Unarchive"
-msgstr "Arkiverte bøker"
 
 #: cps/templates/book_table.html:71
 #, fuzzy
@@ -5333,10 +6934,6 @@ msgid ""
 "affecting other users. Recovery is via the profile page (Hidden Books link)."
 msgstr ""
 
-#: cps/templates/config_edit.html:208
-msgid "Enable Kobo sync"
-msgstr "Aktiver Kobo-synkronisering"
-
 #: cps/templates/config_edit.html:213
 msgid "Proxy unknown requests to Kobo Store"
 msgstr "Ukjente proxy-forespørsler til Kobo Store"
@@ -5364,10 +6961,6 @@ msgid ""
 "original cover files on disk are unchanged."
 msgstr ""
 
-#: cps/templates/config_edit.html:235 cps/templates/cover_picker.html:104
-msgid "Target aspect ratio"
-msgstr ""
-
 #: cps/templates/config_edit.html:237 cps/templates/cover_picker.html:106
 msgid "Kobo Libra Color / Libra 2 (1264x1680)"
 msgstr ""
@@ -5382,10 +6975,6 @@ msgstr ""
 
 #: cps/templates/config_edit.html:240 cps/templates/cover_picker.html:109
 msgid "2:3 (publisher cover, no padding for typical covers)"
-msgstr ""
-
-#: cps/templates/config_edit.html:244 cps/templates/cover_picker.html:114
-msgid "Border fill style"
 msgstr ""
 
 #: cps/templates/config_edit.html:246 cps/templates/cover_picker.html:116
@@ -6146,62 +7735,20 @@ msgstr ""
 msgid "Add Allowed/Denied custom column values"
 msgstr ""
 
-#: cps/templates/cover_picker.html:14
-msgid ""
-"Pick a cover from any source we support, paste a URL, upload a file, or use "
-"the cover embedded in the book itself."
-msgstr ""
-
-#: cps/templates/cover_picker.html:23
-#, fuzzy
-msgid "Current cover"
-msgstr "Gjeldende versjon"
-
-#: cps/templates/cover_picker.html:37
-msgid "Lock cover"
-msgstr ""
-
-#: cps/templates/cover_picker.html:40
-msgid "When locked, fetching metadata will not overwrite this cover."
-msgstr ""
-
 #: cps/templates/cover_picker.html:51
 msgid "Use a URL"
 msgstr ""
-
-#: cps/templates/cover_picker.html:62 cps/templates/cover_picker.html:191
-#, fuzzy
-msgid "Use this cover"
-msgstr "Oppdage"
 
 #: cps/templates/cover_picker.html:69
 #, fuzzy
 msgid "Upload a file"
 msgstr "Laste opp"
 
-#: cps/templates/cover_picker.html:74
-#, fuzzy
-msgid "Upload as cover"
-msgstr "Last opp format"
-
-#: cps/templates/cover_picker.html:81
-msgid "API keys"
-msgstr ""
-
 #: cps/templates/cover_picker.html:84
 msgid ""
 "Some metadata sources need an API key. Adding one here improves cover "
 "quality and unblocks rate-limited services. Keys are stored once for the "
 "whole instance — admins only."
-msgstr ""
-
-#: cps/templates/cover_picker.html:87
-#, fuzzy
-msgid "Loading…"
-msgstr "Laster inn..."
-
-#: cps/templates/cover_picker.html:94
-msgid "E-reader preview"
 msgstr ""
 
 #: cps/templates/cover_picker.html:98
@@ -6218,43 +7765,12 @@ msgstr ""
 msgid "Candidates"
 msgstr ""
 
-#: cps/templates/cover_picker.html:147 cps/templates/cover_picker.html:222
-#, fuzzy
-msgid "Searching…"
-msgstr "Søk"
-
-#: cps/templates/cover_picker.html:152 cps/templates/index.html:120
-#, fuzzy
-msgid "Refresh"
-msgstr "I biblioteket"
-
 #: cps/templates/cover_picker.html:157
 msgid "Loading candidates…"
 msgstr ""
 
 #: cps/templates/cover_picker.html:173
 msgid "Replace cover with this candidate?"
-msgstr ""
-
-#: cps/templates/cover_picker.html:178
-#, fuzzy
-msgid "Current"
-msgstr "Gjeldende versjon"
-
-#: cps/templates/cover_picker.html:182
-msgid "New"
-msgstr ""
-
-#: cps/templates/cover_picker.html:223
-msgid "No candidates found yet. Try a different search or refresh."
-msgstr ""
-
-#: cps/templates/cover_picker.html:224
-msgid "Applying…"
-msgstr ""
-
-#: cps/templates/cover_picker.html:226
-msgid "Something went wrong. Try again."
 msgstr ""
 
 #: cps/templates/cover_picker.html:227
@@ -7320,11 +8836,6 @@ msgstr ""
 msgid "Click to See More"
 msgstr ""
 
-#: cps/templates/cwng_feedback_popup.html:24 cps/templates/duplicates.html:618
-#: cps/templates/layout.html:404 cps/templates/layout.html:574
-msgid "Dismiss"
-msgstr ""
-
 #: cps/templates/cwng_feedback_popup.html:28
 msgid "Before you go — what made you switch back?"
 msgstr ""
@@ -7444,18 +8955,6 @@ msgstr "Slå sammen valgte bøker"
 msgid "Marked as unread"
 msgstr "Slå sammen valgte bøker"
 
-#: cps/templates/detail.html:701 cps/templates/detail.html:702
-#: cps/templates/detail.html:703
-#, fuzzy
-msgid "Remove from favorites"
-msgstr "Rediger en hylle"
-
-#: cps/templates/detail.html:701 cps/templates/detail.html:702
-#: cps/templates/detail.html:704
-#, fuzzy
-msgid "Add to favorites"
-msgstr "Rediger en hylle"
-
 #: cps/templates/detail.html:705
 #, fuzzy
 msgid "Added to favorites"
@@ -7476,11 +8975,6 @@ msgstr ""
 #, fuzzy
 msgid "Add to archive"
 msgstr "Rediger en hylle"
-
-#: cps/templates/detail.html:713 cps/templates/listenmp3.html:167
-#, fuzzy
-msgid "Archived"
-msgstr "Arkiverte bøker"
 
 #: cps/templates/detail.html:714
 #, fuzzy
@@ -7521,17 +9015,6 @@ msgstr "Se bøker"
 #: cps/templates/detail.html:772
 msgid "Unhidden"
 msgstr ""
-
-#: cps/templates/detail.html:810 cps/templates/detail.html:992
-#, fuzzy
-msgid "Remove from shelf"
-msgstr "Rediger en hylle"
-
-#: cps/templates/detail.html:850 cps/templates/image.html:27
-#: cps/templates/index.html:45
-#, fuzzy
-msgid "Currently reading"
-msgstr "Gjeldende versjon"
 
 #: cps/templates/detail.html:859
 #, fuzzy
@@ -7580,10 +9063,6 @@ msgstr ""
 msgid "File sizes"
 msgstr ""
 
-#: cps/templates/detail.html:1018
-msgid "KOReader Progress"
-msgstr ""
-
 #: cps/templates/detail.html:1092 cps/templates/listenmp3.html:177
 #, fuzzy
 msgid "Description:"
@@ -7628,10 +9107,6 @@ msgstr ""
 #, fuzzy
 msgid "Select format:"
 msgstr "Slett formater:"
-
-#: cps/templates/detail.html:1183
-msgid "Send"
-msgstr ""
 
 #: cps/templates/detail.html:1510
 #, fuzzy
@@ -7701,10 +9176,6 @@ msgstr "Slett bok"
 
 #: cps/templates/duplicates.html:542
 msgid "You can keep using CWA while it runs."
-msgstr ""
-
-#: cps/templates/duplicates.html:545 cps/templates/tasks.html:17
-msgid "Progress"
 msgstr ""
 
 #: cps/templates/duplicates.html:554
@@ -7876,15 +9347,6 @@ msgstr ""
 
 #: cps/templates/email_edit.html:24
 msgid "Revoke Gmail Access"
-msgstr ""
-
-#: cps/templates/email_edit.html:42
-#, fuzzy
-msgid "STARTTLS"
-msgstr "Omstart"
-
-#: cps/templates/email_edit.html:43
-msgid "SSL/TLS"
 msgstr ""
 
 #: cps/templates/email_edit.html:51
@@ -8115,10 +9577,6 @@ msgstr ""
 #, fuzzy
 msgid "Logout User"
 msgstr "Rediger brukere"
-
-#: cps/templates/image.html:25
-msgid "Favorite"
-msgstr ""
 
 #: cps/templates/index.html:104
 msgid "Mobile Notice"
@@ -8547,11 +10005,6 @@ msgstr ""
 msgid "Parent Directory"
 msgstr "Caliber Database Directory"
 
-#: cps/templates/modal_dialogs.html:98
-#, fuzzy
-msgid "Select"
-msgstr "Slett"
-
 #: cps/templates/modal_dialogs.html:134 cps/templates/tasks.html:93
 msgid "Ok"
 msgstr ""
@@ -8573,11 +10026,6 @@ msgstr "Vurderinger"
 
 #: cps/templates/read.html:47
 msgid "Open annotations page"
-msgstr ""
-
-#: cps/templates/read.html:106 cps/templates/readcbr.html:102
-#: cps/templates/user_edit.html:279
-msgid "Theme"
 msgstr ""
 
 #: cps/templates/read.html:111
@@ -8789,10 +10237,6 @@ msgstr ""
 msgid "Show"
 msgstr "Vis alt"
 
-#: cps/templates/readcbr.html:173
-msgid "Hide"
-msgstr ""
-
 #: cps/templates/readdjvu.html:5
 msgid "DJVU Reader"
 msgstr ""
@@ -8875,10 +10319,6 @@ msgstr "Publisert etter "
 #: cps/templates/search_form.html:42
 msgid "Read Status"
 msgstr "Les status"
-
-#: cps/templates/search_form.html:44 cps/templates/search_form.html:165
-msgid "Any"
-msgstr ""
 
 #: cps/templates/search_form.html:45 cps/templates/search_form.html:166
 msgid "Empty"
@@ -9099,22 +10539,6 @@ msgstr "ikke installert"
 #: cps/templates/tasks.html:8
 msgid "Background Tasks Overview"
 msgstr ""
-
-#: cps/templates/tasks.html:13 cps/templates/tasks.html:42
-#: cps/templates/tasks.html:65
-#, fuzzy
-msgid "User"
-msgstr "Brukere"
-
-#: cps/templates/tasks.html:15
-#, fuzzy
-msgid "Task"
-msgstr "Oppgaver"
-
-#: cps/templates/tasks.html:16
-#, fuzzy
-msgid "Status"
-msgstr "Omstart"
 
 #: cps/templates/tasks.html:18
 msgid "Run Time"
@@ -9740,20 +11164,12 @@ msgstr "Vis serieutvalg"
 #~ msgstr "Ta bort"
 
 #, fuzzy, python-brace-format
-#~ msgid "Move {label} up"
-#~ msgstr "Oppheve"
-
-#, fuzzy, python-brace-format
 #~ msgid "Hide {label}"
 #~ msgstr "Oppheve"
 
 #, fuzzy, python-brace-format
 #~ msgid "Show {label}"
 #~ msgstr "Vis alt"
-
-#, fuzzy
-#~ msgid "Cancel Scan"
-#~ msgstr "Avbryt"
 
 #, fuzzy
 #~ msgid "Calibre-Web Automated configuration updated"
@@ -9864,13 +11280,6 @@ msgstr "Vis serieutvalg"
 #, fuzzy
 #~ msgid "Generate Thumbnails"
 #~ msgstr "Generer miniatyrbilder av bokomslag"
-
-#~ msgid "Ratings list"
-#~ msgstr "Rangeringsliste"
-
-#, fuzzy
-#~ msgid "Clear selections"
-#~ msgstr "Fjern valg"
 
 #, fuzzy
 #~ msgid "Unarchive selected books"
