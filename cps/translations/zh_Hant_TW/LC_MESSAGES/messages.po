@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-10 01:18+0000\n"
+"POT-Creation-Date: 2026-07-10 23:31+0000\n"
 "PO-Revision-Date: 2020-09-27 22:18+0800\n"
 "Last-Translator: xlivevil <xlivevil@aliyun.com>\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
@@ -146,7 +146,7 @@ msgstr "找不到用戶"
 msgid "{} users deleted successfully"
 msgstr "成功刪除 {} 個用戶"
 
-#: cps/admin.py:801 cps/api/account.py:64
+#: cps/admin.py:801 cps/api/account.py:66
 #: cps/templates/config_view_edit.html:186 cps/templates/user_edit.html:270
 #: cps/templates/user_edit.html:292 cps/templates/user_table.html:81
 msgid "Show All"

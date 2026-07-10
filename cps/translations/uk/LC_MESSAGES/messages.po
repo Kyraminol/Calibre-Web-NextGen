@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-10 01:18+0000\n"
+"POT-Creation-Date: 2026-07-10 23:31+0000\n"
 "PO-Revision-Date: 2017-04-30 00:47+0300\n"
 "Last-Translator: ABIS Team <biblio.if.abis@gmail.com>\n"
 "Language-Team: \n"
@@ -155,7 +155,7 @@ msgstr "Користувача не знайдено"
 msgid "{} users deleted successfully"
 msgstr "{} користувачі видалені успішно"
 
-#: cps/admin.py:801 cps/api/account.py:64
+#: cps/admin.py:801 cps/api/account.py:66
 #: cps/templates/config_view_edit.html:186 cps/templates/user_edit.html:270
 #: cps/templates/user_edit.html:292 cps/templates/user_table.html:81
 msgid "Show All"

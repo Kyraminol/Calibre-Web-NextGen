@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web (GPLV3)\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-10 01:18+0000\n"
+"POT-Creation-Date: 2026-07-10 23:31+0000\n"
 "PO-Revision-Date: 2026-04-26 13:31+0200\n"
 "Last-Translator: Michiel Cornelissen <michiel.cornelissen+gitbhun at proton."
 "me>\n"
@@ -158,7 +158,7 @@ msgstr "Gebruiker niet gevonden"
 msgid "{} users deleted successfully"
 msgstr "{} gebruikers succesvol verwijderd"
 
-#: cps/admin.py:801 cps/api/account.py:64
+#: cps/admin.py:801 cps/api/account.py:66
 #: cps/templates/config_view_edit.html:186 cps/templates/user_edit.html:270
 #: cps/templates/user_edit.html:292 cps/templates/user_table.html:81
 msgid "Show All"
