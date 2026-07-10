@@ -16,6 +16,8 @@ is for things you can see or feel when running the app.
 
 ## [Unreleased]
 
+## [v4.1.8] - 2026-07-10
+
 ### Added
 - **Book pages now show when you started reading and when your progress last
   synced.** If you read with Kobo or KOReader, the book page now shows both
@@ -28,6 +30,8 @@ is for things you can see or feel when running the app.
   Thanks to @mrdynamo and the original reporter (#725).
 
 ### Fixed
+- **Russian interface translation updated** with another round of corrections.
+  Thanks to @standhaftsohnsergius (#740).
 - **Downloads failed with a server error for apps and scripts that don't send a
   browser identifier.** Some OPDS readers, download managers, and command-line
   tools (`curl`, scripts) omit the User-Agent header. Those requests hit a

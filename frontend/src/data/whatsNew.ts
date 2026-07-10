@@ -56,6 +56,66 @@ export interface WhatsNewRelease {
 /** Newest release first. The `whats-new-populate` skill prepends here. */
 export const WHATS_NEW: WhatsNewRelease[] = [
   {
+    version: 'v4.1.8',
+    date: '2026-07-10',
+    items: [
+      {
+        title: 'See when you started a book and when it last synced',
+        body: "If you read with a Kobo or KOReader, a book's page now shows the date your reading progress first synced and when it last did — so you can tell how long a book has been in progress and whether its saved position is current.",
+        category: 'Sync',
+        link: { to: '/', label: 'Open your library' },
+      },
+      {
+        title: 'Show tags as a column in the table view',
+        body: 'The table view can now show each book\'s tags in their own column, next to Series — useful when you\'re skimming or editing metadata and want genres and subjects at a glance. Toggle it with the "Columns" button.',
+        category: 'Library',
+        link: { to: '/table', label: 'Open the table view' },
+      },
+      {
+        title: 'Book lists load as you scroll',
+        body: 'The Library grid, table view, shelves, smart shelves, and search results now load the next page automatically as you near the bottom — one continuous scroll instead of a "Load more" button.',
+        category: 'Library',
+        link: { to: '/', label: 'Open your library' },
+      },
+      {
+        title: 'The duplicates notice respects your archive',
+        body: 'If you archived one book of a duplicate pair, the sidebar badge and pop-up notice kept counting it even though the duplicates page showed nothing. The count now honors archived and hidden books, so the badge and the page agree.',
+        category: 'Library',
+        link: { to: '/duplicates', label: 'Review duplicates' },
+      },
+      {
+        title: 'Reordering the sidebar feels smooth and physical',
+        body: 'In the Customize panel, dragging a section now lifts the row and glides the others aside instead of snapping and jittering — the same on mouse, touch, and pen. Keyboard reordering animates through the same motion, and it all falls back to instant when your system prefers reduced motion.',
+        category: 'Library',
+      },
+      {
+        title: 'OPDS feeds show their own names',
+        body: 'In an OPDS reader app, every feed used to carry the same title — your library\'s name — so the feed list was a wall of identical entries. Each feed now shows its own name (a shelf shows its shelf name, a search shows the query).',
+        category: 'Sync',
+      },
+      {
+        title: 'Better automatic Hardcover matches',
+        body: 'Automatic Hardcover metadata matching now scores the full set of search results instead of only the first ten, so the right edition is found more often without a manual review.',
+        category: 'Library',
+      },
+      {
+        title: 'Author names with commas display correctly',
+        body: 'An author like "William H. Keith, Jr." showed a raw "|" where the comma should be on book cards and the book page in the new interface. The stored form is now converted for display everywhere.',
+        category: 'Library',
+      },
+      {
+        title: 'Downloads work for apps that skip the browser identifier',
+        body: 'Some OPDS readers, download managers, and scripts omit the User-Agent header; those downloads hit a server error instead of the book. They now download normally.',
+        category: 'Under the hood',
+      },
+      {
+        title: 'The new interface translates more completely',
+        body: 'Many menu items and whole screens — admin settings, the cover picker, advanced search, the book editor — stayed English even in fully translated languages, because their strings were never collected for translation. They are now, and the Russian translation received a round of corrections.',
+        category: 'Under the hood',
+      },
+    ],
+  },
+  {
     version: 'v4.1.7',
     date: '2026-07-08',
     items: [
