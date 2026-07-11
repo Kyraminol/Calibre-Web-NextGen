@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-11 16:01+0000\n"
+"POT-Creation-Date: 2026-07-11 19:27+0000\n"
 "PO-Revision-Date: 2026-05-12 00:06+0200\n"
 "Last-Translator: Gabor L. <nom@il.thx>\n"
 "Language-Team: \n"
@@ -436,7 +436,7 @@ msgstr "Siker! A Gmail-fiók hitelesítve."
 #: cps/admin.py:2838 cps/admin.py:3106 cps/editbooks.py:1148
 #: cps/editbooks.py:2050 cps/shelf.py:148 cps/shelf.py:226 cps/shelf.py:297
 #: cps/shelf.py:332 cps/shelf.py:389 cps/shelf.py:464 cps/shelf.py:547
-#: cps/shelf.py:672 cps/tasks/convert.py:145 cps/web.py:3202
+#: cps/shelf.py:672 cps/tasks/convert.py:145 cps/web.py:3197
 #, python-format
 msgid "Oops! Database Error: %(error)s."
 msgstr "Hoppá! Adatbázis hiba: %(error)s."
@@ -542,7 +542,7 @@ msgid "Settings DB is not Writeable"
 msgstr "A beállítások adatbázisa nem írható"
 
 #: cps/admin.py:2090 cps/opds.py:316 cps/opds.py:354 cps/opds.py:357
-#: cps/web.py:3118 cps/web.py:3253
+#: cps/web.py:3113 cps/web.py:3248
 msgid "title"
 msgstr "cím"
 
@@ -746,7 +746,7 @@ msgstr "A vendég felhasználó nem törölhető"
 msgid "No admin user remaining, can't delete user"
 msgstr "Nem marad admin felhasználó, nem lehet felhasználót törölni"
 
-#: cps/admin.py:3057 cps/web.py:2926
+#: cps/admin.py:3057 cps/web.py:2921
 msgid "Email can't be empty and has to be a valid Email"
 msgstr "Az e-mail nem lehet üres, és érvényes e-mail címnek kell lennie"
 
@@ -1393,8 +1393,8 @@ msgstr ""
 msgid "File to be uploaded must have an extension"
 msgstr "A feltöltendő fájlnak kiterjesztéssel kell rendelkeznie!"
 
-#: cps/editbooks.py:931 cps/editbooks.py:1670 cps/web.py:844 cps/web.py:3383
-#: cps/web.py:3565 cps/web.py:3715
+#: cps/editbooks.py:931 cps/editbooks.py:1670 cps/web.py:844 cps/web.py:3378
+#: cps/web.py:3560 cps/web.py:3710
 msgid ""
 "Oops! Selected book is unavailable. File does not exist or is not accessible"
 msgstr ""
@@ -1797,12 +1797,12 @@ msgstr ""
 msgid "Kobo Setup"
 msgstr "Kobo beállítása"
 
-#: cps/oauth_bb.py:261
+#: cps/oauth_bb.py:287
 #, python-format
 msgid "Register with %(provider)s"
 msgstr "Regisztráció a %(provider)s-hez/hoz"
 
-#: cps/oauth_bb.py:316
+#: cps/oauth_bb.py:342
 msgid ""
 "Login failed: OAuth token validation error. This may be due to scope "
 "configuration mismatch. Please check your OAuth scopes configuration or "
@@ -1812,11 +1812,11 @@ msgstr ""
 "jogosultsági körök (scope) helytelen beállítása lehet. Ellenőrizze az OAuth "
 "jogosultsági körök beállításait, vagy keresse a rendszergazdát."
 
-#: cps/oauth_bb.py:321
+#: cps/oauth_bb.py:347
 msgid "Login failed: OAuth token expired. Please try logging in again."
 msgstr "Bejelentkezés sikertelen: OAuth token lejárt. Jelentkezzen be újra."
 
-#: cps/oauth_bb.py:325
+#: cps/oauth_bb.py:351
 msgid ""
 "Login failed: Could not connect to the OAuth provider's user info endpoint. "
 "Please try again or contact your administrator."
@@ -1824,7 +1824,7 @@ msgstr ""
 "Bejelentkezés sikertelen: Nem sikerült csatlakozni az OAuth szolgáltató "
 "felhasználó infó végpontjához. Próbálja újra vagy keresse a rendszergazdát."
 
-#: cps/oauth_bb.py:330
+#: cps/oauth_bb.py:356
 msgid ""
 "Login failed: The OAuth provider returned invalid user profile data. Please "
 "contact your administrator."
@@ -1832,7 +1832,7 @@ msgstr ""
 "Bejelentkezés sikertelen: Az OAuth szolgáltató érvénytelen felhasználó "
 "adatokkal tért vissza. Forduljon a rendszergazdához."
 
-#: cps/oauth_bb.py:352
+#: cps/oauth_bb.py:378
 #, python-format
 msgid ""
 "Login failed: OAuth provider response is missing required fields: "
@@ -1843,37 +1843,37 @@ msgstr ""
 "mezők: %(fields)s. Ellenőrizze az OAuth beállításait vagy keresse a "
 "rendszergazdát."
 
-#: cps/oauth_bb.py:378 cps/oauth_bb.py:637
+#: cps/oauth_bb.py:404 cps/oauth_bb.py:663
 msgid "Failed to link OAuth account. Please try again."
 msgstr "Nem sikerült összekapcsolni az OAuth fiókot. Próbálja újra."
 
-#: cps/oauth_bb.py:411
+#: cps/oauth_bb.py:437
 msgid "Login failed: your account is not allowed to access this application."
 msgstr ""
 
-#: cps/oauth_bb.py:600
+#: cps/oauth_bb.py:626
 msgid ""
 "OAuth error: Provider returned invalid user information. Please try again."
 msgstr ""
 "OAuth hiba: A szolgáltató érvénytelen felhasználó információval tért vissza. "
 "Próbálja újra."
 
-#: cps/oauth_bb.py:614
+#: cps/oauth_bb.py:640
 #, python-format
 msgid "This %(oauth)s account is already linked to a different user"
 msgstr "Ez a(z) %(oauth)s fiók már egy másik felhasználóhoz van kapcsolva"
 
-#: cps/oauth_bb.py:621 cps/remotelogin.py:149
+#: cps/oauth_bb.py:647 cps/remotelogin.py:149
 #, python-format
 msgid "Success! You are now logged in as: %(nickname)s"
 msgstr "Be vagy jelentkezve mint: %(nickname)s"
 
-#: cps/oauth_bb.py:631
+#: cps/oauth_bb.py:657
 #, python-format
 msgid "Link to %(oauth)s Succeeded"
 msgstr "Link %(oauth)s-hoz/hez sikeres"
 
-#: cps/oauth_bb.py:639
+#: cps/oauth_bb.py:665
 #, python-format
 msgid ""
 "Login failed: No user account is linked to your %(provider)s account. Please "
@@ -1884,60 +1884,60 @@ msgstr ""
 "fiókjához. Keresse a rendszergazdát, hogy létrehozzon egy fiókot, vagy "
 "összekapcsoljon egy létezővel."
 
-#: cps/oauth_bb.py:647
+#: cps/oauth_bb.py:673
 msgid "OAuth authentication failed. Please try again or contact administrator."
 msgstr "OAuth hitelesítési hiba. Próbálja újra vagy keresse a rendszergazdát."
 
-#: cps/oauth_bb.py:651
+#: cps/oauth_bb.py:677
 msgid "OAuth system error. Please contact administrator."
 msgstr "OAuth rendszerhiba. Kérjük, forduljon a rendszergazdához!"
 
-#: cps/oauth_bb.py:684
+#: cps/oauth_bb.py:710
 #, python-format
 msgid "Unlink to %(oauth)s Succeeded"
 msgstr "A %(oauth)s-hoz/hez való kapcsolódás megszüntetése sikeres volt"
 
-#: cps/oauth_bb.py:689
+#: cps/oauth_bb.py:715
 #, python-format
 msgid "Unlink to %(oauth)s Failed"
 msgstr "A %(oauth)s-hoz/hez való kapcsolódás megszüntetése sikertelen"
 
-#: cps/oauth_bb.py:692
+#: cps/oauth_bb.py:718
 #, python-format
 msgid "Not Linked to %(oauth)s"
 msgstr "Nincs kapcsolata %(oauth)s-tal"
 
-#: cps/oauth_bb.py:913
+#: cps/oauth_bb.py:939
 msgid "Failed to log in with GitHub."
 msgstr "A Github-fiókkal való bejelentkezés sikertelen."
 
-#: cps/oauth_bb.py:919
+#: cps/oauth_bb.py:945
 msgid "Failed to fetch user info from GitHub."
 msgstr "Nem sikerült lekérni a felhasználói adatokat a GitHub-ról."
 
-#: cps/oauth_bb.py:940
+#: cps/oauth_bb.py:966
 msgid "Failed to log in with Google."
 msgstr "A Google-fiókkal való bejelentkezés sikertelen."
 
-#: cps/oauth_bb.py:949
+#: cps/oauth_bb.py:975
 msgid "Failed to fetch user info from Google."
 msgstr "Nem sikerült lekérni a felhasználói adatokat a Google-tól."
 
-#: cps/oauth_bb.py:974
+#: cps/oauth_bb.py:1000
 msgid "Failed to log in with Generic OAuth."
 msgstr "Bejelentkezés általános OAuth segítségével sikertelen."
 
-#: cps/oauth_bb.py:990
+#: cps/oauth_bb.py:1016
 msgid "OAuth authentication failed: Token validation error. Please try again."
 msgstr "OAuth hitelesítési hiba: Token érvényesítési hiba. Próbálja újra."
 
-#: cps/oauth_bb.py:994
+#: cps/oauth_bb.py:1020
 msgid ""
 "OAuth authentication failed due to an unexpected error. Please contact "
 "administrator."
 msgstr "OAuth hitelesítés váratlan hibába ütközött. Keresse a rendszergazdát."
 
-#: cps/oauth_bb.py:1002 cps/oauth_bb.py:1020 cps/oauth_bb.py:1038
+#: cps/oauth_bb.py:1028 cps/oauth_bb.py:1046 cps/oauth_bb.py:1064
 msgid ""
 "OAuth error: Invalid redirect URI. If you're experiencing this error "
 "repeatedly, please configure the 'OAuth Redirect Host' setting in Admin > "
@@ -1947,25 +1947,25 @@ msgstr ""
 "hibával állítsa be az \"OAuth átirányítási címet\" a Beállítások > "
 "Alapbeállítások szerkesztése > OAuth oldalon."
 
-#: cps/oauth_bb.py:1074
+#: cps/oauth_bb.py:1100
 msgid "GitHub Oauth error, please retry later."
 msgstr "GitHub Oauth hiba, kérjük, próbálja meg később újból."
 
-#: cps/oauth_bb.py:1081
+#: cps/oauth_bb.py:1107
 #, python-brace-format
 msgid "GitHub Oauth error: {}"
 msgstr "GitHub Oauth hiba: {}"
 
-#: cps/oauth_bb.py:1131
+#: cps/oauth_bb.py:1157
 msgid "Google Oauth error, please retry later."
 msgstr "Google Oauth hiba, kérjük, próbálja meg később újból."
 
-#: cps/oauth_bb.py:1138
+#: cps/oauth_bb.py:1164
 #, python-brace-format
 msgid "Google Oauth error: {}"
 msgstr "Google Oauth hiba: {}"
 
-#: cps/oauth_bb.py:1174 cps/oauth_bb.py:1182
+#: cps/oauth_bb.py:1200 cps/oauth_bb.py:1208
 #, python-brace-format
 msgid "OAuth error: {}"
 msgstr "OAuth hiba: {}"
@@ -2138,7 +2138,7 @@ msgstr "Keresés"
 
 #: cps/remotelogin.py:76 cps/spa_strings.py:465 cps/templates/layout.html:344
 #: cps/templates/layout.html:385 cps/templates/login.html:11
-#: cps/templates/login.html:39 cps/web.py:2700
+#: cps/templates/login.html:39 cps/web.py:2695
 msgid "Login"
 msgstr "Belépés"
 
@@ -5538,7 +5538,7 @@ msgstr "Kérjük várjon egy percet a következő felhasználó létrehozásáva
 msgid "Register"
 msgstr "Regisztrálás"
 
-#: cps/web.py:2582 cps/web.py:2747
+#: cps/web.py:2582 cps/web.py:2742
 msgid "Connection error to limiter backend, please contact your administrator"
 msgstr ""
 "Nem sikerült csatlakozni a korlátozó háttérrendszerhez. Kérjük, forduljon a "
@@ -5567,35 +5567,35 @@ msgstr ""
 "Hitelesítési hurok észlelve. Bejelentkezési problémák esetén vegye fel a "
 "kapcsolatot a rendszergazdával."
 
-#: cps/web.py:2721
+#: cps/web.py:2716
 msgid ""
 "OAuth authentication is not properly configured. Please contact "
 "administrator."
 msgstr ""
 "OAuth bejelentkezés nincs megfelelően beállítva. Értesítse a rendszergazdát."
 
-#: cps/web.py:2726 cps/web.py:2753
+#: cps/web.py:2721 cps/web.py:2748
 msgid "Cannot activate LDAP authentication"
 msgstr "Az LDAP-hitelesítés nem aktiválható"
 
-#: cps/web.py:2735
+#: cps/web.py:2730
 msgid "Standard login is disabled."
 msgstr "Alap bejelentkezés letiltva."
 
-#: cps/web.py:2743
+#: cps/web.py:2738
 msgid "Please wait one minute before next login"
 msgstr "Kérjük várjon egy percet a következő belépéssel"
 
-#: cps/web.py:2761
+#: cps/web.py:2756
 msgid "Username cannot be empty"
 msgstr "Felhasználónév nem lehet üres"
 
-#: cps/web.py:2773
+#: cps/web.py:2768
 #, python-format
 msgid "you are now logged in as: '%(nickname)s'"
 msgstr "\"%(nickname)s\" néven van bejelentkezve"
 
-#: cps/web.py:2792
+#: cps/web.py:2787
 #, python-format
 msgid ""
 "Welcome! Your account has been automatically created. You are now logged in "
@@ -5604,7 +5604,7 @@ msgstr ""
 "Üdvözöljük! Fiókja automatikusan létrejött. Be van jelentkezve mint: "
 "\"%(nickname)s\""
 
-#: cps/web.py:2797 cps/web.py:2800
+#: cps/web.py:2792 cps/web.py:2795
 msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
@@ -5612,7 +5612,7 @@ msgstr ""
 "Autentikáció sikeres, de a fiók létrehozás nem sikerült. Keresse a "
 "rendszergazdát."
 
-#: cps/web.py:2804
+#: cps/web.py:2799
 msgid ""
 "Authentication successful, but no local account found. Please contact your "
 "administrator to create your account."
@@ -5620,7 +5620,7 @@ msgstr ""
 "Hitelesítés sikeres, de nem található lokális fiók. Keresse a "
 "rendszergazdát, hogy létrehozzon egy fiókot."
 
-#: cps/web.py:2812
+#: cps/web.py:2807
 #, python-format
 msgid ""
 "Fallback Login as: '%(nickname)s', LDAP Server not reachable, or user not "
@@ -5629,50 +5629,50 @@ msgstr ""
 "Tartalék bejelentkezés \"%(nickname)s\" néven. Az LDAP szerver nem elérhető, "
 "vagy a felhasználó nem található"
 
-#: cps/web.py:2818
+#: cps/web.py:2813
 #, python-format
 msgid "Could not login: %(message)s"
 msgstr "Nem sikerült bejelentkezni: %(message)s"
 
-#: cps/web.py:2841 cps/web.py:2842 cps/web.py:2885
+#: cps/web.py:2836 cps/web.py:2837 cps/web.py:2880
 msgid "Wrong Username or Password"
 msgstr "Rossz felhasználónév vagy jelszó"
 
-#: cps/web.py:2850
+#: cps/web.py:2845
 msgid "New Password was sent to your email address"
 msgstr "Az új jelszót elküldtük az emailcímére"
 
-#: cps/web.py:2854
+#: cps/web.py:2849
 msgid "An unknown error occurred. Please try again later."
 msgstr "Ismeretlen hiba történt. Próbálja újra később!"
 
-#: cps/web.py:2856
+#: cps/web.py:2851
 msgid "Please enter valid username to reset password"
 msgstr "Érvényes felhasználónevet adjon meg a jelszó visszaállításához"
 
-#: cps/web.py:2864
+#: cps/web.py:2859
 #, python-format
 msgid "You are now logged in as: '%(nickname)s'"
 msgstr "Be van jelentkezve mint: \"%(nickname)s\""
 
-#: cps/web.py:3191
+#: cps/web.py:3186
 msgid "Success! Profile Updated"
 msgstr "Siker! Profil frissítve"
 
-#: cps/web.py:3197
+#: cps/web.py:3192
 msgid "Oops! An account already exists for this Email."
 msgstr "Már létezik felhasználó ehhez az e-mail címhez."
 
-#: cps/web.py:3331
+#: cps/web.py:3326
 msgid "App-password label must be 1-64 characters."
 msgstr "Az alkalmazásjelszó címkéje 1–64 karakter hosszú lehet."
 
-#: cps/web.py:3366
+#: cps/web.py:3361
 #, python-format
 msgid "App password '%(label)s' revoked."
 msgstr "A(z) '%(label)s' alkalmazásjelszó visszavonva."
 
-#: cps/web.py:3578
+#: cps/web.py:3573
 msgid "Invalid book ID."
 msgstr "Érvénytelen könyv azonosító."
 

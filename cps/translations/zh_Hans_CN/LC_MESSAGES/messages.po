@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-11 16:01+0000\n"
+"POT-Creation-Date: 2026-07-11 19:27+0000\n"
 "PO-Revision-Date: 2020-09-27 22:18+0800\n"
 "Last-Translator: xlivevil <xlivevil@aliyun.com>\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
@@ -404,7 +404,7 @@ msgstr "Gmail 账户验证成功"
 #: cps/admin.py:2838 cps/admin.py:3106 cps/editbooks.py:1148
 #: cps/editbooks.py:2050 cps/shelf.py:148 cps/shelf.py:226 cps/shelf.py:297
 #: cps/shelf.py:332 cps/shelf.py:389 cps/shelf.py:464 cps/shelf.py:547
-#: cps/shelf.py:672 cps/tasks/convert.py:145 cps/web.py:3202
+#: cps/shelf.py:672 cps/tasks/convert.py:145 cps/web.py:3197
 #, python-format
 msgid "Oops! Database Error: %(error)s."
 msgstr "数据库错误：%(error)s"
@@ -504,7 +504,7 @@ msgid "Settings DB is not Writeable"
 msgstr "设置数据库不可写"
 
 #: cps/admin.py:2090 cps/opds.py:316 cps/opds.py:354 cps/opds.py:357
-#: cps/web.py:3118 cps/web.py:3253
+#: cps/web.py:3113 cps/web.py:3248
 #, fuzzy
 msgid "title"
 msgstr "标题"
@@ -701,7 +701,7 @@ msgstr "无法删除游客用户"
 msgid "No admin user remaining, can't delete user"
 msgstr "管理员账户不存在，无法删除用户"
 
-#: cps/admin.py:3057 cps/web.py:2926
+#: cps/admin.py:3057 cps/web.py:2921
 msgid "Email can't be empty and has to be a valid Email"
 msgstr "电子邮件地址不能为空，并且必须是有效的电子邮件"
 
@@ -1346,8 +1346,8 @@ msgstr "不能上传文件扩展名为“%(ext)s”的文件到此服务器"
 msgid "File to be uploaded must have an extension"
 msgstr "要上传的文件必须具有扩展名"
 
-#: cps/editbooks.py:931 cps/editbooks.py:1670 cps/web.py:844 cps/web.py:3383
-#: cps/web.py:3565 cps/web.py:3715
+#: cps/editbooks.py:931 cps/editbooks.py:1670 cps/web.py:844 cps/web.py:3378
+#: cps/web.py:3560 cps/web.py:3710
 msgid ""
 "Oops! Selected book is unavailable. File does not exist or is not accessible"
 msgstr "糟糕！选择书名无法打开。文件不存在或者文件不可访问"
@@ -1730,12 +1730,12 @@ msgstr ""
 msgid "Kobo Setup"
 msgstr "Kobo 设置"
 
-#: cps/oauth_bb.py:261
+#: cps/oauth_bb.py:287
 #, python-format
 msgid "Register with %(provider)s"
 msgstr "使用 %(provider)s 注册"
 
-#: cps/oauth_bb.py:316
+#: cps/oauth_bb.py:342
 msgid ""
 "Login failed: OAuth token validation error. This may be due to scope "
 "configuration mismatch. Please check your OAuth scopes configuration or "
@@ -1744,25 +1744,25 @@ msgstr ""
 "登录失败：OAuth 令牌验证错误。这可能是由于作用域配置不匹配造成的。请检查您的 "
 "OAuth 作用域配置或联系您的管理员。"
 
-#: cps/oauth_bb.py:321
+#: cps/oauth_bb.py:347
 msgid "Login failed: OAuth token expired. Please try logging in again."
 msgstr "登录失败：OAuth 令牌已过期。请尝试重新登录。"
 
-#: cps/oauth_bb.py:325
+#: cps/oauth_bb.py:351
 #, fuzzy
 msgid ""
 "Login failed: Could not connect to the OAuth provider's user info endpoint. "
 "Please try again or contact your administrator."
 msgstr "登录失败：无法连接到用户信息端点。"
 
-#: cps/oauth_bb.py:330
+#: cps/oauth_bb.py:356
 #, fuzzy
 msgid ""
 "Login failed: The OAuth provider returned invalid user profile data. Please "
 "contact your administrator."
 msgstr "登录失败：OAuth 提供者返回了无效的用户资料。"
 
-#: cps/oauth_bb.py:352
+#: cps/oauth_bb.py:378
 #, python-format
 msgid ""
 "Login failed: OAuth provider response is missing required fields: "
@@ -1772,35 +1772,35 @@ msgstr ""
 "登录失败：OAuth 提供者响应中缺少必需的字段：%(fields)s。请检查您的 OAuth 配置"
 "或联系您的管理员。"
 
-#: cps/oauth_bb.py:378 cps/oauth_bb.py:637
+#: cps/oauth_bb.py:404 cps/oauth_bb.py:663
 msgid "Failed to link OAuth account. Please try again."
 msgstr "链接 OAuth 帐户失败。请重试。"
 
-#: cps/oauth_bb.py:411
+#: cps/oauth_bb.py:437
 msgid "Login failed: your account is not allowed to access this application."
 msgstr ""
 
-#: cps/oauth_bb.py:600
+#: cps/oauth_bb.py:626
 msgid ""
 "OAuth error: Provider returned invalid user information. Please try again."
 msgstr "OAuth 错误：提供者返回了无效的用户信息。请重试。"
 
-#: cps/oauth_bb.py:614
+#: cps/oauth_bb.py:640
 #, python-format
 msgid "This %(oauth)s account is already linked to a different user"
 msgstr ""
 
-#: cps/oauth_bb.py:621 cps/remotelogin.py:149
+#: cps/oauth_bb.py:647 cps/remotelogin.py:149
 #, python-format
 msgid "Success! You are now logged in as: %(nickname)s"
 msgstr "您现在已以“%(nickname)s”身份登录"
 
-#: cps/oauth_bb.py:631
+#: cps/oauth_bb.py:657
 #, python-format
 msgid "Link to %(oauth)s Succeeded"
 msgstr "链接到 %(oauth)s 成功"
 
-#: cps/oauth_bb.py:639
+#: cps/oauth_bb.py:665
 #, python-format
 msgid ""
 "Login failed: No user account is linked to your %(provider)s account. Please "
@@ -1810,62 +1810,62 @@ msgstr ""
 "登录失败：没有用户帐户链接到您的 %(provider)s 帐户。请联系您的管理员以创建帐"
 "户或链接您现有的帐户。"
 
-#: cps/oauth_bb.py:647
+#: cps/oauth_bb.py:673
 msgid "OAuth authentication failed. Please try again or contact administrator."
 msgstr "OAuth 身份验证失败。请重试或联系管理员。"
 
-#: cps/oauth_bb.py:651
+#: cps/oauth_bb.py:677
 #, fuzzy
 msgid "OAuth system error. Please contact administrator."
 msgstr "邮件服务未配置，请联系网站管理员！"
 
-#: cps/oauth_bb.py:684
+#: cps/oauth_bb.py:710
 #, python-format
 msgid "Unlink to %(oauth)s Succeeded"
 msgstr "取消链接到 %(oauth)s 成功"
 
-#: cps/oauth_bb.py:689
+#: cps/oauth_bb.py:715
 #, python-format
 msgid "Unlink to %(oauth)s Failed"
 msgstr "取消链接到 %(oauth)s 失败"
 
-#: cps/oauth_bb.py:692
+#: cps/oauth_bb.py:718
 #, python-format
 msgid "Not Linked to %(oauth)s"
 msgstr "未连接到 %(oauth)s"
 
-#: cps/oauth_bb.py:913
+#: cps/oauth_bb.py:939
 msgid "Failed to log in with GitHub."
 msgstr "使用 Github 登录失败"
 
-#: cps/oauth_bb.py:919
+#: cps/oauth_bb.py:945
 msgid "Failed to fetch user info from GitHub."
 msgstr "从 Github 获取用户信息失败"
 
-#: cps/oauth_bb.py:940
+#: cps/oauth_bb.py:966
 msgid "Failed to log in with Google."
 msgstr "使用 Google 登录失败"
 
-#: cps/oauth_bb.py:949
+#: cps/oauth_bb.py:975
 msgid "Failed to fetch user info from Google."
 msgstr "从 Google 获取用户信息失败"
 
-#: cps/oauth_bb.py:974
+#: cps/oauth_bb.py:1000
 #, fuzzy
 msgid "Failed to log in with Generic OAuth."
 msgstr "使用 Github 登录失败"
 
-#: cps/oauth_bb.py:990
+#: cps/oauth_bb.py:1016
 msgid "OAuth authentication failed: Token validation error. Please try again."
 msgstr "OAuth 身份验证失败：令牌验证错误。请重试。"
 
-#: cps/oauth_bb.py:994
+#: cps/oauth_bb.py:1020
 msgid ""
 "OAuth authentication failed due to an unexpected error. Please contact "
 "administrator."
 msgstr "由于意外错误，OAuth 身份验证失败。请联系管理员。"
 
-#: cps/oauth_bb.py:1002 cps/oauth_bb.py:1020 cps/oauth_bb.py:1038
+#: cps/oauth_bb.py:1028 cps/oauth_bb.py:1046 cps/oauth_bb.py:1064
 msgid ""
 "OAuth error: Invalid redirect URI. If you're experiencing this error "
 "repeatedly, please configure the 'OAuth Redirect Host' setting in Admin > "
@@ -1874,25 +1874,25 @@ msgstr ""
 "OAuth 错误：重定向 URI 无效。如果您反复遇到此错误，请在“管理” > “基本配置” > "
 "“OAuth”中配置“OAuth 重定向主机”设置。"
 
-#: cps/oauth_bb.py:1074
+#: cps/oauth_bb.py:1100
 msgid "GitHub Oauth error, please retry later."
 msgstr "GitHub Oauth 错误，请重试"
 
-#: cps/oauth_bb.py:1081
+#: cps/oauth_bb.py:1107
 #, python-brace-format
 msgid "GitHub Oauth error: {}"
 msgstr "GitHub Oauth 错误: {}"
 
-#: cps/oauth_bb.py:1131
+#: cps/oauth_bb.py:1157
 msgid "Google Oauth error, please retry later."
 msgstr "Google Oauth 错误，请重试"
 
-#: cps/oauth_bb.py:1138
+#: cps/oauth_bb.py:1164
 #, python-brace-format
 msgid "Google Oauth error: {}"
 msgstr "Google Oauth 错误: {}"
 
-#: cps/oauth_bb.py:1174 cps/oauth_bb.py:1182
+#: cps/oauth_bb.py:1200 cps/oauth_bb.py:1208
 #, fuzzy, python-brace-format
 msgid "OAuth error: {}"
 msgstr "GitHub Oauth 错误: {}"
@@ -2064,7 +2064,7 @@ msgstr "搜索"
 
 #: cps/remotelogin.py:76 cps/spa_strings.py:465 cps/templates/layout.html:344
 #: cps/templates/layout.html:385 cps/templates/login.html:11
-#: cps/templates/login.html:39 cps/web.py:2700
+#: cps/templates/login.html:39 cps/web.py:2695
 msgid "Login"
 msgstr "登录"
 
@@ -5470,7 +5470,7 @@ msgstr "请等待一分钟注册下一个用户"
 msgid "Register"
 msgstr "注册"
 
-#: cps/web.py:2582 cps/web.py:2747
+#: cps/web.py:2582 cps/web.py:2742
 #, fuzzy
 msgid "Connection error to limiter backend, please contact your administrator"
 msgstr "邮件服务未配置，请联系网站管理员！"
@@ -5495,105 +5495,105 @@ msgid ""
 "contact your administrator."
 msgstr "Calibre-Web 实例未配置，请联系您的管理员！"
 
-#: cps/web.py:2721
+#: cps/web.py:2716
 #, fuzzy
 msgid ""
 "OAuth authentication is not properly configured. Please contact "
 "administrator."
 msgstr "邮件服务未配置，请联系网站管理员！"
 
-#: cps/web.py:2726 cps/web.py:2753
+#: cps/web.py:2721 cps/web.py:2748
 msgid "Cannot activate LDAP authentication"
 msgstr "无法激活 LDAP 认证"
 
-#: cps/web.py:2735
+#: cps/web.py:2730
 msgid "Standard login is disabled."
 msgstr "标准登录已禁用。"
 
-#: cps/web.py:2743
+#: cps/web.py:2738
 msgid "Please wait one minute before next login"
 msgstr "下次登录前请等待一分钟"
 
-#: cps/web.py:2761
+#: cps/web.py:2756
 msgid "Username cannot be empty"
 msgstr "用户名不能为空"
 
-#: cps/web.py:2773
+#: cps/web.py:2768
 #, python-format
 msgid "you are now logged in as: '%(nickname)s'"
 msgstr "您现在已以“%(nickname)s”身份登录"
 
-#: cps/web.py:2792
+#: cps/web.py:2787
 #, fuzzy, python-format
 msgid ""
 "Welcome! Your account has been automatically created. You are now logged in "
 "as: '%(nickname)s'"
 msgstr "您现在已以“%(nickname)s”身份登录"
 
-#: cps/web.py:2797 cps/web.py:2800
+#: cps/web.py:2792 cps/web.py:2795
 #, fuzzy
 msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
 msgstr "Calibre-Web 实例未配置，请联系您的管理员！"
 
-#: cps/web.py:2804
+#: cps/web.py:2799
 msgid ""
 "Authentication successful, but no local account found. Please contact your "
 "administrator to create your account."
 msgstr "身份验证成功，但未找到本地帐户。请联系您的管理员以创建帐户。"
 
-#: cps/web.py:2812
+#: cps/web.py:2807
 #, python-format
 msgid ""
 "Fallback Login as: '%(nickname)s', LDAP Server not reachable, or user not "
 "known"
 msgstr "后备登录“%(nickname)s”：无法访问 LDAP 服务器，或用户未知"
 
-#: cps/web.py:2818
+#: cps/web.py:2813
 #, python-format
 msgid "Could not login: %(message)s"
 msgstr "无法登录：%(message)s"
 
-#: cps/web.py:2841 cps/web.py:2842 cps/web.py:2885
+#: cps/web.py:2836 cps/web.py:2837 cps/web.py:2880
 msgid "Wrong Username or Password"
 msgstr "用户名或密码错误"
 
-#: cps/web.py:2850
+#: cps/web.py:2845
 msgid "New Password was sent to your email address"
 msgstr "新密码已发送到您的邮箱"
 
-#: cps/web.py:2854
+#: cps/web.py:2849
 msgid "An unknown error occurred. Please try again later."
 msgstr "发生一个未知错误，请稍后再试"
 
-#: cps/web.py:2856
+#: cps/web.py:2851
 msgid "Please enter valid username to reset password"
 msgstr "请输入有效的用户名进行密码重置"
 
-#: cps/web.py:2864
+#: cps/web.py:2859
 #, python-format
 msgid "You are now logged in as: '%(nickname)s'"
 msgstr "您现在已以“%(nickname)s”身份登录"
 
-#: cps/web.py:3191
+#: cps/web.py:3186
 msgid "Success! Profile Updated"
 msgstr "资料已更新"
 
-#: cps/web.py:3197
+#: cps/web.py:3192
 msgid "Oops! An account already exists for this Email."
 msgstr "使用此邮箱的账号已经存在"
 
-#: cps/web.py:3331
+#: cps/web.py:3326
 msgid "App-password label must be 1-64 characters."
 msgstr ""
 
-#: cps/web.py:3366
+#: cps/web.py:3361
 #, python-format
 msgid "App password '%(label)s' revoked."
 msgstr ""
 
-#: cps/web.py:3578
+#: cps/web.py:3573
 #, fuzzy
 msgid "Invalid book ID."
 msgstr "无效角色"

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-11 16:01+0000\n"
+"POT-Creation-Date: 2026-07-11 19:27+0000\n"
 "PO-Revision-Date: 2026-04-06 17:03+0000\n"
 "Last-Translator: Manuel Drescher\n"
 "Language-Team: German\n"
@@ -426,7 +426,7 @@ msgstr "Erfolg! G-Mail-Konto verifiziert."
 #: cps/admin.py:2838 cps/admin.py:3106 cps/editbooks.py:1148
 #: cps/editbooks.py:2050 cps/shelf.py:148 cps/shelf.py:226 cps/shelf.py:297
 #: cps/shelf.py:332 cps/shelf.py:389 cps/shelf.py:464 cps/shelf.py:547
-#: cps/shelf.py:672 cps/tasks/convert.py:145 cps/web.py:3202
+#: cps/shelf.py:672 cps/tasks/convert.py:145 cps/web.py:3197
 #, python-format
 msgid "Oops! Database Error: %(error)s."
 msgstr "Ups! Datenbankfehler: %(error)s."
@@ -535,7 +535,7 @@ msgid "Settings DB is not Writeable"
 msgstr "Einstellungsdatenbank ist nicht schreibbar"
 
 #: cps/admin.py:2090 cps/opds.py:316 cps/opds.py:354 cps/opds.py:357
-#: cps/web.py:3118 cps/web.py:3253
+#: cps/web.py:3113 cps/web.py:3248
 msgid "title"
 msgstr "Titel"
 
@@ -739,7 +739,7 @@ msgstr "Benutzer 'Guest' kann nicht gelöscht werden"
 msgid "No admin user remaining, can't delete user"
 msgstr "Kein verbleibender Admin-Benutzer, Benutzer kann nicht gelöscht werden"
 
-#: cps/admin.py:3057 cps/web.py:2926
+#: cps/admin.py:3057 cps/web.py:2921
 msgid "Email can't be empty and has to be a valid Email"
 msgstr "E-Mail kann nicht leer sein und muss gültig sein"
 
@@ -1389,8 +1389,8 @@ msgstr "Dateiendung '%(ext)s' kann nicht auf diesen Server hochgeladen werden"
 msgid "File to be uploaded must have an extension"
 msgstr "Dateien müssen eine Erweiterung haben, um hochgeladen zu werden"
 
-#: cps/editbooks.py:931 cps/editbooks.py:1670 cps/web.py:844 cps/web.py:3383
-#: cps/web.py:3565 cps/web.py:3715
+#: cps/editbooks.py:931 cps/editbooks.py:1670 cps/web.py:844 cps/web.py:3378
+#: cps/web.py:3560 cps/web.py:3710
 msgid ""
 "Oops! Selected book is unavailable. File does not exist or is not accessible"
 msgstr ""
@@ -1795,12 +1795,12 @@ msgstr ""
 msgid "Kobo Setup"
 msgstr "Kobo Setup"
 
-#: cps/oauth_bb.py:261
+#: cps/oauth_bb.py:287
 #, python-format
 msgid "Register with %(provider)s"
 msgstr "Anmelden mit %(provider)s"
 
-#: cps/oauth_bb.py:316
+#: cps/oauth_bb.py:342
 msgid ""
 "Login failed: OAuth token validation error. This may be due to scope "
 "configuration mismatch. Please check your OAuth scopes configuration or "
@@ -1810,13 +1810,13 @@ msgstr ""
 "fehlerhaften Scope-Konfiguration liegen. Bitte prüfen Sie Ihre OAuth-Scopes "
 "oder kontaktieren Sie Ihren Administrator."
 
-#: cps/oauth_bb.py:321
+#: cps/oauth_bb.py:347
 msgid "Login failed: OAuth token expired. Please try logging in again."
 msgstr ""
 "Anmeldung fehlgeschlagen: OAuth-Token abgelaufen. Bitte versuchen Sie, sich "
 "erneut anzumelden."
 
-#: cps/oauth_bb.py:325
+#: cps/oauth_bb.py:351
 msgid ""
 "Login failed: Could not connect to the OAuth provider's user info endpoint. "
 "Please try again or contact your administrator."
@@ -1825,7 +1825,7 @@ msgstr ""
 "OAuth-Anbieters fehlgeschlagen. Bitte versuchen Sie es erneut oder "
 "kontaktieren Sie Ihren Administrator."
 
-#: cps/oauth_bb.py:330
+#: cps/oauth_bb.py:356
 msgid ""
 "Login failed: The OAuth provider returned invalid user profile data. Please "
 "contact your administrator."
@@ -1834,7 +1834,7 @@ msgstr ""
 "Benutzerprofildaten zurückgegeben. Bitte kontaktieren Sie Ihren "
 "Administrator."
 
-#: cps/oauth_bb.py:352
+#: cps/oauth_bb.py:378
 #, python-format
 msgid ""
 "Login failed: OAuth provider response is missing required fields: "
@@ -1845,39 +1845,39 @@ msgstr ""
 "erforderliche Felder: %(fields)s. Bitte prüfen Sie Ihre OAuth-Konfiguration "
 "oder kontaktieren Sie Ihren Administrator."
 
-#: cps/oauth_bb.py:378 cps/oauth_bb.py:637
+#: cps/oauth_bb.py:404 cps/oauth_bb.py:663
 msgid "Failed to link OAuth account. Please try again."
 msgstr ""
 "Verknüpfung des OAuth-Kontos fehlgeschlagen. Bitte versuchen Sie es erneut."
 
-#: cps/oauth_bb.py:411
+#: cps/oauth_bb.py:437
 msgid "Login failed: your account is not allowed to access this application."
 msgstr ""
 
-#: cps/oauth_bb.py:600
+#: cps/oauth_bb.py:626
 msgid ""
 "OAuth error: Provider returned invalid user information. Please try again."
 msgstr ""
 "OAuth-Fehler: Provider lieferte ungültige Benutzerinformationen. Bitte "
 "versuchen Sie es erneut."
 
-#: cps/oauth_bb.py:614
+#: cps/oauth_bb.py:640
 #, python-format
 msgid "This %(oauth)s account is already linked to a different user"
 msgstr ""
 "Dieses %(oauth)s-Konto ist bereits mit einem anderen Benutzer verknüpft"
 
-#: cps/oauth_bb.py:621 cps/remotelogin.py:149
+#: cps/oauth_bb.py:647 cps/remotelogin.py:149
 #, python-format
 msgid "Success! You are now logged in as: %(nickname)s"
 msgstr "Erfolg! Du bist nun eingeloggt als '%(nickname)s'"
 
-#: cps/oauth_bb.py:631
+#: cps/oauth_bb.py:657
 #, python-format
 msgid "Link to %(oauth)s Succeeded"
 msgstr "Verbindung mit %(oauth)s erfolgreich"
 
-#: cps/oauth_bb.py:639
+#: cps/oauth_bb.py:665
 #, python-format
 msgid ""
 "Login failed: No user account is linked to your %(provider)s account. Please "
@@ -1888,58 +1888,58 @@ msgstr ""
 "Konto verknüpft. Bitte kontaktieren Sie Ihren Administrator, um ein Konto zu "
 "erstellen oder Ihr bestehendes Konto zu verknüpfen."
 
-#: cps/oauth_bb.py:647
+#: cps/oauth_bb.py:673
 msgid "OAuth authentication failed. Please try again or contact administrator."
 msgstr ""
 "OAuth-Authentifizierung fehlgeschlagen. Bitte versuchen Sie es erneut oder "
 "kontaktieren Sie den Administrator."
 
-#: cps/oauth_bb.py:651
+#: cps/oauth_bb.py:677
 msgid "OAuth system error. Please contact administrator."
 msgstr "OAuth-Systemfehler. Bitte kontaktieren Sie den Administrator."
 
-#: cps/oauth_bb.py:684
+#: cps/oauth_bb.py:710
 #, python-format
 msgid "Unlink to %(oauth)s Succeeded"
 msgstr "Verbindung zu %(oauth)s ist erfolgreich getrennt"
 
-#: cps/oauth_bb.py:689
+#: cps/oauth_bb.py:715
 #, python-format
 msgid "Unlink to %(oauth)s Failed"
 msgstr "Verbindung mit %(oauth)s trennen ist fehlgeschlagen"
 
-#: cps/oauth_bb.py:692
+#: cps/oauth_bb.py:718
 #, python-format
 msgid "Not Linked to %(oauth)s"
 msgstr "Nicht mit %(oauth)s verbunden"
 
-#: cps/oauth_bb.py:913
+#: cps/oauth_bb.py:939
 msgid "Failed to log in with GitHub."
 msgstr "Login mit GitHub fehlgeschlagen."
 
-#: cps/oauth_bb.py:919
+#: cps/oauth_bb.py:945
 msgid "Failed to fetch user info from GitHub."
 msgstr "Laden der Benutzerinformationen von GitHub fehlgeschlagen."
 
-#: cps/oauth_bb.py:940
+#: cps/oauth_bb.py:966
 msgid "Failed to log in with Google."
 msgstr "Login mit Google fehlgeschlagen."
 
-#: cps/oauth_bb.py:949
+#: cps/oauth_bb.py:975
 msgid "Failed to fetch user info from Google."
 msgstr "Laden der Benutzerinformationen von Google fehlgeschlagen."
 
-#: cps/oauth_bb.py:974
+#: cps/oauth_bb.py:1000
 msgid "Failed to log in with Generic OAuth."
 msgstr "Login mit generischem OAuth fehlgeschlagen."
 
-#: cps/oauth_bb.py:990
+#: cps/oauth_bb.py:1016
 msgid "OAuth authentication failed: Token validation error. Please try again."
 msgstr ""
 "OAuth-Authentifizierung fehlgeschlagen: Token-Validierungsfehler. Bitte "
 "versuchen Sie es erneut."
 
-#: cps/oauth_bb.py:994
+#: cps/oauth_bb.py:1020
 msgid ""
 "OAuth authentication failed due to an unexpected error. Please contact "
 "administrator."
@@ -1947,7 +1947,7 @@ msgstr ""
 "OAuth-Authentifizierung aufgrund eines unerwarteten Fehlers fehlgeschlagen. "
 "Bitte kontaktieren Sie den Administrator."
 
-#: cps/oauth_bb.py:1002 cps/oauth_bb.py:1020 cps/oauth_bb.py:1038
+#: cps/oauth_bb.py:1028 cps/oauth_bb.py:1046 cps/oauth_bb.py:1064
 msgid ""
 "OAuth error: Invalid redirect URI. If you're experiencing this error "
 "repeatedly, please configure the 'OAuth Redirect Host' setting in Admin > "
@@ -1957,25 +1957,25 @@ msgstr ""
 "auftritt, konfigurieren Sie bitte die Einstellung „OAuth-Redirect-Host“ "
 "unter Admin > Basiskonfiguration > OAuth."
 
-#: cps/oauth_bb.py:1074
+#: cps/oauth_bb.py:1100
 msgid "GitHub Oauth error, please retry later."
 msgstr "GitHub OAuth Fehler, bitte später erneut versuchen."
 
-#: cps/oauth_bb.py:1081
+#: cps/oauth_bb.py:1107
 #, python-brace-format
 msgid "GitHub Oauth error: {}"
 msgstr "Github OAuth Fehler {}"
 
-#: cps/oauth_bb.py:1131
+#: cps/oauth_bb.py:1157
 msgid "Google Oauth error, please retry later."
 msgstr "Google OAuth Fehler, bitte später erneut versuchen."
 
-#: cps/oauth_bb.py:1138
+#: cps/oauth_bb.py:1164
 #, python-brace-format
 msgid "Google Oauth error: {}"
 msgstr "Google OAuth Fehler: {}"
 
-#: cps/oauth_bb.py:1174 cps/oauth_bb.py:1182
+#: cps/oauth_bb.py:1200 cps/oauth_bb.py:1208
 #, python-brace-format
 msgid "OAuth error: {}"
 msgstr "OAuth-Fehler: {}"
@@ -2153,7 +2153,7 @@ msgstr "Suchen"
 
 #: cps/remotelogin.py:76 cps/spa_strings.py:465 cps/templates/layout.html:344
 #: cps/templates/layout.html:385 cps/templates/login.html:11
-#: cps/templates/login.html:39 cps/web.py:2700
+#: cps/templates/login.html:39 cps/web.py:2695
 msgid "Login"
 msgstr "Anmelden"
 
@@ -5571,7 +5571,7 @@ msgstr "Bitte eine Minute warten vor der Registrierung des nächsten Benutzers"
 msgid "Register"
 msgstr "Registrieren"
 
-#: cps/web.py:2582 cps/web.py:2747
+#: cps/web.py:2582 cps/web.py:2742
 msgid "Connection error to limiter backend, please contact your administrator"
 msgstr "Verbindugnsfehler zu Limiter Backend, bitte Administrator kontaktieren"
 
@@ -5598,7 +5598,7 @@ msgstr ""
 "Authentifizierungsschleife erkannt. Wenn Sie Probleme beim Anmelden haben, "
 "kontaktieren Sie bitte Ihren Administrator."
 
-#: cps/web.py:2721
+#: cps/web.py:2716
 msgid ""
 "OAuth authentication is not properly configured. Please contact "
 "administrator."
@@ -5606,28 +5606,28 @@ msgstr ""
 "Die OAuth-Authentifizierung ist nicht korrekt konfiguriert. Bitte "
 "kontaktieren Sie den Administrator."
 
-#: cps/web.py:2726 cps/web.py:2753
+#: cps/web.py:2721 cps/web.py:2748
 msgid "Cannot activate LDAP authentication"
 msgstr "LDAP-Authentifizierung kann nicht aktiviert werden"
 
-#: cps/web.py:2735
+#: cps/web.py:2730
 msgid "Standard login is disabled."
 msgstr "Standard-Login ist deaktiviert."
 
-#: cps/web.py:2743
+#: cps/web.py:2738
 msgid "Please wait one minute before next login"
 msgstr "Bitte eine Minute vor dem nächsten Anmeldeversuch warten"
 
-#: cps/web.py:2761
+#: cps/web.py:2756
 msgid "Username cannot be empty"
 msgstr "Benutzername darf nicht leer sein"
 
-#: cps/web.py:2773
+#: cps/web.py:2768
 #, python-format
 msgid "you are now logged in as: '%(nickname)s'"
 msgstr "du bist nun eingeloggt als: '%(nickname)s'"
 
-#: cps/web.py:2792
+#: cps/web.py:2787
 #, python-format
 msgid ""
 "Welcome! Your account has been automatically created. You are now logged in "
@@ -5636,7 +5636,7 @@ msgstr ""
 "Willkommen! Ihr Konto wurde automatisch erstellt. Sie sind jetzt eingeloggt "
 "als: '%(nickname)s'"
 
-#: cps/web.py:2797 cps/web.py:2800
+#: cps/web.py:2792 cps/web.py:2795
 msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
@@ -5644,7 +5644,7 @@ msgstr ""
 "Authentifizierung erfolgreich, aber die Kontoerstellung ist fehlgeschlagen. "
 "Bitte kontaktieren Sie Ihren Administrator."
 
-#: cps/web.py:2804
+#: cps/web.py:2799
 msgid ""
 "Authentication successful, but no local account found. Please contact your "
 "administrator to create your account."
@@ -5652,7 +5652,7 @@ msgstr ""
 "Authentifizierung erfolgreich, aber kein lokales Konto gefunden. Bitte "
 "kontaktieren Sie Ihren Administrator, um Ihr Konto zu erstellen."
 
-#: cps/web.py:2812
+#: cps/web.py:2807
 #, python-format
 msgid ""
 "Fallback Login as: '%(nickname)s', LDAP Server not reachable, or user not "
@@ -5661,52 +5661,52 @@ msgstr ""
 "Fallback Login als: '%(nickname)s', LDAP Server ist nicht erreichbar, oder "
 "der Nutzer ist unbekannt"
 
-#: cps/web.py:2818
+#: cps/web.py:2813
 #, python-format
 msgid "Could not login: %(message)s"
 msgstr "Login nicht erfolgreich: %(message)s"
 
-#: cps/web.py:2841 cps/web.py:2842 cps/web.py:2885
+#: cps/web.py:2836 cps/web.py:2837 cps/web.py:2880
 msgid "Wrong Username or Password"
 msgstr "Falscher Benutzername oder Passwort"
 
-#: cps/web.py:2850
+#: cps/web.py:2845
 msgid "New Password was sent to your email address"
 msgstr "Das neue Passwort wurde an die E-Mail-Adresse geschickt"
 
-#: cps/web.py:2854
+#: cps/web.py:2849
 msgid "An unknown error occurred. Please try again later."
 msgstr ""
 "Es ist ein unbekannter Fehler aufgetreten. Bitte später erneut versuchen."
 
-#: cps/web.py:2856
+#: cps/web.py:2851
 msgid "Please enter valid username to reset password"
 msgstr ""
 "Bitte einen gültigen Benutzernamen zum Zurücksetzen des Passworts angeben"
 
-#: cps/web.py:2864
+#: cps/web.py:2859
 #, python-format
 msgid "You are now logged in as: '%(nickname)s'"
 msgstr "Du bist nun eingeloggt als: '%(nickname)s'"
 
-#: cps/web.py:3191
+#: cps/web.py:3186
 msgid "Success! Profile Updated"
 msgstr "Erfolg! Profil aktualisiert"
 
-#: cps/web.py:3197
+#: cps/web.py:3192
 msgid "Oops! An account already exists for this Email."
 msgstr "Ups! Es existiert bereits ein Benutzer für diese E-Mail-Adresse."
 
-#: cps/web.py:3331
+#: cps/web.py:3326
 msgid "App-password label must be 1-64 characters."
 msgstr ""
 
-#: cps/web.py:3366
+#: cps/web.py:3361
 #, python-format
 msgid "App password '%(label)s' revoked."
 msgstr ""
 
-#: cps/web.py:3578
+#: cps/web.py:3573
 msgid "Invalid book ID."
 msgstr "Ungültige Buch-ID."
 

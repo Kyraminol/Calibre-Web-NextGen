@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-11 16:01+0000\n"
+"POT-Creation-Date: 2026-07-11 19:27+0000\n"
 "PO-Revision-Date: 2020-01-12 13:56+0100\n"
 "Last-Translator: Samuli Valavuo <svalavuo@gmail.com>\n"
 "Language-Team: \n"
@@ -410,7 +410,7 @@ msgstr ""
 #: cps/admin.py:2838 cps/admin.py:3106 cps/editbooks.py:1148
 #: cps/editbooks.py:2050 cps/shelf.py:148 cps/shelf.py:226 cps/shelf.py:297
 #: cps/shelf.py:332 cps/shelf.py:389 cps/shelf.py:464 cps/shelf.py:547
-#: cps/shelf.py:672 cps/tasks/convert.py:145 cps/web.py:3202
+#: cps/shelf.py:672 cps/tasks/convert.py:145 cps/web.py:3197
 #, python-format
 msgid "Oops! Database Error: %(error)s."
 msgstr ""
@@ -509,7 +509,7 @@ msgid "Settings DB is not Writeable"
 msgstr ""
 
 #: cps/admin.py:2090 cps/opds.py:316 cps/opds.py:354 cps/opds.py:357
-#: cps/web.py:3118 cps/web.py:3253
+#: cps/web.py:3113 cps/web.py:3248
 #, fuzzy
 msgid "title"
 msgstr "Otsikko"
@@ -707,7 +707,7 @@ msgstr ""
 msgid "No admin user remaining, can't delete user"
 msgstr "Pääkäyttäjiä ei jää jäljelle, käyttäjää ei voi poistaa"
 
-#: cps/admin.py:3057 cps/web.py:2926
+#: cps/admin.py:3057 cps/web.py:2921
 msgid "Email can't be empty and has to be a valid Email"
 msgstr ""
 
@@ -1344,8 +1344,8 @@ msgstr ""
 msgid "File to be uploaded must have an extension"
 msgstr "Ladattavalla tiedostolla on oltava tiedostopääte"
 
-#: cps/editbooks.py:931 cps/editbooks.py:1670 cps/web.py:844 cps/web.py:3383
-#: cps/web.py:3565 cps/web.py:3715
+#: cps/editbooks.py:931 cps/editbooks.py:1670 cps/web.py:844 cps/web.py:3378
+#: cps/web.py:3560 cps/web.py:3710
 msgid ""
 "Oops! Selected book is unavailable. File does not exist or is not accessible"
 msgstr "Virhe eKirjan avaamisessa. Tiedostoa ei ole tai se ei ole saatavilla:"
@@ -1737,36 +1737,36 @@ msgstr ""
 msgid "Kobo Setup"
 msgstr ""
 
-#: cps/oauth_bb.py:261
+#: cps/oauth_bb.py:287
 #, python-format
 msgid "Register with %(provider)s"
 msgstr "Rekisteröi tuottajalle %(provider)s"
 
-#: cps/oauth_bb.py:316
+#: cps/oauth_bb.py:342
 msgid ""
 "Login failed: OAuth token validation error. This may be due to scope "
 "configuration mismatch. Please check your OAuth scopes configuration or "
 "contact your administrator."
 msgstr ""
 
-#: cps/oauth_bb.py:321
+#: cps/oauth_bb.py:347
 msgid "Login failed: OAuth token expired. Please try logging in again."
 msgstr ""
 
-#: cps/oauth_bb.py:325
+#: cps/oauth_bb.py:351
 msgid ""
 "Login failed: Could not connect to the OAuth provider's user info endpoint. "
 "Please try again or contact your administrator."
 msgstr ""
 
-#: cps/oauth_bb.py:330
+#: cps/oauth_bb.py:356
 #, fuzzy
 msgid ""
 "Login failed: The OAuth provider returned invalid user profile data. Please "
 "contact your administrator."
 msgstr "Calibre-Web asetukset päivitetty"
 
-#: cps/oauth_bb.py:352
+#: cps/oauth_bb.py:378
 #, python-format
 msgid ""
 "Login failed: OAuth provider response is missing required fields: "
@@ -1774,35 +1774,35 @@ msgid ""
 "administrator."
 msgstr ""
 
-#: cps/oauth_bb.py:378 cps/oauth_bb.py:637
+#: cps/oauth_bb.py:404 cps/oauth_bb.py:663
 msgid "Failed to link OAuth account. Please try again."
 msgstr ""
 
-#: cps/oauth_bb.py:411
+#: cps/oauth_bb.py:437
 msgid "Login failed: your account is not allowed to access this application."
 msgstr ""
 
-#: cps/oauth_bb.py:600
+#: cps/oauth_bb.py:626
 msgid ""
 "OAuth error: Provider returned invalid user information. Please try again."
 msgstr ""
 
-#: cps/oauth_bb.py:614
+#: cps/oauth_bb.py:640
 #, python-format
 msgid "This %(oauth)s account is already linked to a different user"
 msgstr ""
 
-#: cps/oauth_bb.py:621 cps/remotelogin.py:149
+#: cps/oauth_bb.py:647 cps/remotelogin.py:149
 #, python-format
 msgid "Success! You are now logged in as: %(nickname)s"
 msgstr "olet nyt kirjautunut tunnuksella: \"%(nickname)s\""
 
-#: cps/oauth_bb.py:631
+#: cps/oauth_bb.py:657
 #, python-format
 msgid "Link to %(oauth)s Succeeded"
 msgstr ""
 
-#: cps/oauth_bb.py:639
+#: cps/oauth_bb.py:665
 #, python-format
 msgid ""
 "Login failed: No user account is linked to your %(provider)s account. Please "
@@ -1810,86 +1810,86 @@ msgid ""
 "account."
 msgstr ""
 
-#: cps/oauth_bb.py:647
+#: cps/oauth_bb.py:673
 msgid "OAuth authentication failed. Please try again or contact administrator."
 msgstr ""
 
-#: cps/oauth_bb.py:651
+#: cps/oauth_bb.py:677
 msgid "OAuth system error. Please contact administrator."
 msgstr ""
 
-#: cps/oauth_bb.py:684
+#: cps/oauth_bb.py:710
 #, python-format
 msgid "Unlink to %(oauth)s Succeeded"
 msgstr ""
 
-#: cps/oauth_bb.py:689
+#: cps/oauth_bb.py:715
 #, python-format
 msgid "Unlink to %(oauth)s Failed"
 msgstr ""
 
-#: cps/oauth_bb.py:692
+#: cps/oauth_bb.py:718
 #, python-format
 msgid "Not Linked to %(oauth)s"
 msgstr ""
 
-#: cps/oauth_bb.py:913
+#: cps/oauth_bb.py:939
 msgid "Failed to log in with GitHub."
 msgstr "GitHubiin kirjautuminen epäonnistui."
 
-#: cps/oauth_bb.py:919
+#: cps/oauth_bb.py:945
 msgid "Failed to fetch user info from GitHub."
 msgstr "Käyttäjätietojen haku GitHubista epäonnistui"
 
-#: cps/oauth_bb.py:940
+#: cps/oauth_bb.py:966
 msgid "Failed to log in with Google."
 msgstr "Googleen kirjautuminen epäonnistui."
 
-#: cps/oauth_bb.py:949
+#: cps/oauth_bb.py:975
 msgid "Failed to fetch user info from Google."
 msgstr "Käyttäjätietojen haku Googlesta epäonnistui."
 
-#: cps/oauth_bb.py:974
+#: cps/oauth_bb.py:1000
 #, fuzzy
 msgid "Failed to log in with Generic OAuth."
 msgstr "GitHubiin kirjautuminen epäonnistui."
 
-#: cps/oauth_bb.py:990
+#: cps/oauth_bb.py:1016
 msgid "OAuth authentication failed: Token validation error. Please try again."
 msgstr ""
 
-#: cps/oauth_bb.py:994
+#: cps/oauth_bb.py:1020
 msgid ""
 "OAuth authentication failed due to an unexpected error. Please contact "
 "administrator."
 msgstr ""
 
-#: cps/oauth_bb.py:1002 cps/oauth_bb.py:1020 cps/oauth_bb.py:1038
+#: cps/oauth_bb.py:1028 cps/oauth_bb.py:1046 cps/oauth_bb.py:1064
 msgid ""
 "OAuth error: Invalid redirect URI. If you're experiencing this error "
 "repeatedly, please configure the 'OAuth Redirect Host' setting in Admin > "
 "Basic Configuration > OAuth."
 msgstr ""
 
-#: cps/oauth_bb.py:1074
+#: cps/oauth_bb.py:1100
 msgid "GitHub Oauth error, please retry later."
 msgstr "GitHub Oauth virhe, yritä myöhemmin uudelleen."
 
-#: cps/oauth_bb.py:1081
+#: cps/oauth_bb.py:1107
 #, python-brace-format
 msgid "GitHub Oauth error: {}"
 msgstr ""
 
-#: cps/oauth_bb.py:1131
+#: cps/oauth_bb.py:1157
 msgid "Google Oauth error, please retry later."
 msgstr "Google Oauth virhe, yritä myöhemmin uudelleen."
 
-#: cps/oauth_bb.py:1138
+#: cps/oauth_bb.py:1164
 #, python-brace-format
 msgid "Google Oauth error: {}"
 msgstr ""
 
-#: cps/oauth_bb.py:1174 cps/oauth_bb.py:1182
+#: cps/oauth_bb.py:1200 cps/oauth_bb.py:1208
 #, python-brace-format
 msgid "OAuth error: {}"
 msgstr ""
@@ -2067,7 +2067,7 @@ msgstr "Hae"
 
 #: cps/remotelogin.py:76 cps/spa_strings.py:465 cps/templates/layout.html:344
 #: cps/templates/layout.html:385 cps/templates/login.html:11
-#: cps/templates/login.html:39 cps/web.py:2700
+#: cps/templates/login.html:39 cps/web.py:2695
 msgid "Login"
 msgstr "Kirjaudu sisään"
 
@@ -5449,7 +5449,7 @@ msgstr ""
 msgid "Register"
 msgstr "Rekisteröi"
 
-#: cps/web.py:2582 cps/web.py:2747
+#: cps/web.py:2582 cps/web.py:2742
 msgid "Connection error to limiter backend, please contact your administrator"
 msgstr ""
 
@@ -5473,111 +5473,111 @@ msgid ""
 "contact your administrator."
 msgstr "Calibre-Web asetukset päivitetty"
 
-#: cps/web.py:2721
+#: cps/web.py:2716
 #, fuzzy
 msgid ""
 "OAuth authentication is not properly configured. Please contact "
 "administrator."
 msgstr "Calibre-Web asetukset päivitetty"
 
-#: cps/web.py:2726 cps/web.py:2753
+#: cps/web.py:2721 cps/web.py:2748
 #, fuzzy
 msgid "Cannot activate LDAP authentication"
 msgstr "LDAP autnetikoinnin aktivointi ei onnistu"
 
-#: cps/web.py:2735
+#: cps/web.py:2730
 msgid "Standard login is disabled."
 msgstr ""
 
-#: cps/web.py:2743
+#: cps/web.py:2738
 msgid "Please wait one minute before next login"
 msgstr ""
 
-#: cps/web.py:2761
+#: cps/web.py:2756
 msgid "Username cannot be empty"
 msgstr ""
 
-#: cps/web.py:2773
+#: cps/web.py:2768
 #, fuzzy, python-format
 msgid "you are now logged in as: '%(nickname)s'"
 msgstr "olet nyt kirjautunut tunnuksella: \"%(nickname)s\""
 
-#: cps/web.py:2792
+#: cps/web.py:2787
 #, fuzzy, python-format
 msgid ""
 "Welcome! Your account has been automatically created. You are now logged in "
 "as: '%(nickname)s'"
 msgstr "olet nyt kirjautunut tunnuksella: \"%(nickname)s\""
 
-#: cps/web.py:2797 cps/web.py:2800
+#: cps/web.py:2792 cps/web.py:2795
 #, fuzzy
 msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
 msgstr "Calibre-Web asetukset päivitetty"
 
-#: cps/web.py:2804
+#: cps/web.py:2799
 msgid ""
 "Authentication successful, but no local account found. Please contact your "
 "administrator to create your account."
 msgstr ""
 
-#: cps/web.py:2812
+#: cps/web.py:2807
 #, python-format
 msgid ""
 "Fallback Login as: '%(nickname)s', LDAP Server not reachable, or user not "
 "known"
 msgstr ""
 
-#: cps/web.py:2818
+#: cps/web.py:2813
 #, python-format
 msgid "Could not login: %(message)s"
 msgstr ""
 
-#: cps/web.py:2841 cps/web.py:2842 cps/web.py:2885
+#: cps/web.py:2836 cps/web.py:2837 cps/web.py:2880
 #, fuzzy
 msgid "Wrong Username or Password"
 msgstr "Väärä käyttäjätunnus tai salasana"
 
-#: cps/web.py:2850
+#: cps/web.py:2845
 msgid "New Password was sent to your email address"
 msgstr ""
 
-#: cps/web.py:2854
+#: cps/web.py:2849
 #, fuzzy
 msgid "An unknown error occurred. Please try again later."
 msgstr "Tapahtui tuntematon virhe. Yritä myöhemmin uudelleen."
 
-#: cps/web.py:2856
+#: cps/web.py:2851
 #, fuzzy
 msgid "Please enter valid username to reset password"
 msgstr "Väärä käyttäjätunnus tai salasana"
 
-#: cps/web.py:2864
+#: cps/web.py:2859
 #, fuzzy, python-format
 msgid "You are now logged in as: '%(nickname)s'"
 msgstr "olet nyt kirjautunut tunnuksella: \"%(nickname)s\""
 
-#: cps/web.py:3191
+#: cps/web.py:3186
 #, fuzzy
 msgid "Success! Profile Updated"
 msgstr "Profiili päivitetty"
 
-#: cps/web.py:3197
+#: cps/web.py:3192
 #, fuzzy
 msgid "Oops! An account already exists for this Email."
 msgstr "Tälle sähköpostiosoitteelle läytyi jo käyttäjätunnus."
 
-#: cps/web.py:3331
+#: cps/web.py:3326
 msgid "App-password label must be 1-64 characters."
 msgstr ""
 
-#: cps/web.py:3366
+#: cps/web.py:3361
 #, python-format
 msgid "App password '%(label)s' revoked."
 msgstr ""
 
-#: cps/web.py:3578
+#: cps/web.py:3573
 msgid "Invalid book ID."
 msgstr ""
 
