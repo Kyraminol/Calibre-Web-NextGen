@@ -71,16 +71,20 @@ def apply_push(annotations, *, user, book, session, commit) -> dict:
     from ...services import annotation_sync
 
     summary = {"created": 0, "updated": 0, "deleted": 0, "skipped": 0}
-    for payload in (annotations or []):
+    if not isinstance(annotations, list):
+        return summary
+    for payload in annotations:
         row, action = apply_portable(
             payload, user_id=user.id, book=book, session=session, commit=commit,
         )
         summary[action] = summary.get(action, 0) + 1
-        if row is None:
+        if row is None or action == "skipped":
             continue
         try:
             if action == "deleted":
-                annotation_sync.dispatch_annotation_deletes([row.annotation_id], user)
+                annotation_sync.dispatch_annotation_deletes(
+                    [row.annotation_id], user, book_id=book.id,
+                )
             else:
                 annotation_sync.dispatch_existing_annotation_sync(row, book, user)
         except Exception:  # pragma: no cover - fan-out must never fail the push
@@ -129,7 +133,9 @@ def push_annotations():
     if not user:
         return create_sync_response({"error": ERROR_UNAUTHORIZED_USER, "message": "Unauthorized"}, 401)
 
-    data = request.get_json(silent=True) or {}
+    data = request.get_json(silent=True)
+    if not isinstance(data, dict):
+        return create_sync_response({"error": "invalid_payload", "message": "JSON object required"}, 400)
     document = data.get("document")
     if not is_valid_key_field(document):
         return create_sync_response({"error": ERROR_DOCUMENT_FIELD_MISSING, "message": "Invalid document field"}, 400)
@@ -145,8 +151,19 @@ def push_annotations():
         return create_sync_response({"document": document, "matched": False,
                                      "created": 0, "updated": 0, "deleted": 0, "skipped": 0})
 
+    annotations = data.get("annotations")
+    if not isinstance(annotations, list):
+        return create_sync_response({"error": "invalid_annotations", "message": "annotations must be an array"}, 400)
+    from ...services.annotation_portable import validate_portable_payload
+    for index, payload in enumerate(annotations):
+        error = validate_portable_payload(payload)
+        if error:
+            return create_sync_response({
+                "error": "invalid_annotation",
+                "message": f"annotations[{index}]: {error}",
+            }, 400)
     summary = apply_push(
-        data.get("annotations"), user=user, book=book,
+        annotations, user=user, book=book,
         session=ub.session, commit=ub.session_commit,
     )
     summary["document"] = document
