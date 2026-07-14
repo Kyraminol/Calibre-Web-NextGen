@@ -18,10 +18,13 @@ is for things you can see or feel when running the app.
 
 ### Added
 
+- Book details and the sortable table now show when each book was added and last modified, restoring metadata that was only visible in the classic interface. ([#878](https://github.com/new-usemame/Calibre-Web-NextGen/issues/878))
+- Libraries that need a standing filter—such as hiding comics by tag—can now save any advanced search as the account's default library view, with the choice following the user across devices and a one-click way to clear it. ([#498](https://github.com/new-usemame/Calibre-Web-NextGen/issues/498))
 - KOReader highlights and notes from the open book can now sync into Calibre-Web NextGen, survive concurrent updates from multiple devices, and appear in the existing Highlights list on the book page. ([#699](https://github.com/new-usemame/Calibre-Web-NextGen/issues/699))
 
 ### Changed
 
+- Editors can now correct a book title directly in the sortable table with keyboard-friendly Save/Cancel controls, while viewers retain a read-only table. ([#783](https://github.com/new-usemame/Calibre-Web-NextGen/issues/783))
 - The new in-browser reader now keeps font family, size, margins, line height, and page theme with your account, so your preferred reading layout follows you between browsers and the classic/new interfaces; its appearance panel is touch- and keyboard-accessible on phones and desktops.
 - Book grids can now load a chosen number of complete rows at any card density, Discover respects the server's random-book count, and touch-screen “Read now” actions align along the bottom of each card.
 
