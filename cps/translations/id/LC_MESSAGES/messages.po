@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web NextGen\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-07-16 02:13+0000\n"
+"POT-Creation-Date: 2026-07-16 10:46+0000\n"
 "PO-Revision-Date: 2023-01-21 10:00+0700\n"
 "Last-Translator: Arief Hidayat<arihid95@gmail.com>\n"
 "Language-Team: Arief Hidayat <arihid95@gmail.com>\n"
@@ -1068,212 +1068,212 @@ msgid ""
 "wait..."
 msgstr ""
 
-#: cps/cwa_functions.py:993
+#: cps/cwa_functions.py:995
 msgid "Invalid cron expression for duplicate scans. Changes were not saved."
 msgstr ""
 
-#: cps/cwa_functions.py:1105
+#: cps/cwa_functions.py:1107
 msgid "Calibre-Web NextGen User Settings"
 msgstr ""
 
-#: cps/cwa_functions.py:1151 cps/cwa_functions.py:1153
-#: cps/cwa_functions.py:1157 cps/cwa_functions.py:1159
-#: cps/cwa_functions.py:1162 cps/cwa_functions.py:1164
+#: cps/cwa_functions.py:1153 cps/cwa_functions.py:1155
+#: cps/cwa_functions.py:1159 cps/cwa_functions.py:1161
+#: cps/cwa_functions.py:1164 cps/cwa_functions.py:1166
 msgid "Timestamp"
 msgstr ""
 
-#: cps/cwa_functions.py:1151 cps/cwa_functions.py:1153
+#: cps/cwa_functions.py:1153 cps/cwa_functions.py:1155
 #: cps/templates/tasks.html:43 cps/templates/user_edit.html:342
 #, fuzzy
 msgid "Book ID"
 msgstr "Buku"
 
-#: cps/cwa_functions.py:1151 cps/templates/book_edit.html:125
+#: cps/cwa_functions.py:1153 cps/templates/book_edit.html:125
 #: cps/templates/search_form.html:8
 msgid "Book Title"
 msgstr "Judul Buku"
 
-#: cps/cwa_functions.py:1151
+#: cps/cwa_functions.py:1153
 #, fuzzy
 msgid "Book Author"
 msgstr "Penulis"
 
-#: cps/cwa_functions.py:1151
+#: cps/cwa_functions.py:1153
 msgid "Trigger Type"
 msgstr ""
 
-#: cps/cwa_functions.py:1153 cps/cwa_functions.py:1159
+#: cps/cwa_functions.py:1155 cps/cwa_functions.py:1161
 #, fuzzy
 msgid "Filepath"
 msgstr "Format berkas"
 
-#: cps/cwa_functions.py:1157 cps/cwa_functions.py:1159
-#: cps/cwa_functions.py:1162 cps/cwa_functions.py:1164
+#: cps/cwa_functions.py:1159 cps/cwa_functions.py:1161
+#: cps/cwa_functions.py:1164 cps/cwa_functions.py:1166
 #, fuzzy
 msgid "Filename"
 msgstr "nama"
 
-#: cps/cwa_functions.py:1157
+#: cps/cwa_functions.py:1159
 msgid "Manual?"
 msgstr ""
 
-#: cps/cwa_functions.py:1157
+#: cps/cwa_functions.py:1159
 msgid "No. Fixes"
 msgstr ""
 
-#: cps/cwa_functions.py:1157 cps/cwa_functions.py:1162
-#: cps/cwa_functions.py:1164
+#: cps/cwa_functions.py:1159 cps/cwa_functions.py:1164
+#: cps/cwa_functions.py:1166
 msgid "Original Backed Up?"
 msgstr ""
 
-#: cps/cwa_functions.py:1159
+#: cps/cwa_functions.py:1161
 msgid "Fixes Applied"
 msgstr ""
 
-#: cps/cwa_functions.py:1164
+#: cps/cwa_functions.py:1166
 msgid "Original Format"
 msgstr ""
 
-#: cps/cwa_functions.py:1164
+#: cps/cwa_functions.py:1166
 #, fuzzy
 msgid "End Format"
 msgstr "Format Unggahan"
 
-#: cps/cwa_functions.py:1240 cps/cwa_functions.py:1269
+#: cps/cwa_functions.py:1242 cps/cwa_functions.py:1271
 #, fuzzy
 msgid "Unknown User"
 msgstr "Tidak diketahui"
 
-#: cps/cwa_functions.py:1377
+#: cps/cwa_functions.py:1379
 msgid "Calibre-Web NextGen Stats & Activity"
 msgstr ""
 
-#: cps/cwa_functions.py:1761
+#: cps/cwa_functions.py:1763
 msgid "Calibre-Web NextGen - Full Enforcement History"
 msgstr ""
 
-#: cps/cwa_functions.py:1770
+#: cps/cwa_functions.py:1772
 msgid "Calibre-Web NextGen - Full Enforcement History (w/ Paths)"
 msgstr ""
 
-#: cps/cwa_functions.py:1779
+#: cps/cwa_functions.py:1781
 msgid "Calibre-Web NextGen - Full Import History"
 msgstr ""
 
-#: cps/cwa_functions.py:1788
+#: cps/cwa_functions.py:1790
 msgid "Calibre-Web NextGen - Full Conversion History"
 msgstr ""
 
-#: cps/cwa_functions.py:1797
+#: cps/cwa_functions.py:1799
 msgid "Calibre-Web NextGen - Full EPUB Fixer History (w/out Paths & Fixes)"
 msgstr ""
 
-#: cps/cwa_functions.py:1806
+#: cps/cwa_functions.py:1808
 msgid "Calibre-Web NextGen - Full EPUB Fixer History (w/ Paths & Fixes)"
 msgstr ""
 
-#: cps/cwa_functions.py:1824
-msgid "✅ All Monitoring Services are running as intended! 👍"
-msgstr ""
-
 #: cps/cwa_functions.py:1826
-msgid ""
-"🔴 The Ingest Service is running but the Metadata Change Detector is not"
+msgid "✅ All Monitoring Services are running as intended! 👍"
 msgstr ""
 
 #: cps/cwa_functions.py:1828
 msgid ""
-"🔴 The Metadata Change Detector is running but the Ingest Service is not"
+"🔴 The Ingest Service is running but the Metadata Change Detector is not"
 msgstr ""
 
 #: cps/cwa_functions.py:1830
 msgid ""
-"⛔ Neither the Ingest Service or the Metadata Change Detector are running"
+"🔴 The Metadata Change Detector is running but the Ingest Service is not"
 msgstr ""
 
 #: cps/cwa_functions.py:1832
+msgid ""
+"⛔ Neither the Ingest Service or the Metadata Change Detector are running"
+msgstr ""
+
+#: cps/cwa_functions.py:1834
 msgid "An Error has occurred"
 msgstr ""
 
-#: cps/cwa_functions.py:2009 cps/cwa_functions.py:2037
+#: cps/cwa_functions.py:2011 cps/cwa_functions.py:2039
 msgid "Calibre-Web NextGen - Convert Library"
 msgstr ""
 
-#: cps/cwa_functions.py:2163 cps/cwa_functions.py:2189
+#: cps/cwa_functions.py:2165 cps/cwa_functions.py:2191
 msgid "Calibre-Web NextGen - EPUB Fixer Service"
 msgstr ""
 
-#: cps/cwa_functions.py:2247
+#: cps/cwa_functions.py:2249
 msgid "Single-book EPUB Fixer is not supported with Google Drive libraries."
 msgstr ""
 
-#: cps/cwa_functions.py:2254
+#: cps/cwa_functions.py:2256
 #, fuzzy
 msgid "Invalid book selection."
 msgstr "Peran tidak valid"
 
-#: cps/cwa_functions.py:2260 cps/spa_strings.py:432
+#: cps/cwa_functions.py:2262 cps/spa_strings.py:432
 msgid "Book not found."
 msgstr ""
 
-#: cps/cwa_functions.py:2266
+#: cps/cwa_functions.py:2268
 #, fuzzy
 msgid "Selected book has no EPUB format."
 msgstr "Gabungkan buku terpiih"
 
-#: cps/cwa_functions.py:2270
+#: cps/cwa_functions.py:2272
 #, fuzzy
 msgid "EPUB file not found on disk."
 msgstr "%(format)s format tidak ditemukan dalam disk"
 
-#: cps/cwa_functions.py:2285
+#: cps/cwa_functions.py:2287
 #, fuzzy
 msgid "EPUB Fixer started for selected book."
 msgstr "Gabungkan buku terpiih"
 
-#: cps/cwa_functions.py:2288
+#: cps/cwa_functions.py:2290
 msgid "Failed to start EPUB Fixer for selected book."
 msgstr ""
 
-#: cps/cwa_functions.py:2339
+#: cps/cwa_functions.py:2341
 msgid "You must be an admin to access this page."
 msgstr ""
 
-#: cps/cwa_functions.py:2354
+#: cps/cwa_functions.py:2356
 msgid "Both username and image data are required."
 msgstr ""
 
-#: cps/cwa_functions.py:2362
+#: cps/cwa_functions.py:2364
 msgid "Invalid image data format. Must be a valid image."
 msgstr ""
 
-#: cps/cwa_functions.py:2370
+#: cps/cwa_functions.py:2372
 msgid "Unsupported image type. Only PNG and JPEG are allowed."
 msgstr ""
 
-#: cps/cwa_functions.py:2382
+#: cps/cwa_functions.py:2384
 msgid "Image is too large. Please use an image smaller than 500KB."
 msgstr ""
 
-#: cps/cwa_functions.py:2386
+#: cps/cwa_functions.py:2388
 msgid "Invalid Base64 image data."
 msgstr ""
 
-#: cps/cwa_functions.py:2390
+#: cps/cwa_functions.py:2392
 #, fuzzy
 msgid "Invalid image data format."
 msgstr "Format alamat email tidak valid"
 
-#: cps/cwa_functions.py:2395
+#: cps/cwa_functions.py:2397
 msgid "Error validating image data."
 msgstr ""
 
-#: cps/cwa_functions.py:2413
+#: cps/cwa_functions.py:2415
 #, fuzzy
 msgid "Profile picture updated successfully."
 msgstr "{} pengguna berhasil dihapus"
 
-#: cps/cwa_functions.py:2426
+#: cps/cwa_functions.py:2428
 msgid "Calibre-Web NextGen Profile Picture Management (WIP)"
 msgstr ""
 
@@ -6291,55 +6291,55 @@ msgstr "Menghubungkan kembali basis data Calibre"
 msgid "Clean archived book references"
 msgstr ""
 
-#: cps/tasks/duplicate_scan.py:36 cps/tasks/duplicate_scan.py:52
+#: cps/tasks/duplicate_scan.py:60 cps/tasks/duplicate_scan.py:76
 #, fuzzy
 msgid "Duplicate scan"
 msgstr "Hapus"
 
-#: cps/tasks/duplicate_scan.py:82
+#: cps/tasks/duplicate_scan.py:106
 msgid "Duplicate scan skipped: import in progress"
 msgstr ""
 
-#: cps/tasks/duplicate_scan.py:90
+#: cps/tasks/duplicate_scan.py:114
 msgid "Building duplicate index"
 msgstr ""
 
-#: cps/tasks/duplicate_scan.py:98
+#: cps/tasks/duplicate_scan.py:122
 #, python-format
 msgid "Building duplicate index: %(processed)s/%(total)s books"
 msgstr ""
 
-#: cps/tasks/duplicate_scan.py:104
+#: cps/tasks/duplicate_scan.py:128
 msgid "Building duplicate index: no books"
 msgstr ""
 
-#: cps/tasks/duplicate_scan.py:108
+#: cps/tasks/duplicate_scan.py:132
 #, fuzzy
 msgid "Finding duplicate groups"
 msgstr "Hapus"
 
-#: cps/tasks/duplicate_scan.py:124
+#: cps/tasks/duplicate_scan.py:148
 #, fuzzy
 msgid "Updating duplicate cache"
 msgstr "Mengekstrak paket pembaruan"
 
-#: cps/tasks/duplicate_scan.py:153 cps/tasks/duplicate_scan.py:163
-#: cps/tasks/duplicate_scan.py:203 cps/tasks/duplicate_scan.py:212
+#: cps/tasks/duplicate_scan.py:177 cps/tasks/duplicate_scan.py:187
+#: cps/tasks/duplicate_scan.py:227 cps/tasks/duplicate_scan.py:236
 #, fuzzy
 msgid "Duplicate scan pending: manual scan required"
 msgstr "Tidak ada hasil yang ditemukan"
 
-#: cps/tasks/duplicate_scan.py:231
+#: cps/tasks/duplicate_scan.py:255
 #, python-format
 msgid "Duplicate scan completed: %(count)s groups"
 msgstr ""
 
-#: cps/tasks/duplicate_scan.py:233
+#: cps/tasks/duplicate_scan.py:257
 #, python-format
 msgid "Duplicate scan completed: %(count)s new groups"
 msgstr ""
 
-#: cps/tasks/duplicate_scan.py:293
+#: cps/tasks/duplicate_scan.py:307
 #, python-format
 msgid "Duplicate scan completed: %(count)s groups auto-resolved"
 msgstr ""
