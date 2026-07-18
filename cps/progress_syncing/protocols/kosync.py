@@ -19,6 +19,7 @@ Protocol Specification:
         * GET  /kosync/syncs/progress/<document> - Get reading progress
         * PUT  /kosync/syncs/progress - Update reading progress
         * GET  /kosync - Plugin download page
+        * GET  /kosync/export - Bulk export of all progress (non-protocol)
 
 Security:
     - All API endpoints use HTTP Basic Authentication
@@ -46,7 +47,7 @@ from ...kobo import push_reading_state_to_hardcover
 from flask import Blueprint, request, jsonify
 from flask_babel import gettext as _
 from werkzeug.security import check_password_hash
-from sqlalchemy import func, desc
+from sqlalchemy import func, desc, cast, String
 from sqlalchemy.exc import SQLAlchemyError, OperationalError, InvalidRequestError
 
 from ... import logger, ub, csrf, config, constants, services, usermanagement
@@ -749,6 +750,142 @@ def get_progress(document: str):
         return handle_sync_error(KOSyncError(ERROR_INTERNAL, "Database error"))
     except Exception as e:
         log.error(f"get_progress: Unexpected error: {str(e)}")
+        return handle_sync_error(KOSyncError(ERROR_INTERNAL, "Internal server error"))
+
+
+@csrf.exempt
+@kosync.route("/kosync/export", methods=["GET"])
+def export_progress():
+    """
+    Export all the authenticated user's reading progress as JSON, plus book title and authors.
+
+    Not part of the KOReader protocol, it's meant to be a bulk read-only export
+    to feed data into other services.
+    Auth is handled as other KOSync endpoints: HTTP Basic, app passwords supported.
+
+    Because this is not part of the protocol, percentage is exported as stored
+    (0-100) instead of the 0-1 decimal that KOReader expects.
+
+    Entry format:
+        {
+            "calibre_book_id": 42,  # Calibre book id
+            "created_at": "...",    # From Kobo bookmark (reading started), may be null
+            "last_modified": "...", # From the kosync progress timestamp
+            "percentage": 45.67,
+            "title": "...",
+            "authors": [...]        # [] for books without authors
+        }
+
+    Timestamps are UTC, ISO 8601 with explicit offset. Rows that don't resolve
+    to a Calibre library book (checksum-keyed records that never converged after
+    #633, or books since deleted) carry no identifiable metadata and are
+    omitted from the export.
+
+    Returns:
+        200: JSON array of progress entries
+        400: Database or internal error (via handle_sync_error)
+        401: Unauthorized if authentication fails
+        503: KOReader sync disabled
+    """
+    blocked = _require_kosync_enabled()
+    if blocked:
+        return blocked
+
+    user = authenticate_user()
+    if not user:
+        return create_sync_response(
+            {"error": ERROR_UNAUTHORIZED_USER, "message": "Unauthorized"}, 401
+        )
+
+    try:
+        from ... import calibre_db
+        from ...db import Authors, books_authors_link, Books
+
+        progress_rows = (
+            ub.session.query(
+                KOSyncProgress.document,
+                KOSyncProgress.percentage,
+                KOSyncProgress.timestamp,
+                func.min(ub.KoboBookmark.created_at).label("created_at"),
+            )
+            .select_from(KOSyncProgress)
+            .outerjoin(
+                ub.KoboReadingState,
+                (ub.KoboReadingState.user_id == KOSyncProgress.user_id)
+                & (
+                    cast(ub.KoboReadingState.book_id, String) == KOSyncProgress.document
+                ),
+            )
+            .outerjoin(
+                ub.KoboBookmark,
+                ub.KoboBookmark.kobo_reading_state_id == ub.KoboReadingState.id,
+            )
+            .filter(KOSyncProgress.user_id == user.id)
+            .group_by(KOSyncProgress.id)
+            .order_by(KOSyncProgress.timestamp)
+            .all()
+        )
+        if not progress_rows:
+            return jsonify([])
+
+        # Documents are book ids only after #633
+        # older records still carry raw file checksums, which can't be looked up in Calibre.
+        # The length cap keeps an all-digit checksum (rare but possible in hex)
+        # from overflowing SQLite's 64-bit INTEGER in the in_() lookup.
+        book_ids = [
+            int(row.document)
+            for row in progress_rows
+            if row.document.isdecimal() and len(row.document) <= 18
+        ]
+
+        calibre_books = {}
+        if book_ids:
+            calibre_query = (
+                calibre_db.session.query(Books.id, Books.title, Authors.name)
+                .select_from(Books)
+                .outerjoin(books_authors_link, Books.id == books_authors_link.c.book)
+                .outerjoin(Authors, Authors.id == books_authors_link.c.author)
+                .filter(Books.id.in_(book_ids))
+                .order_by(Books.id, Authors.sort)
+                .all()
+            )
+            for book_id, title, author_name in calibre_query:
+                entry = calibre_books.setdefault(
+                    book_id, {"title": title, "authors": []}
+                )
+                if author_name and author_name not in entry["authors"]:
+                    entry["authors"].append(author_name)
+
+        def utc_isoformat(value):
+            return value.replace(tzinfo=timezone.utc).isoformat() if value else None
+
+        result = []
+        for row in progress_rows:
+            book_id = int(row.document) if row.document.isdecimal() else None
+            book = calibre_books.get(book_id)
+            if book is None:
+                # Skips books not found in Calibre, either deleted or still with checksum.
+                # In any case, they won't be identifiable to ingesting service so it's no use to export them.
+                continue
+
+            result.append(
+                {
+                    "calibre_book_id": book_id,
+                    "created_at": utc_isoformat(row.created_at),
+                    "last_modified": utc_isoformat(row.timestamp),
+                    "percentage": row.percentage,
+                    "authors": book["authors"],
+                    "title": book["title"],
+                }
+            )
+
+        return jsonify(result)
+
+    except SQLAlchemyError as e:
+        log.error("export_progress: database error: %s", e)
+        return handle_sync_error(KOSyncError(ERROR_INTERNAL, "Database error"))
+    except Exception as e:
+        log.error("export_progress: unexpected error: %s", e)
         return handle_sync_error(KOSyncError(ERROR_INTERNAL, "Internal server error"))
 
 
